@@ -4,6 +4,7 @@
  */
 package View;
 
+import Controllers.CalculateArrivalDate;
 import Models.Location;
 import Models.Passenger;
 import Models.Plane;
@@ -1638,7 +1639,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblAllFlights.getModel();
         model.setRowCount(0);
         for (Flight flight : this.flights) {
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), flight.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
+            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), CalculateArrivalDate.calculateArrivalDate(), flight.getPlane().getId(), flight.getNumPassengers()});
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
