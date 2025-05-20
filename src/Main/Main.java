@@ -20,6 +20,7 @@ public class Main {
         storage.setPassengers(DataLoader.LoadPassengers("src/json/passengers.json"));
         storage.setLocations(DataLoader.LoadLocations("src/json/locations.json"));
         storage.setPlanes(DataLoader.LoadPlanes("src/json/planes.json"));
+        storage.setFlights(DataLoader.LoadFlights("src/json/flights.json"));
         
         
         

@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -99,23 +100,38 @@ public abstract class DataLoader {
             JSONObject o = array.getJSONObject(i);
 
             String id = o.getString("id");
-            String planeId = o.getString("planeId");
-            String departureId = o.getString("departure");
-            String arrivalId = o.getString("arrival");
-            String scaleId = o.optString("scale", null);
-            String departureDateStr = o.getString("departureDate");
+            String planeId = o.getString("plane");
+            String departureId = o.getString("departureLocation");
+            String arrivalId = o.getString("arrivalLocation");
+            String scaleId = o.optString("scaleLocation", null);
+            LocalDateTime departureDate = LocalDateTime.parse(o.getString("departureDate"));
             int hoursArrival = o.getInt("hoursDurationArrival");
             int minutesArrival = o.getInt("minutesDurationArrival");
             int hoursScale = o.optInt("hoursDurationScale", 0);
-            int minutesScale = o.optInt("minutesDurationScale", 0);            
+            int minutesScale = o.optInt("minutesDurationScale", 0);
 
+            Plane plane = SearchStorage.getPlane(planeId);
+
+            Location departure = SearchStorage.getLocation(departureId);
+            Location arrival = SearchStorage.getLocation(arrivalId);
+
+            if (scaleId != null) {
+                Location scale = SearchStorage.getLocation(scaleId);
+                flights.add(new Flight(
+                        id, plane, departure,
+                        scale, arrival, departureDate, hoursArrival,
+                        minutesArrival, hoursScale, minutesScale));
+            } else {
+                flights.add(new Flight(
+                        id, plane, departure,
+                        arrival, departureDate, hoursArrival,
+                        minutesArrival
+                ));
+            }
+            plane.addFlight(flights.get(i));
         }
+        
+        return flights;
 
-        
-        
-        
-        
-        
-        
     }
 }
