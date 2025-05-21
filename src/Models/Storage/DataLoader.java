@@ -131,7 +131,6 @@ public abstract class DataLoader {
                 
             }
             plane.addFlight(flights.get(i));
-            System.out.println(flights.get(i));
         }
         
         return flights;

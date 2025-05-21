@@ -50,4 +50,7 @@ public class Location {
         return airportLongitude;
     }
     
+    public Location getCopyLocation(){
+        return new Location( airportId,  airportName,  airportCity,  airportCountry,  airportLatitude, airportLongitude);
+    }
 }
