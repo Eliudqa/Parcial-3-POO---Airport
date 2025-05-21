@@ -6,6 +6,9 @@ package Controllers;
 
 import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRegister;
+import Models.Flight;
+import core.controllers.utils.Response;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -23,19 +26,36 @@ public class MainController {
     }
 
 //Metodos de timeGenerator
-    public  ArrayList<String> generateMonths() {
+    public ArrayList<String> generateMonths() {
         return timeGenerator.generateMonths();
     }
 
-    public  ArrayList<String> generateDays() {
+    public ArrayList<String> generateDays() {
         return timeGenerator.generateDays();
     }
 
-    public  ArrayList<String> generateMinutes() {
+    public ArrayList<String> generateMinutes() {
         return timeGenerator.generateMinutes();
     }
 
-    public  ArrayList<String> generateHours() {
+    public ArrayList<String> generateHours() {
         return timeGenerator.generateHours();
+    }
+
+//Metodos de register
+    public Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country) {
+        return register.registerPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
+    }
+
+//De forma temporal depende de controllerflights, 
+//Se debe de poner una interfaz aqui    
+
+    public void delayFlight(Flight flight, int hours, int minutes) {
+        ControllerFlights.delay(flight, hours, minutes);
+    }
+//De forma temporal tambien llama directo a la clase    
+
+    public LocalDateTime calculateArrivalDate(Flight flight) {
+        return ControllerFlights.calculateArrivalDate(flight);
     }
 }
