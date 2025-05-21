@@ -1458,17 +1458,17 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void btnRegisterPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPassengerActionPerformed
         // TODO add your handling code here:
-        long id = Long.parseLong(txtIDRegister.getText());
+        String id = txtIDRegister.getText();
         String firstname = txtFirstNameRegister.getText();
         String lastname = txtLastNameRegister.getText();
-        int year = Integer.parseInt(txtDayBDRegister.getText());
+        String year = txtDayBDRegister.getText();
         int month = Integer.parseInt(cmbMONTH.getItemAt(cmbMONTH.getSelectedIndex()));
         int day = Integer.parseInt(cmbDAY.getItemAt(cmbDAY.getSelectedIndex()));
-        int phoneCode = Integer.parseInt(txtCountryCodeRegister.getText());
-        long phone = Long.parseLong(txtPhoneRegister.getText());
+        String phoneCode = txtCountryCodeRegister.getText();
+        String phone = txtPhoneRegister.getText();
         String country = txtCountryRegister.getText();
 
-        LocalDate birthDate = LocalDate.of(year, month, day);
+        //LocalDate birthDate = LocalDate.of(year, month, day);
 
         this.passengers.add(new Passenger(id, firstname, lastname, birthDate, phoneCode, phone, country));
         this.userSelect.addItem("" + id);
