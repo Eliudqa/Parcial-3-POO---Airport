@@ -5,7 +5,10 @@
 package Main;
 
 import Models.Storage.DataLoader;
-import Models.Storage.Storage;
+import Models.Storage.FlightsStorage;
+import Models.Storage.LocationsStorage;
+import Models.Storage.PassengersStorage;
+import Models.Storage.PlanesStorage;
 import java.io.IOException;
 
 /**
@@ -13,17 +16,20 @@ import java.io.IOException;
  * @author HOLA
  */
 public class Main {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException {       
         
-        Storage storage = Storage.getInstance();
+        PassengersStorage passengersStorage = PassengersStorage.getInstance();
+        LocationsStorage locationsStorage = LocationsStorage.getInstance();
+        PlanesStorage planesStorage = PlanesStorage.getInstance();
+        FlightsStorage flightsStorage = FlightsStorage.getInstance();
         
-        storage.setPassengers(DataLoader.LoadPassengers("src/json/passengers.json"));
-        storage.setLocations(DataLoader.LoadLocations("src/json/locations.json"));
-        storage.setPlanes(DataLoader.LoadPlanes("src/json/planes.json"));
-        storage.setFlights(DataLoader.LoadFlights("src/json/flights.json"));
+        passengersStorage.setPassengers(DataLoader.LoadPassengers("src/json/passengers.json"));
+        locationsStorage.setLocations(DataLoader.LoadLocations("src/json/locations.json"));
+        planesStorage.setPlanes(DataLoader.LoadPlanes("src/json/planes.json"));
+        flightsStorage.setFlights(DataLoader.LoadFlights("src/json/flights.json"));
+        System.out.println("Pasajeros cargados: " + passengersStorage.getPassengers().size());
+
         
         
-        
-                
-    }
+}
 }
