@@ -16,6 +16,7 @@ public class FlightsStorage {
     // Singleton
     private static FlightsStorage instance;
     
+    //ArrayList
     private ArrayList<Flight> flights;
     
     
@@ -33,6 +34,12 @@ public class FlightsStorage {
     public void setFlights(ArrayList<Flight> flights) {
         this.flights = flights;
     }
+
+    public ArrayList<Flight> getFlights() {
+        return flights;
+    }
+    
+    
     
     
     

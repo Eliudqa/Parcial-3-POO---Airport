@@ -21,6 +21,8 @@ import org.json.JSONObject;
  *
  * @author HOLA
  */
+
+// Clase que se encarga de cargar los datos del Json, crear los objetos y añadirlos a los storage correspondientes
 public abstract class DataLoader {
 
     public static ArrayList<Passenger> LoadPassengers(String path) throws IOException {

@@ -17,6 +17,7 @@ public class PlanesStorage {
     // Singleton
     private static PlanesStorage instance;
     
+    // ArrayList
     private ArrayList<Plane> planes;
     
     
@@ -31,6 +32,8 @@ public class PlanesStorage {
         return instance;
     }
     
+    
+    // Se obtiene un avion por ID
     public Plane getPlane(String idPlane){
         
         ArrayList<Plane> planes = PlanesStorage.getInstance().getPlanes();
@@ -44,6 +47,7 @@ public class PlanesStorage {
         return null;
     }
 
+    // Devuelve la lista entera de aviones
     public ArrayList<Plane> getPlanes() {
         return planes;
     }

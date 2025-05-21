@@ -9,7 +9,10 @@ import Models.Storage.FlightsStorage;
 import Models.Storage.LocationsStorage;
 import Models.Storage.PassengersStorage;
 import Models.Storage.PlanesStorage;
+import View.AirportFrame;
+import com.formdev.flatlaf.FlatDarkLaf;
 import java.io.IOException;
+import javax.swing.UIManager;
 
 /**
  *
@@ -27,7 +30,23 @@ public class Main {
         locationsStorage.setLocations(DataLoader.LoadLocations("src/json/locations.json"));
         planesStorage.setPlanes(DataLoader.LoadPlanes("src/json/planes.json"));
         flightsStorage.setFlights(DataLoader.LoadFlights("src/json/flights.json"));
-        System.out.println("Pasajeros cargados: " + passengersStorage.getPassengers().size());
+        
+        
+        // Establece el LookAndFeel (FlatDarkLaf)
+    System.setProperty("flatlaf.useNativeLibrary", "false");
+
+    try {
+        UIManager.setLookAndFeel(new FlatDarkLaf());
+    } catch (Exception ex) {
+        System.err.println("Failed to initialize LaF");
+    }
+
+    // Crear y mostrar el formulario en el hilo adecuado
+    java.awt.EventQueue.invokeLater(new Runnable() {
+        public void run() {
+            new AirportFrame().setVisible(true); // Aquí se inicializa el JFrame
+        }
+    });
 
         
         

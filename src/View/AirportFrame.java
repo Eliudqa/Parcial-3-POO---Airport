@@ -10,6 +10,10 @@ import Models.Location;
 import Models.Passenger;
 import Models.Plane;
 import Models.Flight;
+import Models.Storage.FlightsStorage;
+import Models.Storage.LocationsStorage;
+import Models.Storage.PassengersStorage;
+import Models.Storage.PlanesStorage;
 import com.formdev.flatlaf.FlatDarkLaf;
 import config.AppConfig;
 import java.awt.Color;
@@ -29,19 +33,20 @@ public class AirportFrame extends javax.swing.JFrame {
      * Creates new form AirportFrame
      */
     private int x, y;
+    private AppConfig appConfig = new AppConfig();
     private ArrayList<Passenger> passengers;
     private ArrayList<Plane> planes;
     private ArrayList<Location> locations;
     private ArrayList<Flight> flights;
-    private final MainController mainController;
+    private final MainController mainController = appConfig.createMainController();
 
     public AirportFrame() {
         initComponents();
 
-        this.passengers = new ArrayList<>();
-        this.planes = new ArrayList<>();
-        this.locations = new ArrayList<>();
-        this.flights = new ArrayList<>();
+        this.passengers = PassengersStorage.getInstance().getPassengers();
+        this.planes = PlanesStorage.getInstance().getPlanes();
+        this.locations = LocationsStorage.getInstance().getLocations();
+        this.flights = FlightsStorage.getInstance().getFlights();
 
         this.setBackground(new Color(0, 0, 0, 0));
         this.setLocationRelativeTo(null);
@@ -53,7 +58,7 @@ public class AirportFrame extends javax.swing.JFrame {
         this.blockPanels();
         
         AppConfig appConfig = new AppConfig();
-        this.mainController = appConfig.createMainController();
+      
     }
 
     private void blockPanels() {
@@ -1646,7 +1651,7 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnRefreshPassengersActionPerformed
 
     private void btnRefreshFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshFlightsActionPerformed
-        // TODO add your handling code here:
+        // No hemos usado el controladorDeDelay:
         DefaultTableModel model = (DefaultTableModel) tblAllFlights.getModel();
         model.setRowCount(0);
         for (Flight flight : this.flights) {
@@ -1698,24 +1703,7 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbDAYActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        System.setProperty("flatlaf.useNativeLibrary", "false");
-
-        try {
-            UIManager.setLookAndFeel(new FlatDarkLaf());
-        } catch (Exception ex) {
-            System.err.println("Failed to initialize LaF");
-        }
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AirportFrame().setVisible(true);
-            }
-        });
-    }
+   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> DAY2;

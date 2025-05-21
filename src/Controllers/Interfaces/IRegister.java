@@ -13,7 +13,7 @@ import java.time.LocalDate;
  */
 public interface IRegister {
     Response registerPassenger(int id, String firstName, String LastName, LocalDate BD, int phoneCode, int phone, String country);
-    Response registerPlane();
+    Response registerPlane(String id, String brand, String model, String maxCapacity, String airline);
     Response registerLocation();
     Response registerFlight();
     

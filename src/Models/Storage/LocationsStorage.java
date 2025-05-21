@@ -12,13 +12,12 @@ import java.util.ArrayList;
  * @author HOLA
  */
 public class LocationsStorage {
-    
+
     // Singleton
     private static LocationsStorage instance;
-    
+
     private ArrayList<Location> locations;
-    
-    
+
     public LocationsStorage() {
         locations = new ArrayList<>();
     }
@@ -37,22 +36,19 @@ public class LocationsStorage {
     public ArrayList<Location> getLocations() {
         return locations;
     }
-    
-    
-    
-    
-      public  Location getLocation(String AirportId){
-        
+
+    // Busqueda de loccation por AirportId
+    public Location getLocation(String AirportId) {
+
         ArrayList<Location> locations = LocationsStorage.getInstance().getLocations();
-        
-        for(Location location : locations){
-            if(AirportId.equals(location.getAirportId())){
+
+        for (Location location : locations) {
+            if (AirportId.equals(location.getAirportId())) {
                 return location;
             }
         }
-        
+
         return null;
     }
-    
-    
+
 }

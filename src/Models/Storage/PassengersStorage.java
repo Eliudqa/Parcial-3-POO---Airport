@@ -16,6 +16,7 @@ public class PassengersStorage {
     // Singleton
     private static PassengersStorage instance;
     
+    //ArrayList
     private ArrayList<Passenger> passengers;
     
     
