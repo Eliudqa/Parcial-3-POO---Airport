@@ -22,6 +22,7 @@ public class MainController {
         this.register = register;
     }
 
+//Metodos de timeGenerator
     public  ArrayList<String> generateMonths() {
         return timeGenerator.generateMonths();
     }
