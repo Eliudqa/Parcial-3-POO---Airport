@@ -9,6 +9,7 @@ import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRegister;
 import Controllers.MainController;
 import Controllers.PassangerController;
+import Controllers.Register;
 
 /**
  *
@@ -17,7 +18,7 @@ import Controllers.PassangerController;
 public class AppConfig {
      public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();  
-        IRegister register = new PassangerController();
+        IRegister register = new Register();
         return new MainController(generatorTime, register);
     }
 }

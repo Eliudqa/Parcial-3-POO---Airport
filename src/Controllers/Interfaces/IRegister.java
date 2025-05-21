@@ -5,13 +5,14 @@
 package Controllers.Interfaces;
 
 import core.controllers.utils.Response;
+import java.time.LocalDate;
 
 /**
  *
  * @author samit
  */
 public interface IRegister {
-    Response registerPassenger();
+    Response registerPassenger(int id, String firstName, String LastName, LocalDate BD, int phoneCode, int phone, String country);
     Response registerPlane();
     Response registerLocation();
     Response registerFlight();

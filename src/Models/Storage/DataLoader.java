@@ -85,6 +85,7 @@ public abstract class DataLoader {
                     o.getInt("maxCapacity"),
                     o.getString("airline")
             ));
+           
 
         }
 
@@ -110,13 +111,13 @@ public abstract class DataLoader {
             int hoursScale = o.optInt("hoursDurationScale", 0);
             int minutesScale = o.optInt("minutesDurationScale", 0);
 
-            Plane plane = SearchStorage.getPlane(planeId);
+            Plane plane = PlanesStorage.getInstance().getPlane(planeId);
 
-            Location departure = SearchStorage.getLocation(departureId);
-            Location arrival = SearchStorage.getLocation(arrivalId);
+            Location departure = LocationsStorage.getInstance().getLocation(departureId);
+            Location arrival = LocationsStorage.getInstance().getLocation(arrivalId);
 
             if (scaleId != null) {
-                Location scale = SearchStorage.getLocation(scaleId);
+                Location scale = LocationsStorage.getInstance().getLocation(scaleId);
                 flights.add(new Flight(
                         id, plane, departure,
                         scale, arrival, departureDate, hoursArrival,
@@ -127,8 +128,10 @@ public abstract class DataLoader {
                         arrival, departureDate, hoursArrival,
                         minutesArrival
                 ));
+                
             }
             plane.addFlight(flights.get(i));
+            System.out.println(flights.get(i));
         }
         
         return flights;

@@ -14,9 +14,28 @@ import java.time.LocalDate;
  */
 public class Register implements IRegister {
     
+    
+
     @Override
-    public Response registerPassenger(int id, String firstName, String LastName, LocalDate BD, int phoneCode, int phone, String country){
-        
+    public Response registerPassenger(int id, String firstName, String LastName, LocalDate BD, int phoneCode, int phone, String country) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    @Override
+    public Response registerPlane() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Response registerLocation() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Response registerFlight() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    
     
 }

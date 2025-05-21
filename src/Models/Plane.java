@@ -59,6 +59,7 @@ public class Plane {
     public int getNumFlights() {
         return flights.size();
     }
+
     
     
 }

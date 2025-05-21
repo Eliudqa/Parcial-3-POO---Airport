@@ -5,6 +5,7 @@
 package Controllers;
 
 import Controllers.Interfaces.IGeneratorTime;
+import Controllers.Interfaces.IRegister;
 import java.util.ArrayList;
 
 /**
@@ -14,9 +15,11 @@ import java.util.ArrayList;
 public class MainController {
 
     private final IGeneratorTime timeGenerator;
+    private final IRegister register;
 
-    public MainController(IGeneratorTime timeGenerator) {
+    public MainController(IGeneratorTime timeGenerator, IRegister register) {
         this.timeGenerator = timeGenerator;
+        this.register = register;
     }
 
     public  ArrayList<String> generateMonths() {
