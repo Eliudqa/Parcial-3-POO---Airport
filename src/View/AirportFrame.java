@@ -1468,9 +1468,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String phone = txtPhoneRegister.getText();
         String country = txtCountryRegister.getText();
 
-        //LocalDate birthDate = LocalDate.of(year, month, day);
-
-        this.passengers.add(new Passenger(id, firstname, lastname, birthDate, phoneCode, phone, country));
+        mainController.register();
         this.userSelect.addItem("" + id);
     }//GEN-LAST:event_btnRegisterPassengerActionPerformed
 
