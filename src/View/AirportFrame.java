@@ -108,8 +108,8 @@ public class AirportFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        panelRound1 = new Models.PanelRound();
-        panelRound2 = new Models.PanelRound();
+        panelRound1 = new View.PanelRound();
+        panelRound2 = new View.PanelRound();
         jButton13 = new javax.swing.JButton();
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -246,7 +246,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel48 = new javax.swing.JLabel();
         cmbDFlightMinute = new javax.swing.JComboBox<>();
         jButton7 = new javax.swing.JButton();
-        panelRound3 = new Models.PanelRound();
+        panelRound3 = new View.PanelRound();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
@@ -1820,9 +1820,9 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JScrollPane jScrollPane5;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private Models.PanelRound panelRound1;
-    private Models.PanelRound panelRound2;
-    private Models.PanelRound panelRound3;
+    private View.PanelRound panelRound1;
+    private View.PanelRound panelRound2;
+    private View.PanelRound panelRound3;
     private javax.swing.JTable tblAllFlights;
     private javax.swing.JTable tblAllLocations;
     private javax.swing.JTable tblAllPlanes;

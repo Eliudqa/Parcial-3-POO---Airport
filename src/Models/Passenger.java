@@ -110,4 +110,9 @@ public class Passenger {
         return flights.size();
     }
     
+    public Passenger getCopyPassenger(){
+        return new Passenger(id,firstname,  lastname,  birthDate,  countryPhoneCode, phone,country);
+    }
+    
+    
 }
