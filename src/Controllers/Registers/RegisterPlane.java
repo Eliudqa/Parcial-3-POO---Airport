@@ -7,7 +7,6 @@ package Controllers.Registers;
 import Controllers.Creators.IPlaneCreator;
 import Controllers.Interfaces.IRegisterPlane;
 import Controllers.Validators.IValidatorPlane;
-import Controllers.Validators.ValidatorPlane;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 

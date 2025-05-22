@@ -5,10 +5,8 @@
 package Controllers.Registers;
 
 import Controllers.Creators.IPassengerCreator;
-import Controllers.Creators.PassengerCreator;
 import Controllers.Interfaces.IRegisterPassenger;
 import Controllers.Validators.IValidatorPassenger;
-import Controllers.Validators.ValidatorPassenger;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 

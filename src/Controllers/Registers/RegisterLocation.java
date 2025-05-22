@@ -7,7 +7,6 @@ package Controllers.Registers;
 import Controllers.Creators.ILocationCreator;
 import Controllers.Interfaces.IRegisterLocation;
 import Controllers.Validators.IValidatorLocation;
-import Controllers.Validators.ValidatorLocation;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 

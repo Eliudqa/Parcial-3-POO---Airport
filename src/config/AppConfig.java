@@ -23,6 +23,14 @@ import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
 import Controllers.Registers.RegisterPlane;
+import Controllers.Validators.IValidatorFlight;
+import Controllers.Validators.IValidatorLocation;
+import Controllers.Validators.IValidatorPassenger;
+import Controllers.Validators.IValidatorPlane;
+import Controllers.Validators.ValidatorFlight;
+import Controllers.Validators.ValidatorLocation;
+import Controllers.Validators.ValidatorPassenger;
+import Controllers.Validators.ValidatorPlane;
 
 /**
  *
@@ -53,9 +61,10 @@ public class AppConfig {
     public RegisterFlight createRegisterFlight() {
         // Primero creas el FlightCreator
         IFlightCreator flightCreator = new FlightCreator();
+        IValidatorFlight vf = new ValidatorFlight();
 
         // Lo inyectas al RegisterFlight
-        return new RegisterFlight(flightCreator);
+        return new RegisterFlight(flightCreator, vf);
 
     }
     
@@ -63,18 +72,20 @@ public class AppConfig {
     public RegisterPassenger createRegisterPassenger() {
         // Primero creas el PassengerCreator
         IPassengerCreator passengerCreator = new PassengerCreator();
+        IValidatorPassenger vp = new ValidatorPassenger();
 
         // Lo inyectas al RegisterPassenger
-        return new RegisterPassenger(passengerCreator);
+        return new RegisterPassenger(passengerCreator, vp);
 
     }
     
     public RegisterLocation createRegisterLocation() {
         // Primero creas el LocationCreator
         ILocationCreator locationCreator = new LocationCreator();
+        IValidatorLocation vl = new ValidatorLocation();
 
         // Lo inyectas al RegisterFlight
-        return new RegisterLocation(locationCreator);
+        return new RegisterLocation(locationCreator, vl);
 
     }
     
@@ -82,9 +93,10 @@ public class AppConfig {
     public RegisterPlane createRegisterPlane() {
         // Primero creas el PlaneCreator
         IPlaneCreator planeCreator = new PlaneCreator();
+        IValidatorPlane vp = new ValidatorPlane();
 
         // Lo inyectas al RegisterPlane
-        return new RegisterPlane(planeCreator);
+        return new RegisterPlane(planeCreator,vp );
 
     }
 }
