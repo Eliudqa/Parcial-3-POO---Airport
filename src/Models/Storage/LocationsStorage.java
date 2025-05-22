@@ -37,18 +37,5 @@ public class LocationsStorage {
         return locations;
     }
 
-    // Busqueda de loccation por AirportId
-    public Location getLocation(String AirportId) {
-
-        ArrayList<Location> locations = LocationsStorage.getInstance().getLocations();
-
-        for (Location location : locations) {
-            if (AirportId.equals(location.getAirportId())) {
-                return location;
-            }
-        }
-
-        return null;
-    }
 
 }

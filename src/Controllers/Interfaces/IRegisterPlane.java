@@ -4,16 +4,14 @@
  */
 package Controllers.Interfaces;
 
-import Models.Location;
-import Models.Plane;
 import core.controllers.utils.Response;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 /**
  *
- * @author samit
+ * @author HOLA
  */
-public interface IRegister extends IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight  { 
+public interface IRegisterPlane {
     
+Response registerPlane(String id, String brand, String model, String maxCapacity, String airline);
+
 }

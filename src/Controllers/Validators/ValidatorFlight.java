@@ -22,7 +22,9 @@ import java.util.ArrayList;
  */
 public class ValidatorFlight {
 
-    public static Response validateFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year, int month, int day, int hour, int minutes, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale) {
+    public static Response validateFlight(String id, String planeId, String departureLocationId
+            , String arrivalLocationId, String year, int month, int day, int hour, int minutes,
+            String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale) {
         try {
             //Se verifica que nada este vacio
             if (id.equals("")) {
@@ -47,6 +49,10 @@ public class ValidatorFlight {
                 return new Response("Minutes duration arrival must be not empty", Status.BAD_REQUEST);
             }
 
+            //Se verifica que el tiempo de vuelo sea mayor a 00:00
+            if(Integer.parseInt(hoursDurationArrival)==0&&Integer.parseInt(minutesDurationArrival)==0){
+                return new Response("Flight time must be more than 00:00", Status.BAD_REQUEST);
+            }
             //Se verifica que el id sea valido
             if (id.length() != 6) {
                 return new Response("Flight id date must have 6 characters", Status.BAD_REQUEST);

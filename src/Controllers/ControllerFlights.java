@@ -23,4 +23,8 @@ public class ControllerFlights implements IControllerFlights{
         return flight.getDepartureDate().plusHours(flight.getHoursDurationScale()).plusHours(flight.getHoursDurationArrival()).plusMinutes(flight.getMinutesDurationScale()).plusMinutes(flight.getMinutesDurationArrival());
     }
 
+    
+    
+    
+    
 }

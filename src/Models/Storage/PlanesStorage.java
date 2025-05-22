@@ -33,20 +33,6 @@ public class PlanesStorage {
     }
     
     
-    // Se obtiene un avion por ID
-    public Plane getPlane(String idPlane){
-        
-        ArrayList<Plane> planes = PlanesStorage.getInstance().getPlanes();
-        
-        for(Plane plane : planes){
-            if(idPlane.equals(plane.getId())){
-                return plane;
-            }
-        }
-        
-        return null;
-    }
-
     // Devuelve la lista entera de aviones
     public ArrayList<Plane> getPlanes() {
         return planes;
