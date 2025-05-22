@@ -18,7 +18,7 @@ public class LocationsStorage {
 
     private ArrayList<Location> locations;
 
-    public LocationsStorage() {
+    private LocationsStorage() {
         locations = new ArrayList<>();
     }
 

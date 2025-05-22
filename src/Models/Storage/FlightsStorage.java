@@ -20,7 +20,7 @@ public class FlightsStorage {
     private ArrayList<Flight> flights;
     
     
-    public FlightsStorage() {
+    private FlightsStorage() {
         flights = new ArrayList<>();
     }
 

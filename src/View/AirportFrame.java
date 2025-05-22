@@ -1468,7 +1468,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String phone = txtPhoneRegister.getText();
         String country = txtCountryRegister.getText();
 
-        mainController.register();
+        mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
         this.userSelect.addItem("" + id);
     }//GEN-LAST:event_btnRegisterPassengerActionPerformed
 
@@ -1477,11 +1477,10 @@ public class AirportFrame extends javax.swing.JFrame {
         String id = txtIDPlane.getText();
         String brand = txtBrandPlane.getText();
         String model = txtModelPlane.getText();
-        int maxCapacity = Integer.parseInt(txtMaxCapPlane.getText());
+        String maxCapacity =txtMaxCapPlane.getText();
         String airline = txtAirlinePlane.getText();
 
-        this.planes.add(new Plane(id, brand, model, maxCapacity, airline));
-
+        mainController.registerPlane( id,  brand,  model,  maxCapacity,  airline);
         this.cmbPlaneRegister.addItem(id);
     }//GEN-LAST:event_btnCreateAirplaneActionPerformed
 
@@ -1494,7 +1493,7 @@ public class AirportFrame extends javax.swing.JFrame {
         double latitude = Double.parseDouble(txtAirportLatitude.getText());
         double longitude = Double.parseDouble(txtAirportLongitude.getText());
 
-        this.locations.add(new Location(id, name, city, country, latitude, longitude));
+        //this.locations.add(new Location(id, name, city, country, latitude, longitude));
 
         this.cmbDepartureLocationRegister.addItem(id);
         this.cmbArrivalLocationRegister.addItem(id);
@@ -1508,46 +1507,18 @@ public class AirportFrame extends javax.swing.JFrame {
         String departureLocationId = cmbDepartureLocationRegister.getItemAt(cmbDepartureLocationRegister.getSelectedIndex());
         String arrivalLocationId = cmbArrivalLocationRegister.getItemAt(cmbArrivalLocationRegister.getSelectedIndex());
         String scaleLocationId = cmbScaleLocationRegister.getItemAt(cmbScaleLocationRegister.getSelectedIndex());
-        int year = Integer.parseInt(txtDepartureDayRegister.getText());
+        String year = txtDepartureDayRegister.getText();
         int month = Integer.parseInt(cmbDepartureMonthRegister.getItemAt(cmbDepartureMonthRegister.getSelectedIndex()));
         int day = Integer.parseInt(cmbDepartureDayRegister.getItemAt(cmbDepartureDayRegister.getSelectedIndex()));
         int hour = Integer.parseInt(cmbDepartureHourRegister.getItemAt(cmbDepartureHourRegister.getSelectedIndex()));
         int minutes = Integer.parseInt(DAY2.getItemAt(DAY2.getSelectedIndex()));
-        int hoursDurationsArrival = Integer.parseInt(cmbDurationRegister.getItemAt(cmbDurationRegister.getSelectedIndex()));
-        int minutesDurationsArrival = Integer.parseInt(cmbMinuteRegister.getItemAt(cmbMinuteRegister.getSelectedIndex()));
+        String hoursDurationsArrival = cmbDurationRegister.getItemAt(cmbDurationRegister.getSelectedIndex());
+        String minutesDurationsArrival = cmbMinuteRegister.getItemAt(cmbMinuteRegister.getSelectedIndex());
         int hoursDurationsScale = Integer.parseInt(cmbScaleHourRegister.getItemAt(cmbScaleHourRegister.getSelectedIndex()));
         int minutesDurationsScale = Integer.parseInt(cmbScaleMinuteRegister.getItemAt(cmbScaleMinuteRegister.getSelectedIndex()));
 
-        LocalDateTime departureDate = LocalDateTime.of(year, month, day, hour, minutes);
-
-        Plane plane = null;
-        for (Plane p : this.planes) {
-            if (planeId.equals(p.getId())) {
-                plane = p;
-            }
-        }
-
-        Location departure = null;
-        Location arrival = null;
-        Location scale = null;
-        for (Location location : this.locations) {
-            if (departureLocationId.equals(location.getAirportId())) {
-                departure = location;
-            }
-            if (arrivalLocationId.equals(location.getAirportId())) {
-                arrival = location;
-            }
-            if (scaleLocationId.equals(location.getAirportId())) {
-                scale = location;
-            }
-        }
-
-        if (scale == null) {
-            this.flights.add(new Flight(id, plane, departure, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival));
-        } else {
-            this.flights.add(new Flight(id, plane, departure, scale, arrival, departureDate, hoursDurationsArrival, minutesDurationsArrival, hoursDurationsScale, minutesDurationsScale));
-        }
-
+        mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival,scaleLocationId, hoursDurationsScale, minutesDurationsScale );
+        
         this.cmbFlights.addItem(id);
     }//GEN-LAST:event_btnCreateRegisterFlightActionPerformed
 

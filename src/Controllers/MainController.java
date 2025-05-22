@@ -46,7 +46,18 @@ public class MainController {
     public Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country) {
         return register.registerPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
     }
+    
+    public Response registerPlane(String id, String brand, String model, String maxCapacity, String airline){
+        return register.registerPlane( id,  brand,  model,  maxCapacity,  airline);
+    }
 
+    public Response registerLocation(String id, String name, String city, String country, String latitude, String longitude){
+        return register.registerLocation(id, name, city, country, latitude, longitude);
+    } 
+    
+    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year, int month, int day, int hour, int minutes, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale){
+        return register.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
+    }
 //De forma temporal depende de controllerflights, 
 //Se debe de poner una interfaz aqui    
 

@@ -21,7 +21,7 @@ public class PlanesStorage {
     private ArrayList<Plane> planes;
     
     
-    public PlanesStorage() {
+    private PlanesStorage() {
         planes = new ArrayList<>();
     }
 
