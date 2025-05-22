@@ -4,6 +4,7 @@
  */
 package Controllers.Validators;
 
+import Controllers.Interfaces.ISearchStorage;
 import Models.Location;
 import Models.Storage.LocationsStorage;
 import core.controllers.utils.Response;
@@ -16,7 +17,11 @@ import core.controllers.utils.Status;
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class ValidatorLocation implements IValidatorLocation {
+    private final ISearchStorage searchStorage;
     
+    public ValidatorLocation(ISearchStorage searchStorage){
+        this.searchStorage = searchStorage;
+    }
     
     
     @Override

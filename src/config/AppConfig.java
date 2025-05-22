@@ -31,6 +31,7 @@ import Controllers.Validators.ValidatorFlight;
 import Controllers.Validators.ValidatorLocation;
 import Controllers.Validators.ValidatorPassenger;
 import Controllers.Validators.ValidatorPlane;
+import Models.Storage.DataLoader;
 
 /**
  *
@@ -61,6 +62,7 @@ public class AppConfig {
     public RegisterFlight createRegisterFlight() {
         // Primero creas el FlightCreator
         IFlightCreator flightCreator = new FlightCreator();
+        
         IValidatorFlight vf = new ValidatorFlight();
 
         // Lo inyectas al RegisterFlight
@@ -99,4 +101,9 @@ public class AppConfig {
         return new RegisterPlane(planeCreator,vp );
 
     }
+    
+    public DataLoader createDataLoader() {
+        return new DataLoader(createSearchStorage());
+    }
+
 }

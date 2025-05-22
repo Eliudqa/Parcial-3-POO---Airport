@@ -4,6 +4,7 @@
  */
 package Controllers.Validators;
 
+import Controllers.Interfaces.ISearchStorage;
 import Models.Flight;
 import Models.Location;
 import Models.Plane;
@@ -24,7 +25,11 @@ import java.util.ArrayList;
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class ValidatorFlight implements IValidatorFlight {
 
-   
+    private final ISearchStorage searchStorage;
+    
+    public ValidatorFlight(ISearchStorage searchStorage){
+        this.searchStorage = searchStorage;
+    }
     
     @Override
     public Response validateFlight(String id, String planeId, String departureLocationId
@@ -100,6 +105,8 @@ public class ValidatorFlight implements IValidatorFlight {
                 }
             }
 
+            
+            // CAMBIAR USANDO EL SEARCHSTORAGE
             int i = 0;
             //Se busca el avion
             boolean found = false;
@@ -118,6 +125,7 @@ public class ValidatorFlight implements IValidatorFlight {
             }
 
             //Se busca el lugar de salida
+            
             //Se verifica que el id sí este hecho por 3 caracteres
             if (departureLocationId.length() != 3) {
                 return new Response("Id must be 3 digits long", Status.BAD_REQUEST);
@@ -163,7 +171,10 @@ public class ValidatorFlight implements IValidatorFlight {
                     }
                 }
             }
-
+ 
+            
+            
+            //BUSQUEDA AQUI TAMBIEN
             i = 0;
             Location arrivalLocation = null;
             found = false;
@@ -194,6 +205,7 @@ public class ValidatorFlight implements IValidatorFlight {
                 return new Response("Enter a valid date and hour", Status.BAD_REQUEST);
             }
 
+            // BUSQUEDA AQUI TAMBIEN
             //En caso de escala
             Flight flight;
             if (!scaleId.equals("")) {

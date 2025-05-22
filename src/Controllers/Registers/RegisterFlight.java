@@ -6,6 +6,7 @@ package Controllers.Registers;
 
 import Controllers.Creators.IFlightCreator;
 import Controllers.Interfaces.IRegisterFlight;
+import Controllers.Interfaces.ISearchStorage;
 import Controllers.SearchStorage;
 import Controllers.Validators.IValidatorFlight;
 import Models.Location;
@@ -21,11 +22,14 @@ public class RegisterFlight implements IRegisterFlight {
     
     private final IFlightCreator flightCreator;
     private final IValidatorFlight vf;
+    private final ISearchStorage searchStorage;
+
     
     // Inyección por constructor
-    public RegisterFlight(IFlightCreator flightCreator, IValidatorFlight validatorFlight) {
+    public RegisterFlight(IFlightCreator flightCreator, IValidatorFlight validatorFlight,ISearchStorage searchStorage) {
         this.flightCreator = flightCreator;
         this.vf=validatorFlight;
+        this.searchStorage=searchStorage;
     }  
 
   
@@ -48,10 +52,10 @@ public class RegisterFlight implements IRegisterFlight {
         }
 
         // Se hacen las busquedas correspondientes
-        Location departureLocation = SearchStorage.getLocation(departureLocationId),
-                scaleLocation = SearchStorage.getLocation(scaleId),
-                arrivalLocation = SearchStorage.getLocation(arrivalLocationId);
-        Plane plane = SearchStorage.getPlane(planeId);
+        Location departureLocation = searchStorage.getLocation(departureLocationId),
+                scaleLocation = searchStorage.getLocation(scaleId),
+                arrivalLocation = searchStorage.getLocation(arrivalLocationId);
+        Plane plane = searchStorage.getPlane(planeId);
         
         // Se llama la clase creadora de objetos de tipo Flight
         flightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 

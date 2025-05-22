@@ -4,6 +4,7 @@
  */
 package Controllers.Validators;
 
+import Controllers.Interfaces.ISearchStorage;
 import Models.Passenger;
 import Models.Storage.PassengersStorage;
 import core.controllers.utils.Response;
@@ -19,7 +20,11 @@ import java.time.LocalDate;
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class ValidatorPassenger implements IValidatorPassenger{
     
-   
+   private final ISearchStorage searchStorage;
+    
+    public ValidatorPassenger(ISearchStorage searchStorage){
+        this.searchStorage = searchStorage;
+    }
     
     @Override
     public Response validatePassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country){

@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Controllers.Interfaces.ISearchStorage;
 import Models.Flight;
 import Models.Location;
 import Models.Passenger;
@@ -20,10 +21,11 @@ import java.util.ArrayList;
  */
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
-public abstract class SearchStorage {
+public class SearchStorage implements ISearchStorage {
     
     
-     public static Plane getPlane(String idPlane){
+     @Override
+     public Plane getPlane(String idPlane){
         
         ArrayList<Plane> planes = PlanesStorage.getInstance().getPlanes();
         
@@ -37,7 +39,8 @@ public abstract class SearchStorage {
     }
     
     
-    public static Location getLocation(String AirportId){
+     @Override
+    public Location getLocation(String AirportId){
         
         ArrayList<Location> locations = LocationsStorage.getInstance().getLocations();
         
@@ -51,7 +54,8 @@ public abstract class SearchStorage {
     }
     
     
-    public static Passenger getPassenger(int passengerId){
+     @Override
+    public Passenger getPassenger(int passengerId){
         
         ArrayList<Passenger> passengers = PassengersStorage.getInstance().getPassengers();
         
@@ -66,7 +70,8 @@ public abstract class SearchStorage {
     }
     
     
-    public static Flight getFlight(String flightId){
+     @Override
+    public Flight getFlight(String flightId){
         
         ArrayList<Flight> flights = FlightsStorage.getInstance().getFlights();
         

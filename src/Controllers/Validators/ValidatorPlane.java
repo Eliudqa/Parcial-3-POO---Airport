@@ -4,6 +4,7 @@
  */
 package Controllers.Validators;
 
+import Controllers.Interfaces.ISearchStorage;
 import Models.Plane;
 import Models.Storage.PlanesStorage;
 import core.controllers.utils.Response;
@@ -17,6 +18,13 @@ import core.controllers.utils.Status;
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class ValidatorPlane implements IValidatorPlane {
 
+    private final ISearchStorage searchStorage;
+    
+    public ValidatorPlane(ISearchStorage searchStorage){
+        this.searchStorage = searchStorage;
+    }
+    
+    
     @Override
     public Response validatePlane(String id, String brand, String model, String maxCapacity, String airline) {
         try {

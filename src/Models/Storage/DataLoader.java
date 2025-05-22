@@ -4,6 +4,7 @@
  */
 package Models.Storage;
 
+import Controllers.Interfaces.ISearchStorage;
 import Controllers.SearchStorage;
 import Models.Flight;
 import Models.Location;
@@ -24,9 +25,15 @@ import org.json.JSONObject;
  */
 
 // Clase que se encarga de cargar los datos del Json, crear los objetos y añadirlos a los storage correspondientes
-public abstract class DataLoader {
+public class DataLoader {
+    
+    private final ISearchStorage searchStorage;
+    
+    public DataLoader(ISearchStorage searchStorage){
+        this.searchStorage = searchStorage;
+    }
 
-    public static ArrayList<Passenger> LoadPassengers(String path) throws IOException {
+    public ArrayList<Passenger> LoadPassengers(String path) throws IOException {
         ArrayList<Passenger> passengers = new ArrayList<>();
         String content = Files.readString(Paths.get(path));
         JSONArray array = new JSONArray(content);
@@ -50,7 +57,7 @@ public abstract class DataLoader {
 
     }
 
-    public static ArrayList<Location> LoadLocations(String path) throws IOException {
+    public ArrayList<Location> LoadLocations(String path) throws IOException {
         ArrayList<Location> locations = new ArrayList<>();
         String content = Files.readString(Paths.get(path));
         JSONArray array = new JSONArray(content);
@@ -73,7 +80,7 @@ public abstract class DataLoader {
 
     }
 
-    public static ArrayList<Plane> LoadPlanes(String path) throws IOException {
+    public ArrayList<Plane> LoadPlanes(String path) throws IOException {
         ArrayList<Plane> planes = new ArrayList<>();
         String content = Files.readString(Paths.get(path));
         JSONArray array = new JSONArray(content);
@@ -96,7 +103,7 @@ public abstract class DataLoader {
 
     }
 
-    public static ArrayList<Flight> LoadFlights(String path) throws IOException {
+    public ArrayList<Flight> LoadFlights(String path) throws IOException {
         ArrayList<Flight> flights = new ArrayList<>();
         String content = Files.readString(Paths.get(path));
         JSONArray array = new JSONArray(content);
@@ -114,12 +121,12 @@ public abstract class DataLoader {
             int hoursScale = o.optInt("hoursDurationScale", 0);
             int minutesScale = o.optInt("minutesDurationScale", 0);
 
-            Plane plane = SearchStorage.getPlane(planeId);
-            Location departure = SearchStorage.getLocation(departureId);
-            Location arrival = SearchStorage.getLocation(arrivalId);
+            Plane plane = searchStorage.getPlane(planeId);
+            Location departure = searchStorage.getLocation(departureId);
+            Location arrival = searchStorage.getLocation(arrivalId);
 
             if (scaleId != null) {
-                Location scale = SearchStorage.getLocation(scaleId);
+                Location scale = searchStorage.getLocation(scaleId);
                 flights.add(new Flight(
                         id, plane, departure,
                         scale, arrival, departureDate, hoursArrival,

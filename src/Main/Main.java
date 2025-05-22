@@ -11,6 +11,7 @@ import Models.Storage.PassengersStorage;
 import Models.Storage.PlanesStorage;
 import View.AirportFrame;
 import com.formdev.flatlaf.FlatDarkLaf;
+import config.AppConfig;
 import java.io.IOException;
 import javax.swing.UIManager;
 
@@ -19,17 +20,19 @@ import javax.swing.UIManager;
  * @author HOLA
  */
 public class Main {
-    public static void main(String[] args) throws IOException {       
+    public static void main(String[] args) throws IOException {  
+        AppConfig config = new AppConfig();
+        DataLoader dataLoader = config.createDataLoader();
         
         PassengersStorage passengersStorage = PassengersStorage.getInstance();
         LocationsStorage locationsStorage = LocationsStorage.getInstance();
         PlanesStorage planesStorage = PlanesStorage.getInstance();
         FlightsStorage flightsStorage = FlightsStorage.getInstance();
         
-        passengersStorage.setPassengers(DataLoader.LoadPassengers("src/json/passengers.json"));
-        locationsStorage.setLocations(DataLoader.LoadLocations("src/json/locations.json"));
-        planesStorage.setPlanes(DataLoader.LoadPlanes("src/json/planes.json"));
-        flightsStorage.setFlights(DataLoader.LoadFlights("src/json/flights.json"));
+        passengersStorage.setPassengers(dataLoader.LoadPassengers("src/json/passengers.json"));
+        locationsStorage.setLocations(dataLoader.LoadLocations("src/json/locations.json"));
+        planesStorage.setPlanes(dataLoader.LoadPlanes("src/json/planes.json"));
+        flightsStorage.setFlights(dataLoader.LoadFlights("src/json/flights.json"));
         
         
         // Establece el LookAndFeel (FlatDarkLaf)
