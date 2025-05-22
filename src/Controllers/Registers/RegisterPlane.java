@@ -4,6 +4,7 @@
  */
 package Controllers.Registers;
 
+import Controllers.Creators.PlaneCreator;
 import Controllers.Interfaces.IRegisterPlane;
 import Controllers.Validators.ValidatorPlane;
 import Models.Plane;
@@ -23,8 +24,8 @@ public class RegisterPlane implements IRegisterPlane {
         if (response.getStatus() != Status.OK) {
             return response;
         }
-
-        Plane plane = new Plane(id, brand, model, Integer.parseInt(maxCapacity), airline);
+        
+        PlaneCreator.createPlane(id, brand, model, maxCapacity, airline);
         //Llamada al metodo que mete al storage
         return response;
 

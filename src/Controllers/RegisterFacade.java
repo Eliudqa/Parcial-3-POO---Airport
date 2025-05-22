@@ -12,6 +12,10 @@ import Controllers.Registers.RegisterPassenger;
 import Controllers.Registers.RegisterPlane;
 import core.controllers.utils.Response;
 
+
+// Esta clase es la que se encarga de controlar las interfaces y que se llamen a los metodos correspondientes  
+// de Register
+// Se usa para no violar el principio OCP
 public class RegisterFacade implements IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight, IRegister {
 
     private final RegisterPassenger registerPassenger;
