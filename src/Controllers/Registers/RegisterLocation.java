@@ -4,10 +4,9 @@
  */
 package Controllers.Registers;
 
-import Controllers.Creators.LocationCreator;
+import Controllers.Creators.ILocationCreator;
 import Controllers.Interfaces.IRegisterLocation;
 import Controllers.Validators.ValidatorLocation;
-import Models.Location;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -16,6 +15,15 @@ import core.controllers.utils.Status;
  * @author HOLA
  */
 public class RegisterLocation implements IRegisterLocation {
+    
+    private final ILocationCreator locationCreator;
+    
+    // Inyección por constructor
+    public RegisterLocation(ILocationCreator locationCreator) {
+        this.locationCreator = locationCreator;
+    }  
+
+
 
     @Override
     public Response registerLocation(String id, String name, String city, String country, String latitude, String longitude) {
@@ -25,7 +33,7 @@ public class RegisterLocation implements IRegisterLocation {
             return response;
         }
 
-        LocationCreator.createLocation(id, name, city, country, latitude, longitude);
+        locationCreator.createLocation(id, name, city, country, latitude, longitude);
         //Llamada al metodo que mete al storage
         return response;
     }

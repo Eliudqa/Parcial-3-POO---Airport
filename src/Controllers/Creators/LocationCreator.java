@@ -10,10 +10,11 @@ import Models.Location;
  *
  * @author HOLA
  */
-public abstract class LocationCreator {
+public class LocationCreator implements ILocationCreator {
     
     
-    public static Location createLocation(String id, String name, String city, String country, String latitude, String longitude){
+    @Override
+    public Location createLocation(String id, String name, String city, String country, String latitude, String longitude){
         return new Location(id, name, city, country, Double.parseDouble(latitude), Double.parseDouble(longitude));
     }
 }

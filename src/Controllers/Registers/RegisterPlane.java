@@ -4,10 +4,9 @@
  */
 package Controllers.Registers;
 
-import Controllers.Creators.PlaneCreator;
+import Controllers.Creators.IPlaneCreator;
 import Controllers.Interfaces.IRegisterPlane;
 import Controllers.Validators.ValidatorPlane;
-import Models.Plane;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -16,6 +15,13 @@ import core.controllers.utils.Status;
  * @author HOLA
  */
 public class RegisterPlane implements IRegisterPlane {
+    
+    private final IPlaneCreator planeCreator;
+    
+    // Inyección por constructor
+    public RegisterPlane(IPlaneCreator planeCreator) {
+        this.planeCreator = planeCreator;
+    } 
 
     @Override
     public Response registerPlane(String id, String brand, String model, String maxCapacity, String airline) {
@@ -25,7 +31,7 @@ public class RegisterPlane implements IRegisterPlane {
             return response;
         }
         
-        PlaneCreator.createPlane(id, brand, model, maxCapacity, airline);
+        planeCreator.createPlane(id, brand, model, maxCapacity, airline);
         //Llamada al metodo que mete al storage
         return response;
 

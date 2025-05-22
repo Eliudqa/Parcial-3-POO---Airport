@@ -4,23 +4,29 @@
  */
 package Controllers.Registers;
 
-import Controllers.Creators.FlightCreator;
+import Controllers.Creators.IFlightCreator;
+import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.IRegisterFlight;
+import Controllers.SearchStorage;
 import Controllers.Validators.ValidatorFlight;
 import Models.Flight;
 import Models.Location;
 import Models.Plane;
-import Models.Storage.PlanesStorage;
-import Models.Storage.SearchStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
-import java.time.LocalDateTime;
 
 /**
  *
  * @author HOLA
  */
 public class RegisterFlight implements IRegisterFlight {
+    
+    private final IFlightCreator flightCreator;
+    
+    // Inyección por constructor
+    public RegisterFlight(IFlightCreator flightCreator) {
+        this.flightCreator = flightCreator;
+    }  
 
     @Override
     public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year,
@@ -46,7 +52,7 @@ public class RegisterFlight implements IRegisterFlight {
         Plane plane = SearchStorage.getPlane(planeId);
         
         // Se llama la clase creadora de objetos de tipo Flight
-        FlightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 
+        flightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 
                 minutes, hoursDurationArrival, minutesDurationArrival, 
                 scaleLocation, hoursDurationScale, minutesDurationScale);
         
@@ -54,4 +60,6 @@ public class RegisterFlight implements IRegisterFlight {
         return response;
 
     }
+
+   
 }

@@ -4,19 +4,25 @@
  */
 package Controllers.Registers;
 
+import Controllers.Creators.IPassengerCreator;
 import Controllers.Creators.PassengerCreator;
 import Controllers.Interfaces.IRegisterPassenger;
 import Controllers.Validators.ValidatorPassenger;
-import Models.Passenger;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
-import java.time.LocalDate;
 
 /**
  *
  * @author HOLA
  */
 public class RegisterPassenger implements IRegisterPassenger {
+    
+    private final IPassengerCreator passengerCreator;
+    
+    // Inyección por constructor
+    public RegisterPassenger(IPassengerCreator passengerCreator) {
+        this.passengerCreator = passengerCreator;
+    } 
 
     @Override
     public Response registerPassenger(String id, String firstName, String lastName, 
@@ -29,7 +35,7 @@ public class RegisterPassenger implements IRegisterPassenger {
             return response;
         }
 
-        PassengerCreator.createPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
+        passengerCreator.createPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
         //Llamada al metodo que mete al storage
         return response;
     }
