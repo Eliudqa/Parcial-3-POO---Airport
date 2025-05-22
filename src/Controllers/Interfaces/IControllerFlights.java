@@ -5,6 +5,7 @@
 package Controllers.Interfaces;
 
 import Models.Flight;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -12,4 +13,6 @@ import Models.Flight;
  */
 public interface IControllerFlights {
     void delay(Flight flight, int hours, int minutes);
+    public LocalDateTime calculateArrivalDate(Flight flight);
+
 }

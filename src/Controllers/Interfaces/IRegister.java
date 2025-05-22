@@ -14,6 +14,8 @@ import java.time.LocalDateTime;
  *
  * @author samit
  */
+
+// Interfaz compuesta que contiene las interfaces independientes
 public interface IRegister extends IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight  { 
     
 }

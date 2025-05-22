@@ -18,7 +18,7 @@ public class ControllerFlights implements IControllerFlights{
     public void delay(Flight flight, int hours, int minutes) {
         flight.setDepartureDate(flight.getDepartureDate().plusHours(hours).plusMinutes(minutes));
     }
-
+    @Override
     public static LocalDateTime calculateArrivalDate(Flight flight) {
         return flight.getDepartureDate().plusHours(flight.getHoursDurationScale()).plusHours(flight.getHoursDurationArrival()).plusMinutes(flight.getMinutesDurationScale()).plusMinutes(flight.getMinutesDurationArrival());
     }
