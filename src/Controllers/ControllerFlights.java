@@ -21,4 +21,8 @@ public class ControllerFlights {
         return flight.getDepartureDate().plusHours(flight.getHoursDurationScale()).plusHours(flight.getHoursDurationArrival()).plusMinutes(flight.getMinutesDurationScale()).plusMinutes(flight.getMinutesDurationArrival());
     }
 
+    
+    
+    
+    
 }
