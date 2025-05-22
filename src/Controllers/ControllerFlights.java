@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Controllers.Interfaces.IControllerFlights;
 import Models.Flight;
 import java.time.LocalDateTime;
 
@@ -11,9 +12,10 @@ import java.time.LocalDateTime;
  *
  * @author Admin
  */
-public class ControllerFlights {
+public class ControllerFlights implements IControllerFlights{
 
-    public static void delay(Flight flight, int hours, int minutes) {
+    @Override
+    public void delay(Flight flight, int hours, int minutes) {
         flight.setDepartureDate(flight.getDepartureDate().plusHours(hours).plusMinutes(minutes));
     }
 

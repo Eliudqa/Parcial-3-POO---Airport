@@ -4,6 +4,7 @@
  */
 package Controllers;
 
+import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRegister;
 import Models.Flight;
@@ -19,10 +20,12 @@ public class MainController {
 
     private final IGeneratorTime timeGenerator;
     private final IRegister register;
+    private final IControllerFlights ICFlights;
 
-    public MainController(IGeneratorTime timeGenerator, IRegister register) {
+    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights) {
         this.timeGenerator = timeGenerator;
         this.register = register;
+        this.ICFlights = ICFlights;
     }
 
 //Metodos de timeGenerator
@@ -62,7 +65,7 @@ public class MainController {
 //Se debe de poner una interfaz aqui    
 
     public void delayFlight(Flight flight, int hours, int minutes) {
-        ControllerFlights.delay(flight, hours, minutes);
+        ICFlights.delay(flight, hours, minutes);
     }
 //De forma temporal tambien llama directo a la clase    
 

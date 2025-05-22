@@ -9,7 +9,7 @@ package Controllers;
  *
  * @author samit
  */
-public class PassangerController {
+public class ControllerPassenger {
     
     
     

@@ -4,11 +4,12 @@
  */
 package config;
 
+import Controllers.ControllerFlights;
 import Controllers.GeneratorTime;
 import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRegister;
 import Controllers.MainController;
-import Controllers.PassangerController;
+import Controllers.Interfaces.IControllerFlights;
 import Controllers.Register;
 
 /**
@@ -19,6 +20,7 @@ public class AppConfig {
      public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();  
         IRegister register = new Register();
-        return new MainController(generatorTime, register);
+        IControllerFlights ICFlights = new ControllerFlights();
+        return new MainController(generatorTime, register, ICFlights);
     }
 }
