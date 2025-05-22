@@ -10,7 +10,7 @@ import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRegister;
 import Controllers.MainController;
 import Controllers.Interfaces.IControllerFlights;
-import Controllers.RegisterFacade;
+import Controllers.Registers.RegisterFacade;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;

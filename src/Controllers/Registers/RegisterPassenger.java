@@ -6,6 +6,7 @@ package Controllers.Registers;
 
 import Controllers.Creators.PassengerCreator;
 import Controllers.Interfaces.IRegisterPassenger;
+import Controllers.Validators.IValidatorPassenger;
 import Controllers.Validators.ValidatorPassenger;
 import Models.Passenger;
 import core.controllers.utils.Response;
@@ -18,12 +19,14 @@ import java.time.LocalDate;
  */
 public class RegisterPassenger implements IRegisterPassenger {
 
+     private IValidatorPassenger vp= new ValidatorPassenger();
+    
     @Override
     public Response registerPassenger(String id, String firstName, String lastName, 
             String year, int month, int day, 
             String phoneCode, String phone, String country) {
 
-        Response response = ValidatorPassenger.validatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
+        Response response = vp.validatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
 
         if (response.getStatus() != Status.OK) {
             return response;

@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controllers;
+package Controllers.Registers;
 
 
 import Controllers.Interfaces.*;
@@ -16,7 +16,7 @@ import core.controllers.utils.Response;
 // Esta clase es la que se encarga de controlar las interfaces y que se llamen a los metodos correspondientes  
 // de Register
 // Se usa para no violar el principio OCP
-public class RegisterFacade implements IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight, IRegister {
+public class RegisterFacade implements IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight, IRegister{
 
     private final RegisterPassenger registerPassenger;
     private final RegisterPlane registerPlane;

@@ -22,9 +22,12 @@ import java.util.ArrayList;
  */
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
-public abstract class ValidatorFlight {
+public class ValidatorFlight implements IValidatorFlight {
 
-    public static Response validateFlight(String id, String planeId, String departureLocationId
+   
+    
+    @Override
+    public Response validateFlight(String id, String planeId, String departureLocationId
             , String arrivalLocationId, String year, int month, int day, int hour, int minutes,
             String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale) {
         try {

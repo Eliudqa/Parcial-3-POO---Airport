@@ -15,8 +15,12 @@ import core.controllers.utils.Status;
  */
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
-public abstract class ValidatorLocation {
-    public static Response validateLocation(String id, String name, String city, String country, String latitude, String longitude){
+public class ValidatorLocation implements IValidatorLocation {
+    
+    
+    
+    @Override
+    public Response validateLocation(String id, String name, String city, String country, String latitude, String longitude){
         try {
 
             //Se verifica que no este vacio

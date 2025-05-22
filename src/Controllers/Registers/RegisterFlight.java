@@ -6,15 +6,13 @@ package Controllers.Registers;
 
 import Controllers.Creators.FlightCreator;
 import Controllers.Interfaces.IRegisterFlight;
+import Controllers.SearchStorage;
+import Controllers.Validators.IValidatorFlight;
 import Controllers.Validators.ValidatorFlight;
-import Models.Flight;
 import Models.Location;
 import Models.Plane;
-import Models.Storage.PlanesStorage;
-import Models.Storage.SearchStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
-import java.time.LocalDateTime;
 
 /**
  *
@@ -22,6 +20,8 @@ import java.time.LocalDateTime;
  */
 public class RegisterFlight implements IRegisterFlight {
 
+     private IValidatorFlight vf= new ValidatorFlight();
+    
     @Override
     public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year,
             int month, int day, int hour, int minutes, String hoursDurationArrival,
@@ -29,7 +29,7 @@ public class RegisterFlight implements IRegisterFlight {
             int hoursDurationScale, int minutesDurationScale) {
 
         // Se le manda al validador la informacion del avion
-        Response response = ValidatorFlight.validateFlight(id, planeId, departureLocationId,
+        Response response = vf.validateFlight(id, planeId, departureLocationId,
                 arrivalLocationId, year, month, day, hour, minutes,
                 hoursDurationArrival, minutesDurationArrival,
                 scaleId, hoursDurationScale, minutesDurationScale);

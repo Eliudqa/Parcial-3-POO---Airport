@@ -17,8 +17,12 @@ import java.time.LocalDate;
  */
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
-public abstract class ValidatorPassenger {
-    public static Response validatePassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country){
+public class ValidatorPassenger implements IValidatorPassenger{
+    
+   
+    
+    @Override
+    public Response validatePassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country){
         try {
             long idInt, phoneInt;
             LocalDate BD;

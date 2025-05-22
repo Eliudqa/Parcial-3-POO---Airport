@@ -6,6 +6,7 @@ package Controllers.Registers;
 
 import Controllers.Creators.PlaneCreator;
 import Controllers.Interfaces.IRegisterPlane;
+import Controllers.Validators.IValidatorPlane;
 import Controllers.Validators.ValidatorPlane;
 import Models.Plane;
 import core.controllers.utils.Response;
@@ -17,9 +18,11 @@ import core.controllers.utils.Status;
  */
 public class RegisterPlane implements IRegisterPlane {
 
+    private IValidatorPlane vp= new ValidatorPlane();
+    
     @Override
     public Response registerPlane(String id, String brand, String model, String maxCapacity, String airline) {
-        Response response = ValidatorPlane.validatePlane(id, brand, model, maxCapacity, airline);
+        Response response = vp.validatePlane(id, brand, model, maxCapacity, airline);
 
         if (response.getStatus() != Status.OK) {
             return response;

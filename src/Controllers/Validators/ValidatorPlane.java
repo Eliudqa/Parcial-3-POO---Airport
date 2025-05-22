@@ -15,9 +15,10 @@ import core.controllers.utils.Status;
  */
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
-public abstract class ValidatorPlane {
+public class ValidatorPlane implements IValidatorPlane {
 
-    public static Response validatePlane(String id, String brand, String model, String maxCapacity, String airline) {
+    @Override
+    public Response validatePlane(String id, String brand, String model, String maxCapacity, String airline) {
         try {
             int maxCapacityInt;
 
