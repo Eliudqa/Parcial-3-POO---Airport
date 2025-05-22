@@ -6,7 +6,6 @@ package Controllers.Registers;
 
 import Controllers.Creators.ILocationCreator;
 import Controllers.DataSavers.ISaverLocations;
-import Controllers.Interfaces.IRegisterLocation;
 import Controllers.Validators.IValidatorLocation;
 import Models.Location;
 import core.controllers.utils.Response;

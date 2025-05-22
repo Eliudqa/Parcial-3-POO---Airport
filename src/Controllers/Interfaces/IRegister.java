@@ -4,11 +4,10 @@
  */
 package Controllers.Interfaces;
 
-import Models.Location;
-import Models.Plane;
-import core.controllers.utils.Response;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
+import Controllers.Registers.IRegisterFlight;
+import Controllers.Registers.IRegisterLocation;
+import Controllers.Registers.IRegisterPlane;
+import Controllers.Registers.IRegisterPassenger;
 
 /**
  *

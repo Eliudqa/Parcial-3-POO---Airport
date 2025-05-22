@@ -4,7 +4,6 @@
  */
 package View;
 
-import Controllers.CalculateArrivalDate;
 import Controllers.MainController;
 import Models.Location;
 import Models.Passenger;
@@ -14,13 +13,11 @@ import Models.Storage.FlightsStorage;
 import Models.Storage.LocationsStorage;
 import Models.Storage.PassengersStorage;
 import Models.Storage.PlanesStorage;
-import com.formdev.flatlaf.FlatDarkLaf;
 import config.AppConfig;
+import core.controllers.utils.Response;
 import java.awt.Color;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
-import javax.swing.UIManager;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -33,6 +30,7 @@ public class AirportFrame extends javax.swing.JFrame {
      * Creates new form AirportFrame
      */
     private int x, y;
+    private Response response;
     private AppConfig appConfig = new AppConfig();
     private ArrayList<Passenger> passengers;
     private ArrayList<Plane> planes;
@@ -1615,8 +1613,10 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tblPassengers.getModel();
         model.setRowCount(0);
-        for (Passenger passenger : this.passengers) {
-            model.addRow(new Object[]{passenger.getId(), passenger.getFullname(), passenger.getBirthDate(), passenger.calculateAge(), passenger.generateFullPhone(), passenger.getCountry(), passenger.getNumFlights()});
+        response = mainController.refreshPlanes();
+        mainController.refreshPassengers();
+        for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+        model.addRow(row); // Añade directamente cada fila
         }
     }//GEN-LAST:event_btnRefreshPassengersActionPerformed
 
@@ -1624,8 +1624,10 @@ public class AirportFrame extends javax.swing.JFrame {
         // No hemos usado el controladorDeDelay:
         DefaultTableModel model = (DefaultTableModel) tblAllFlights.getModel();
         model.setRowCount(0);
-        for (Flight flight : this.flights) {
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureLocation().getAirportId(), flight.getArrivalLocation().getAirportId(), (flight.getScaleLocation() == null ? "-" : flight.getScaleLocation().getAirportId()), flight.getDepartureDate(), mainController.calculateArrivalDate(flight), flight.getPlane().getId(), flight.getNumPassengers()});
+        response = mainController.refreshPlanes();
+        mainController.refreshFlights();
+        for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+        model.addRow(row); // Añade directamente cada fila
         }
     }//GEN-LAST:event_btnRefreshFlightsActionPerformed
 
@@ -1633,18 +1635,23 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tblAllPlanes.getModel();
         model.setRowCount(0);
-        for (Plane plane : this.planes) {
-            model.addRow(new Object[]{plane.getId(), plane.getBrand(), plane.getModel(), plane.getMaxCapacity(), plane.getAirline(), plane.getNumFlights()});
-        }
+        
+        response = mainController.refreshPlanes();
+        for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+        model.addRow(row); // Añade directamente cada fila
+    }
+
     }//GEN-LAST:event_btnRefreshPlanesActionPerformed
 
     private void btnRefreshLocationsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshLocationsActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tblAllLocations.getModel();
         model.setRowCount(0);
-        for (Location location : this.locations) {
-            model.addRow(new Object[]{location.getAirportId(), location.getAirportName(), location.getAirportCity(), location.getAirportCountry()});
-        }
+        // 
+        response = mainController.refreshLocations();
+        for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+        model.addRow(row); // Añade directamente cada fila
+    }
     }//GEN-LAST:event_btnRefreshLocationsActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed

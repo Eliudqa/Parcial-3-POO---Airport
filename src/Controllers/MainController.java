@@ -6,6 +6,7 @@ package Controllers;
 
 import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.IGeneratorTime;
+import Controllers.Interfaces.IRefresher;
 import Controllers.Interfaces.IRegister;
 import Models.Flight;
 import core.controllers.utils.Response;
@@ -21,11 +22,15 @@ public class MainController {
     private final IGeneratorTime timeGenerator;
     private final IRegister registerFacade;
     private final IControllerFlights ICFlights;
+    private final IRefresher refresher;
 
-    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights) {
+
+    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights,IRefresher refresher) {
         this.timeGenerator = timeGenerator;
         this.registerFacade = register;
         this.ICFlights = ICFlights;
+        this.refresher = refresher;
+
     }
 
 //Metodos de timeGenerator
@@ -68,4 +73,25 @@ public class MainController {
     public LocalDateTime calculateArrivalDate(Flight flight) {
         return ICFlights.calculateArrivalDate(flight);
     }
+    
+    public Response refreshPlanes() {
+        return refresher.refreshPlanes();
+    }    
+
+    
+    public Response refreshFlights() {
+        return refresher.refreshFlights();
+    }
+
+    
+    public Response refreshPassengers() {
+        return refresher.refreshPassengers();
+    }
+
+    public Response refreshLocations() {
+        return refresher.refreshLocations();
+    }
+    
+    
+    
 }

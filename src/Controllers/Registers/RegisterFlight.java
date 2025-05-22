@@ -6,7 +6,6 @@ package Controllers.Registers;
 
 import Controllers.Creators.IFlightCreator;
 import Controllers.DataSavers.ISaverFlights;
-import Controllers.Interfaces.IRegisterFlight;
 import Controllers.Interfaces.ISearchStorage;
 import Controllers.SearchStorage;
 import Controllers.Validators.IValidatorFlight;

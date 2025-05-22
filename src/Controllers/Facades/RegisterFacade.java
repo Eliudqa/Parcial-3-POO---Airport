@@ -2,9 +2,13 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package Controllers.Registers;
+package Controllers.Facades;
 
 
+import Controllers.Registers.IRegisterFlight;
+import Controllers.Registers.IRegisterLocation;
+import Controllers.Registers.IRegisterPlane;
+import Controllers.Registers.IRegisterPassenger;
 import Controllers.Interfaces.*;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;

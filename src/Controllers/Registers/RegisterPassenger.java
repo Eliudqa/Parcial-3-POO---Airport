@@ -6,7 +6,6 @@ package Controllers.Registers;
 
 import Controllers.Creators.IPassengerCreator;
 import Controllers.DataSavers.ISaverPassengers;
-import Controllers.Interfaces.IRegisterPassenger;
 import Controllers.Validators.IValidatorPassenger;
 import Models.Passenger;
 import core.controllers.utils.Response;
