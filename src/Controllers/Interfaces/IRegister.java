@@ -19,6 +19,6 @@ public interface IRegister {
     Response registerPlane(String id, String brand, String model, String maxCapacity, String airline);
     Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country);
     Response registerLocation(String id, String name,String  city,String  country, String latitude, String longitude);
-    Response registerFlight(String id, String plane, String departureLocation, String arrivalLocation, String year, int month, int day, int hour,int minute, int hoursDurationArrival, int minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale);
+    Response registerFlight(String id, String plane, String departureLocation, String arrivalLocation, String year, int month, int day, int hour,int minute, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale);
     
 }

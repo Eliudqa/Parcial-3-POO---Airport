@@ -1494,7 +1494,8 @@ public class AirportFrame extends javax.swing.JFrame {
         double longitude = Double.parseDouble(txtAirportLongitude.getText());
 
         //this.locations.add(new Location(id, name, city, country, latitude, longitude));
-
+        
+        
         this.cmbDepartureLocationRegister.addItem(id);
         this.cmbArrivalLocationRegister.addItem(id);
         this.cmbScaleLocationRegister.addItem(id);
