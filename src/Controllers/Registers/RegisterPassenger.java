@@ -5,8 +5,10 @@
 package Controllers.Registers;
 
 import Controllers.Creators.IPassengerCreator;
+import Controllers.DataSavers.ISaverPassengers;
 import Controllers.Interfaces.IRegisterPassenger;
 import Controllers.Validators.IValidatorPassenger;
+import Models.Passenger;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -18,11 +20,13 @@ public class RegisterPassenger implements IRegisterPassenger {
     
     private final IPassengerCreator passengerCreator;
     private final IValidatorPassenger vp;
+    private final ISaverPassengers sp;
     
     // Inyección por constructor
-    public RegisterPassenger(IPassengerCreator passengerCreator, IValidatorPassenger vp) {
+    public RegisterPassenger(IPassengerCreator passengerCreator, IValidatorPassenger vp, ISaverPassengers sp) {
         this.passengerCreator = passengerCreator;
         this.vp = vp;
+        this.sp=sp;
     } 
 
      
@@ -38,8 +42,8 @@ public class RegisterPassenger implements IRegisterPassenger {
             return response;
         }
 
-        passengerCreator.createPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
-        //Llamada al metodo que mete al storage
+        Passenger passenger = passengerCreator.createPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
+        sp.addPassenger(passenger);
         return response;
     }
 }

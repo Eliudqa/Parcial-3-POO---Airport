@@ -11,8 +11,9 @@ import Models.Storage.FlightsStorage;
  *
  * @author samit
  */
-public abstract class SaverFlights {
-    public static void addFlight(Flight flight){
+public class SaverFlights implements ISaverFlights{
+    @Override
+    public void addFlight(Flight flight){
         FlightsStorage.getInstance().addFlight(flight);
     }
 }

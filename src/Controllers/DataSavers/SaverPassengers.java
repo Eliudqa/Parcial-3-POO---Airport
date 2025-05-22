@@ -11,8 +11,9 @@ import Models.Storage.PassengersStorage;
  *
  * @author samit
  */
-public abstract class SaverPassengers {
-    public static void addPassenger(Passenger passenger){
+public  class SaverPassengers implements ISaverPassengers{
+    @Override
+    public void addPassenger(Passenger passenger){
         PassengersStorage.getInstance().addPassenger(passenger);
     }
 }

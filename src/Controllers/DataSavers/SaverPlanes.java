@@ -11,8 +11,9 @@ import Models.Storage.PlanesStorage;
  *
  * @author samit
  */
-public abstract class SaverPlanes {
-    public static void addPlane(Plane plane){
+public class SaverPlanes implements ISaverPlanes{
+    @Override
+    public void addPlane(Plane plane){
         PlanesStorage.getInstance().addPlane(plane);
     }
 }

@@ -5,8 +5,10 @@
 package Controllers.Registers;
 
 import Controllers.Creators.ILocationCreator;
+import Controllers.DataSavers.ISaverLocations;
 import Controllers.Interfaces.IRegisterLocation;
 import Controllers.Validators.IValidatorLocation;
+import Models.Location;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -18,11 +20,13 @@ public class RegisterLocation implements IRegisterLocation {
     
     private final ILocationCreator locationCreator;
     private final IValidatorLocation vl;
+    private final ISaverLocations sl;
     
     // Inyección por constructor
-    public RegisterLocation(ILocationCreator locationCreator, IValidatorLocation vl) {
+    public RegisterLocation(ILocationCreator locationCreator, IValidatorLocation vl, ISaverLocations sl) {
         this.locationCreator = locationCreator;
         this.vl=vl;
+        this.sl=sl;
     }  
 
 
@@ -37,8 +41,8 @@ public class RegisterLocation implements IRegisterLocation {
             return response;
         }
 
-        locationCreator.createLocation(id, name, city, country, latitude, longitude);
-        //Llamada al metodo que mete al storage
+        Location location = locationCreator.createLocation(id, name, city, country, latitude, longitude);
+        sl.addLocation(location);
         return response;
     }
 
