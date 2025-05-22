@@ -11,8 +11,9 @@ import Models.Storage.LocationsStorage;
  *
  * @author samit
  */
-public abstract class SaverLocations {
-    public static void addLocation(Location location){
+public class SaverLocations implements ISaverLocations{
+    @Override
+    public void addLocation(Location location){
         LocationsStorage.getInstance().addLocation(location);
     }
 }

@@ -5,8 +5,10 @@
 package Controllers.Registers;
 
 import Controllers.Creators.IPlaneCreator;
+import Controllers.DataSavers.ISaverPlanes;
 import Controllers.Interfaces.IRegisterPlane;
 import Controllers.Validators.IValidatorPlane;
+import Models.Plane;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -18,11 +20,13 @@ public class RegisterPlane implements IRegisterPlane {
     
     private final IPlaneCreator planeCreator;
     private IValidatorPlane vp;
+    private final ISaverPlanes sp;
     
     // Inyección por constructor
-    public RegisterPlane(IPlaneCreator planeCreator, IValidatorPlane vp) {
+    public RegisterPlane(IPlaneCreator planeCreator, IValidatorPlane vp, ISaverPlanes sp) {
         this.planeCreator = planeCreator;
         this.vp = vp;
+        this.sp=sp;
     } 
 
    
@@ -35,8 +39,8 @@ public class RegisterPlane implements IRegisterPlane {
             return response;
         }
         
-        planeCreator.createPlane(id, brand, model, maxCapacity, airline);
-        //Llamada al metodo que mete al storage
+        Plane plane = planeCreator.createPlane(id, brand, model, maxCapacity, airline);
+        sp.addPlane(plane);
         return response;
 
     }

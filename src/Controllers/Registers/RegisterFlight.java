@@ -5,10 +5,12 @@
 package Controllers.Registers;
 
 import Controllers.Creators.IFlightCreator;
+import Controllers.DataSavers.ISaverFlights;
 import Controllers.Interfaces.IRegisterFlight;
 import Controllers.Interfaces.ISearchStorage;
 import Controllers.SearchStorage;
 import Controllers.Validators.IValidatorFlight;
+import Models.Flight;
 import Models.Location;
 import Models.Plane;
 import core.controllers.utils.Response;
@@ -23,13 +25,16 @@ public class RegisterFlight implements IRegisterFlight {
     private final IFlightCreator flightCreator;
     private final IValidatorFlight vf;
     private final ISearchStorage searchStorage;
+    private final ISaverFlights sf;
+
 
     
     // Inyección por constructor
-    public RegisterFlight(IFlightCreator flightCreator, IValidatorFlight validatorFlight,ISearchStorage searchStorage) {
+    public RegisterFlight(IFlightCreator flightCreator, IValidatorFlight validatorFlight,ISearchStorage searchStorage,ISaverFlights sf) {
         this.flightCreator = flightCreator;
         this.vf=validatorFlight;
         this.searchStorage=searchStorage;
+        this.sf =sf;
     }  
 
   
@@ -58,11 +63,12 @@ public class RegisterFlight implements IRegisterFlight {
         Plane plane = searchStorage.getPlane(planeId);
         
         // Se llama la clase creadora de objetos de tipo Flight
-        flightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 
+        Flight flight = flightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 
                 minutes, hoursDurationArrival, minutesDurationArrival, 
                 scaleLocation, hoursDurationScale, minutesDurationScale);
         
-        //Llamada al metodo que mete al storage
+        
+        sf.addFlight(flight);
         return response;
 
     }
