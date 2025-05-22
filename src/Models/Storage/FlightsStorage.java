@@ -39,6 +39,9 @@ public class FlightsStorage {
         return flights;
     }
     
+    public void addFlight(Flight flight){
+        this.flights.add(flight);
+    }
     
     
     

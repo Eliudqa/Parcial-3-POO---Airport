@@ -39,6 +39,10 @@ public class PassengersStorage {
         return passengers;
     }
     
+    public void addPassenger(Passenger passenger){
+        this.passengers.add(passenger);
+    }
+    
     
     
     

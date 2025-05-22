@@ -20,7 +20,9 @@ import java.util.ArrayList;
  *
  * @author samit
  */
-public class ValidatorFlight {
+
+//Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
+public abstract class ValidatorFlight {
 
     public static Response validateFlight(String id, String planeId, String departureLocationId
             , String arrivalLocationId, String year, int month, int day, int hour, int minutes,

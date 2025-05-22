@@ -4,6 +4,7 @@
  */
 package Models.Storage;
 
+import Controllers.SearchStorage;
 import Models.Flight;
 import Models.Location;
 import Models.Passenger;

@@ -38,4 +38,7 @@ public class LocationsStorage {
     }
 
 
+    public void addLocation(Location location){
+        this.locations.add(location);
+    }
 }

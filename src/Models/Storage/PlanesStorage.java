@@ -4,6 +4,7 @@
  */
 package Models.Storage;
 
+import Models.Flight;
 import Models.Plane;
 import java.util.ArrayList;
 
@@ -43,6 +44,9 @@ public class PlanesStorage {
     }
     
     
+    public void addPlane(Plane plane){
+        this.planes.add(plane);
+    }
     
     
     
