@@ -4,13 +4,14 @@
  */
 package Controllers.Registers;
 
+import Controllers.Creators.FlightCreator;
 import Controllers.Interfaces.IRegisterFlight;
 import Controllers.Validators.ValidatorFlight;
 import Models.Flight;
 import Models.Location;
 import Models.Plane;
-import Models.Storage.LocationsStorage;
 import Models.Storage.PlanesStorage;
+import Models.Storage.SearchStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import java.time.LocalDateTime;
@@ -22,43 +23,33 @@ import java.time.LocalDateTime;
 public class RegisterFlight implements IRegisterFlight {
 
     @Override
-    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year, int month, int day, int hour, int minutes, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale) {
-        Response response = ValidatorFlight.validateFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
+    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year,
+            int month, int day, int hour, int minutes, String hoursDurationArrival,
+            String minutesDurationArrival, String scaleId,
+            int hoursDurationScale, int minutesDurationScale) {
 
+        // Se le manda al validador la informacion del avion
+        Response response = ValidatorFlight.validateFlight(id, planeId, departureLocationId,
+                arrivalLocationId, year, month, day, hour, minutes,
+                hoursDurationArrival, minutesDurationArrival,
+                scaleId, hoursDurationScale, minutesDurationScale);
+        
+        // No se sigue con el proceso de registro si alguna validacion falló
         if (response.getStatus() != Status.OK) {
             return response;
         }
-        Plane plane = null;
-        Flight flight;
-        Location departureLocation = null, scaleLocation = null, arrivalLocation = null;
+
+        // Se hacen las busquedas correspondientes
+        Location departureLocation = SearchStorage.getLocation(departureLocationId),
+                scaleLocation = SearchStorage.getLocation(scaleId),
+                arrivalLocation = SearchStorage.getLocation(arrivalLocationId);
+        Plane plane = SearchStorage.getPlane(planeId);
         
-        for(Location location : LocationsStorage.getInstance().getLocations()){
-            if(departureLocationId.equals(location.getAirportId())){
-                departureLocation = location;
-            }
-            if(arrivalLocationId.equals(location.getAirportId())){
-                arrivalLocation = location;
-            }
-            if(scaleId.equals(location.getAirportId())){
-                scaleLocation = location;
-            }
-        }
+        // Se llama la clase creadora de objetos de tipo Flight
+        FlightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 
+                minutes, hoursDurationArrival, minutesDurationArrival, 
+                scaleLocation, hoursDurationScale, minutesDurationScale);
         
-        for(Plane p : PlanesStorage.getInstance().getPlanes()){
-            if(planeId.equals(p.getId())){
-                plane = p;
-            }
-        }
-        
-        LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), month, day, hour, minutes);
-        if(scaleId.equals("")){
-            flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival), hoursDurationScale, minutesDurationScale);
-        }else{
-            flight = new Flight(id, plane, departureLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival));
-        }
-        
-        plane.addFlight(flight);
-        //Flight flight = response;
         //Llamada al metodo que mete al storage
         return response;
 

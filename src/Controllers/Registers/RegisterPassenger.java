@@ -4,6 +4,7 @@
  */
 package Controllers.Registers;
 
+import Controllers.Creators.PassengerCreator;
 import Controllers.Interfaces.IRegisterPassenger;
 import Controllers.Validators.ValidatorPassenger;
 import Models.Passenger;
@@ -18,7 +19,9 @@ import java.time.LocalDate;
 public class RegisterPassenger implements IRegisterPassenger {
 
     @Override
-    public Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country) {
+    public Response registerPassenger(String id, String firstName, String lastName, 
+            String year, int month, int day, 
+            String phoneCode, String phone, String country) {
 
         Response response = ValidatorPassenger.validatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
 
@@ -26,9 +29,7 @@ public class RegisterPassenger implements IRegisterPassenger {
             return response;
         }
 
-        LocalDate BD = LocalDate.of(Integer.parseInt(year), month, day);
-
-        Passenger passenger = new Passenger(Integer.parseInt(id), firstName, lastName, BD, Integer.parseInt(phoneCode), Integer.parseInt(phone), country);
+        PassengerCreator.createPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
         //Llamada al metodo que mete al storage
         return response;
     }

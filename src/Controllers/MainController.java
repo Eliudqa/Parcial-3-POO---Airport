@@ -61,14 +61,10 @@ public class MainController {
     public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year, int month, int day, int hour, int minutes, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale){
         return registerFacade.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
     }
-//De forma temporal depende de controllerflights, 
-//Se debe de poner una interfaz aqui    
 
     public void delayFlight(Flight flight, int hours, int minutes) {
         ICFlights.delay(flight, hours, minutes);
-    }
-//De forma temporal tambien llama directo a la clase    
-    
+    }    
     public LocalDateTime calculateArrivalDate(Flight flight) {
         return ICFlights.calculateArrivalDate(flight);
     }

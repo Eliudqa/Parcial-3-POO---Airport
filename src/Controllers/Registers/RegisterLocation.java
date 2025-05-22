@@ -4,6 +4,7 @@
  */
 package Controllers.Registers;
 
+import Controllers.Creators.LocationCreator;
 import Controllers.Interfaces.IRegisterLocation;
 import Controllers.Validators.ValidatorLocation;
 import Models.Location;
@@ -24,7 +25,7 @@ public class RegisterLocation implements IRegisterLocation {
             return response;
         }
 
-        Location plane = new Location(id, name, city, country, Double.parseDouble(latitude), Double.parseDouble(longitude));
+        LocationCreator.createLocation(id, name, city, country, latitude, longitude);
         //Llamada al metodo que mete al storage
         return response;
     }

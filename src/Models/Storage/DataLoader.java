@@ -115,7 +115,6 @@ public abstract class DataLoader {
             int minutesScale = o.optInt("minutesDurationScale", 0);
 
             Plane plane = SearchStorage.getPlane(planeId);
-
             Location departure = SearchStorage.getLocation(departureId);
             Location arrival = SearchStorage.getLocation(arrivalId);
 

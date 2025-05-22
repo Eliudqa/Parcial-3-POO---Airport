@@ -210,15 +210,9 @@ public abstract class ValidatorFlight {
                     return new Response("In scale, there is no location with that id", Status.NOT_FOUND);
                 }
 
-                          //   flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival), hoursDurationScale, minutesDurationScale);
-
-            //Se crea el vuelo sin escala 
-            } else {
-                            // flight = new Flight(id, plane, departureLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival));
-            }
-                             //plane.addFlight(flight);
-            //Se registra el vuelo
-            return new Response("Flight registered succesfully", Status.CREATED);
+            } 
+            // Se envia la respuesta
+            return new Response("Flight registered succesfully", Status.OK);
         } catch (Exception e) {
             return new Response("Unexpected error", Status.INTERNAL_SERVER_ERROR);
         }
