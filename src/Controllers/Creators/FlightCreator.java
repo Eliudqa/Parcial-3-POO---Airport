@@ -13,9 +13,10 @@ import java.time.LocalDateTime;
  *
  * @author HOLA
  */
-public abstract class FlightCreator {
+public class FlightCreator implements IFlightCreator {
     
-    public static Flight CreateFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation, String year,
+    @Override
+    public Flight CreateFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation, String year,
             int month, int day, int hour, int minutes, String hoursDurationArrival,
             String minutesDurationArrival, Location scaleLocation,
             int hoursDurationScale, int minutesDurationScale){

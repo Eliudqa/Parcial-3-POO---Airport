@@ -12,10 +12,11 @@ import java.time.LocalDateTime;
  *
  * @author HOLA
  */
-public abstract class PlaneCreator {
+public  class PlaneCreator implements IPlaneCreator {
     
     
-    public static Plane createPlane(String id, String brand, String model, String maxCapacity, String airline){
+    @Override
+    public  Plane createPlane(String id, String brand, String model, String maxCapacity, String airline){
       
         return new Plane(id, brand, model, Integer.parseInt(maxCapacity), airline);
         
