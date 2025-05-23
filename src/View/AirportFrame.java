@@ -1430,15 +1430,20 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_panelRound2MouseDragged
 
     private void administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorActionPerformed
-        
+
+        userSelect.removeAllItems();
+        userSelect.addItem("Select User");
+        userSelect.setSelectedIndex(0);
         
         if (user.isSelected()) {
             user.setSelected(false);
+            userSelect.removeAllItems(); // Limpia todo
+            userSelect.addItem("Select User"); // Vuelve a poner el ítem principal
             userSelect.setSelectedIndex(0);
-            userSelect.removeAllItems();
-            userSelect.addItem("Select User");
 
         }
+
+ 
         for (int i = 1; i < jTabbedPane1.getTabCount(); i++) {
             jTabbedPane1.setEnabledAt(i, true);
         }
@@ -1446,25 +1451,26 @@ public class AirportFrame extends javax.swing.JFrame {
         jTabbedPane1.setEnabledAt(6, false);
         jTabbedPane1.setEnabledAt(7, false);
 
-        ArrayList<String> ids =  mainController.refreshAvailableLocations();
+        ArrayList<String> ids = mainController.refreshAvailableLocations();
         ArrayList<String> idsPlanes = mainController.refreshAvailablePlanes();
-        
+
         for (String idp : idsPlanes) {
             cmbPlaneRegister.addItem(idp);
         }
-        
+
         for (String id : ids) {
             cmbDepartureLocationRegister.addItem(id);
             cmbScaleLocationRegister.addItem(id);
             cmbArrivalLocationRegister.addItem(id);
-            
+
         }
 
-        
+
     }//GEN-LAST:event_administratorActionPerformed
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
 
+        userSelect.removeItemAt(0);
         if (administrator.isSelected()) {
             administrator.setSelected(false);
         }
@@ -1489,6 +1495,7 @@ public class AirportFrame extends javax.swing.JFrame {
         for (String idf : idsFlights) {
             cmbFlights.addItem(idf);
         }
+
 
     }//GEN-LAST:event_userActionPerformed
 
@@ -1545,12 +1552,8 @@ public class AirportFrame extends javax.swing.JFrame {
         String latitude = txtAirportLatitude.getText();
         String longitude = txtAirportLongitude.getText();
 
-
         mainController.registerLocation(id, name, city, country, latitude, longitude);
-        
-        
 
-        
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
@@ -1664,11 +1667,10 @@ public class AirportFrame extends javax.swing.JFrame {
     private void btnRefreshMyFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshMyFlightsActionPerformed
 
         Long passengerId = Long.parseLong(userSelect.getItemAt(userSelect.getSelectedIndex()));
-
         DefaultTableModel model = (DefaultTableModel) tblMyFlights.getModel();
         model.setRowCount(0);
         Response response = mainController.getMyFlightsRows(passengerId);
-        
+
         if (response.getStatus() >= 500) {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
         } else if (response.getStatus() >= 400) {
@@ -1766,17 +1768,18 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton13ActionPerformed
 
     private void userSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectActionPerformed
+        DefaultTableModel model = (DefaultTableModel) tblMyFlights.getModel();
+        model.setRowCount(0);
+
         try {
-            String id = userSelect.getSelectedItem().toString();
-            if (!id.equals(userSelect.getItemAt(0))) {
+            String id = userSelect.getSelectedItem().toString();             
                 txtID.setText(id);
-                txtIdAddToFlight.setText(id);
-            } else {
-                txtID.setText("");
-                txtIdAddToFlight.setText("");
-            }
+                txtIdAddToFlight.setText(id);                   
         } catch (Exception e) {
         }
+        
+
+
     }//GEN-LAST:event_userSelectActionPerformed
 
     private void cmbFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFlightsActionPerformed
