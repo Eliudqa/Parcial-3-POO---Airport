@@ -127,4 +127,13 @@ public class MainController {
         return ISG.getFlights();
     }
     
+    
+    public ArrayList<String> refreshAvailablePlanes(){
+        return refresher.refreshAvailablePlanes();
+    }
+    
+    public ArrayList<String> refreshAvailableLocations(){
+        return refresher.refreshAvailableLocations();
+    }
+    
 }

@@ -61,7 +61,15 @@ public class Plane {
     }
 
     public Plane copy(){
-        return new Plane(id,brand,model,maxCapacity,airline);
-    }
+        Plane copied = new Plane(id, brand, model, maxCapacity, airline);
     
+    // Copiar vuelos también 
+    for (Flight f : this.flights) {
+        copied.addFlight(f); 
+    }
+
+    return copied;
+    
+    
+}
 }

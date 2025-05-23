@@ -4,6 +4,7 @@
  */
 package Controllers.Refreshers;
 
+import Controllers.Interfaces.Refreshers.IRefreshMyFlights;
 import Controllers.Interfaces.ISearchStorage;
 import Models.Flight;
 import Models.Passenger;
@@ -17,14 +18,13 @@ import java.util.ArrayList;
  * @author HOLA
  */
 public class RefreshMyFlights implements IRefreshMyFlights {
-    
+
     private final ISearchStorage searchStorage;
-    
-    public RefreshMyFlights(ISearchStorage searchStorage){
+
+    public RefreshMyFlights(ISearchStorage searchStorage) {
         this.searchStorage = searchStorage;
     }
-    
-    
+
     @Override
     public Response getMyFlightsRows(Long passengerId) {
 
@@ -34,10 +34,16 @@ public class RefreshMyFlights implements IRefreshMyFlights {
             return new Response("Passenger not found", 404);
         }
 
+        if (passenger.getNumFlights() == 0) {
+            return new Response("Lista Vacia", 204);
+
+        }
+
         ArrayList<Object[]> rows = new ArrayList<>();
 
         for (Flight flight : passenger.getFlights()) {
-                Flight copy = flight.copy(); // copia independiente
+
+            Flight copy = flight.copy(); // copia independiente
 
             rows.add(new Object[]{
                 copy.getId(),

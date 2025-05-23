@@ -111,7 +111,11 @@ public class Passenger {
     }
     
     public Passenger copy(){
-        return new Passenger(id,firstname,  lastname,  birthDate,  countryPhoneCode, phone,country);
+        Passenger copy = new Passenger(id,firstname,  lastname,  birthDate,  countryPhoneCode, phone,country);
+        for (Flight f : this.flights){
+            copy.addFlight(f);
+        }
+        return copy;
     }
     
     

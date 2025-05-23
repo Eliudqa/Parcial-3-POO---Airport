@@ -8,14 +8,10 @@ import Controllers.Interfaces.ISearchStorage;
 import Models.Flight;
 import Models.Location;
 import Models.Plane;
-import Models.Storage.FlightsStorage;
-import Models.Storage.LocationsStorage;
-import Models.Storage.PlanesStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 /**
  *
@@ -130,7 +126,7 @@ public class ValidatorFlight implements IValidatorFlight {
                 }
             }
 
-            i = 0;
+        
             Location departureLocation = searchStorage.getLocation(departureLocationId);
 
             if (departureLocation == null) {
@@ -155,7 +151,7 @@ public class ValidatorFlight implements IValidatorFlight {
             
             
             //BUSQUEDA AQUI TAMBIEN
-            i = 0;
+    
             Location arrivalLocation = searchStorage.getLocation(arrivalLocationId);
             if (arrivalLocation == null) {
                 return new Response("In arrival, there is no location with that id", Status.NOT_FOUND);
@@ -179,7 +175,7 @@ public class ValidatorFlight implements IValidatorFlight {
             //En caso de escala
             Flight flight;
             if (!scaleId.equals("")) {
-                i = 0;
+      
                 Location scaleLocation = searchStorage.getLocation(scaleId);
 
                 if (scaleLocation == null) {

@@ -5,8 +5,6 @@
 package Controllers.Validators;
 
 import Controllers.Interfaces.ISearchStorage;
-import Models.Location;
-import Models.Storage.LocationsStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 

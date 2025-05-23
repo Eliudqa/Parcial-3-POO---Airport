@@ -10,10 +10,6 @@ import Models.Flight;
 import Models.Location;
 import Models.Passenger;
 import Models.Plane;
-import Models.Storage.FlightsStorage;
-import Models.Storage.LocationsStorage;
-import Models.Storage.PassengersStorage;
-import Models.Storage.PlanesStorage;
 import java.util.ArrayList;
 
 /**
@@ -35,7 +31,7 @@ public class SearchStorage implements ISearchStorage {
      @Override
      public Plane getPlane(String idPlane){
         
-        ArrayList<Plane> planes = PlanesStorage.getInstance().getPlanes();
+        ArrayList<Plane> planes = ISG.getPlanes();
         
         for(Plane plane : planes){
             if(idPlane.equals(plane.getId())){
@@ -50,7 +46,7 @@ public class SearchStorage implements ISearchStorage {
      @Override
     public Location getLocation(String AirportId){
         
-        ArrayList<Location> locations = LocationsStorage.getInstance().getLocations();
+        ArrayList<Location> locations = ISG.getLocations();
         
         for(Location location : locations){
             if(AirportId.equals(location.getAirportId())){
@@ -65,7 +61,7 @@ public class SearchStorage implements ISearchStorage {
      @Override
     public Passenger getPassenger(Long passengerId){
         
-        ArrayList<Passenger> passengers = PassengersStorage.getInstance().getPassengers();
+        ArrayList<Passenger> passengers = ISG.getPassengers();
         
         for(Passenger p : passengers){
             if(passengerId ==p.getId()){
@@ -81,7 +77,7 @@ public class SearchStorage implements ISearchStorage {
      @Override
     public Flight getFlight(String flightId){
         
-        ArrayList<Flight> flights = FlightsStorage.getInstance().getFlights();
+        ArrayList<Flight> flights = ISG.getFlights();
         
         for(Flight flight : flights){
             if(flightId.equals(flight.getId())){

@@ -4,32 +4,31 @@
  */
 package Controllers.Refreshers;
 
-import Controllers.Interfaces.Refreshers.IFlightsAvailableRefresher;
+import Controllers.Interfaces.Refreshers.IPlanesAvailableRefreshers;
 import Controllers.Interfaces.Storage.IStorageGet;
-import Models.Flight;
-import Models.Storage.FlightsStorage;
+import Models.Plane;
 import java.util.ArrayList;
 
 /**
  *
  * @author HOLA
  */
-public class FlightsAvailableRefresher implements IFlightsAvailableRefresher  {
+public class PlanesAvailableRefreshers implements IPlanesAvailableRefreshers {
     
     private final IStorageGet ISG;
 
-    public FlightsAvailableRefresher(IStorageGet ISG) {
+    public PlanesAvailableRefreshers(IStorageGet ISG) {
         this.ISG = ISG;
     }
     
     @Override
-    public ArrayList<String> refreshAvailableFlights(){
-        ArrayList<Flight> flights = ISG.getFlights();
+    public ArrayList<String> refreshAvailablePlanes(){
+        ArrayList<Plane> planes = ISG.getPlanes();
         ArrayList<String> ids = new ArrayList<>();
 
         
-        for (Flight f : flights) {
-             Flight copy = f.copy(); // copia independiente
+        for (Plane p : planes) {
+             Plane copy = p.copy(); // copia independiente
 
             ids.add(copy.getId()+"");
         }

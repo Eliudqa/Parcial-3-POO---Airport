@@ -4,8 +4,9 @@
  */
 package Controllers.Refreshers;
 
+import Controllers.Interfaces.Refreshers.IUserRefresher;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Passenger;
-import Models.Storage.PassengersStorage;
 import java.util.ArrayList;
 
 /**
@@ -13,20 +14,25 @@ import java.util.ArrayList;
  * @author HOLA
  */
 public class UserRefresher implements IUserRefresher {
-    
+
+    private final IStorageGet ISG;
+
+    public UserRefresher(IStorageGet ISG) {
+        this.ISG = ISG;
+    }
+
     @Override
-    public ArrayList<String> refreshUser(){
-        ArrayList<Passenger> passengers = PassengersStorage.getInstance().getPassengers();
+    public ArrayList<String> refreshUser() {
+        ArrayList<Passenger> passengers = ISG.getPassengers();
         ArrayList<String> ids = new ArrayList<>();
 
-        
         for (Passenger p : passengers) {
-             Passenger copy = p.copy(); // copia independiente
+            Passenger copy = p.copy(); // copia independiente
 
-            ids.add(copy.getId()+"");
+            ids.add(copy.getId() + "");
         }
-        
+
         return ids;
-        
-      } 
+
+    }
 }

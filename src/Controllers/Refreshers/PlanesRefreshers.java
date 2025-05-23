@@ -4,8 +4,9 @@
  */
 package Controllers.Refreshers;
 
+import Controllers.Interfaces.Refreshers.IPlanesRefreshers;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Plane;
-import Models.Storage.PlanesStorage;
 import core.controllers.utils.Response;
 import java.util.ArrayList;
 
@@ -14,11 +15,16 @@ import java.util.ArrayList;
  * @author HOLA
  */
 public class PlanesRefreshers implements IPlanesRefreshers {
-    
-       
-  @Override
-  public Response refreshPlanes() {
-        ArrayList<Plane> planes = PlanesStorage.getInstance().getPlanes();
+
+    private final IStorageGet ISG;
+
+    public PlanesRefreshers(IStorageGet ISG) {
+        this.ISG = ISG;
+    }
+
+    @Override
+    public Response refreshPlanes() {
+        ArrayList<Plane> planes = ISG.getPlanes();
 
         if (planes.isEmpty()) {
             return new Response("No airplanes registered", 404);
@@ -26,7 +32,7 @@ public class PlanesRefreshers implements IPlanesRefreshers {
 
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Plane p : planes) {
-           Plane copy = p.copy(); // copia independiente
+            Plane copy = p.copy(); // copia independiente
 
             rows.add(new Object[]{
                 copy.getId(),
@@ -39,6 +45,5 @@ public class PlanesRefreshers implements IPlanesRefreshers {
         }
 
         return new Response("Planes loaded succesfully", 200, rows);
-    } 
-  }
-        
+    }
+}

@@ -4,6 +4,8 @@
  */
 package Controllers.Refreshers;
 
+import Controllers.Interfaces.Refreshers.ILocationsRefreshers;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Location;
 import Models.Storage.LocationsStorage;
 import core.controllers.utils.Response;
@@ -15,9 +17,15 @@ import java.util.ArrayList;
  */
 public class LocationsRefreshers implements ILocationsRefreshers {
     
+    private final IStorageGet ISG;
+
+    public LocationsRefreshers(IStorageGet ISG) {
+        this.ISG = ISG;
+    }
+    
   @Override
   public Response refreshLocations() {
-        ArrayList<Location> locations = LocationsStorage.getInstance().getLocations();
+        ArrayList<Location> locations = ISG.getLocations();
 
         if (locations.isEmpty()) {
             return new Response("No locations registered", 404);

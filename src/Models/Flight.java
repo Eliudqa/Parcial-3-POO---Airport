@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author edangulo
  */
 public class Flight {
-    
+
     private final String id;
     private ArrayList<Passenger> passengers;
     private Plane plane;
@@ -24,7 +24,6 @@ public class Flight {
     private int minutesDurationArrival;
     private int hoursDurationScale;
     private int minutesDurationScale;
-    
 
     public Flight(String id, Plane plane, Location departureLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival) {
         this.id = id;
@@ -35,7 +34,7 @@ public class Flight {
         this.departureDate = departureDate;
         this.hoursDurationArrival = hoursDurationArrival;
         this.minutesDurationArrival = minutesDurationArrival;
-            }
+    }
 
     public Flight(String id, Plane plane, Location departureLocation, Location scaleLocation, Location arrivalLocation, LocalDateTime departureDate, int hoursDurationArrival, int minutesDurationArrival, int hoursDurationScale, int minutesDurationScale) {
         this.id = id;
@@ -49,13 +48,13 @@ public class Flight {
         this.minutesDurationArrival = minutesDurationArrival;
         this.hoursDurationScale = hoursDurationScale;
         this.minutesDurationScale = minutesDurationScale;
-        
+
     }
-    
+
     public void addPassenger(Passenger passenger) {
         this.passengers.add(passenger);
     }
-    
+
     public String getId() {
         return id;
     }
@@ -99,26 +98,32 @@ public class Flight {
     public void setDepartureDate(LocalDateTime departureDate) {
         this.departureDate = departureDate;
     }
-    
-    
+
     public int getNumPassengers() {
         return passengers.size();
     }
 
-   public Flight copy(){
-       if(this.scaleLocation==null){
-         return new Flight( id, plane,  departureLocation,  arrivalLocation,  departureDate,  hoursDurationArrival, minutesDurationArrival); 
-       }
-       else {
-           return new Flight( id, plane,  departureLocation,  scaleLocation,  arrivalLocation, departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale); 
+    public Flight copy() {
+        if (this.scaleLocation == null) {
+            Flight copy = new Flight(id, plane, departureLocation, arrivalLocation, departureDate, hoursDurationArrival, minutesDurationArrival);
 
-       }
-   }
-   
-   public LocalDateTime calculateArrivalDate() {
+            for (Passenger p : this.passengers) {
+                copy.addPassenger(p);
+            }
+            return copy;
+        } else {
+            Flight copy = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale);
+            for (Passenger p : this.passengers) {
+                copy.addPassenger(p);
+            }
+            return copy;
+
+        }
+
+    }
+
+    public LocalDateTime calculateArrivalDate() {
         return departureDate.plusHours(hoursDurationScale).plusHours(hoursDurationArrival).plusMinutes(minutesDurationScale).plusMinutes(minutesDurationArrival);
     }
-    
-    
-    
+
 }

@@ -38,15 +38,19 @@ import Controllers.Interfaces.Storage.IStorageGetPassengers;
 import Controllers.Interfaces.Storage.IStorageGetPlanes;
 import Controllers.Refreshers.FlightsAvailableRefresher;
 import Controllers.Refreshers.FlightsRefreshers;
-import Controllers.Refreshers.IFlightsAvailableRefresher;
-import Controllers.Refreshers.IFlightsRefresher;
-import Controllers.Refreshers.ILocationsRefreshers;
-import Controllers.Refreshers.IPassengersRefreshers;
-import Controllers.Refreshers.IPlanesRefreshers;
-import Controllers.Refreshers.IRefreshMyFlights;
-import Controllers.Refreshers.IUserRefresher;
+import Controllers.Interfaces.Refreshers.IFlightsAvailableRefresher;
+import Controllers.Interfaces.Refreshers.IFlightsRefresher;
+import Controllers.Interfaces.Refreshers.ILocationAvailableRefresher;
+import Controllers.Interfaces.Refreshers.ILocationsRefreshers;
+import Controllers.Interfaces.Refreshers.IPassengersRefreshers;
+import Controllers.Interfaces.Refreshers.IPlanesAvailableRefreshers;
+import Controllers.Interfaces.Refreshers.IPlanesRefreshers;
+import Controllers.Interfaces.Refreshers.IRefreshMyFlights;
+import Controllers.Interfaces.Refreshers.IUserRefresher;
+import Controllers.Refreshers.LocationAvailableRefresher;
 import Controllers.Refreshers.LocationsRefreshers;
 import Controllers.Refreshers.PassengersRefresher;
+import Controllers.Refreshers.PlanesAvailableRefreshers;
 import Controllers.Refreshers.PlanesRefreshers;
 import Controllers.Refreshers.RefreshMyFlights;
 import Controllers.Refreshers.UserRefresher;
@@ -74,8 +78,9 @@ import Models.Storage.PlanesStorage;
  * @author samit
  */
 public class AppConfig {
-
+    private final IStorageGet ISG = createStorageGet();
     private final ISearchStorage searchStorage = createSearchStorage();
+
 
     public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();
@@ -86,7 +91,6 @@ public class AppConfig {
         RegisterLocation registerLocation = createRegisterLocation();
 
         IRefresher refresher = createRefresher();
-        IStorageGet ISG = createStorageGet();
 
         IRegister registerFacade = new RegisterFacade(
                 registerPassenger,
@@ -94,6 +98,7 @@ public class AppConfig {
                 registerLocation,
                 registerFlight
         );
+        
         IControllerFlights ICFlights = new ControllerFlights();
 
         return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG);
@@ -154,13 +159,18 @@ public class AppConfig {
     }
           
      public IRefresher createRefresher() {
-    IPlanesRefreshers planeRefresher = new PlanesRefreshers();
-    IFlightsRefresher flightRefresher = new FlightsRefreshers();
-    IPassengersRefreshers passengerRefresher = new PassengersRefresher();
-    ILocationsRefreshers locationRefresher = new LocationsRefreshers();
-    IUserRefresher userRefresher = new UserRefresher();
-    IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher();
+         
+    IPlanesRefreshers planeRefresher = new PlanesRefreshers(ISG);
+    IFlightsRefresher flightRefresher = new FlightsRefreshers(ISG);
+    IPassengersRefreshers passengerRefresher = new PassengersRefresher(ISG);
+    ILocationsRefreshers locationRefresher = new LocationsRefreshers(ISG);
+    IUserRefresher userRefresher = new UserRefresher(ISG);
+    IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher(ISG);
     IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage);
+    IPlanesAvailableRefreshers availablePlanesRefresher = new PlanesAvailableRefreshers(ISG);
+    ILocationAvailableRefresher availableLocationsRefresher = new LocationAvailableRefresher(ISG);
+
+   
 
     return new RefresherFacade(
         planeRefresher,
@@ -169,7 +179,9 @@ public class AppConfig {
         locationRefresher,
        userRefresher,
        availableFlightsRefresher,
-       myFlightsRefresher     
+       myFlightsRefresher,
+       availablePlanesRefresher,
+       availableLocationsRefresher
     );
 }
 

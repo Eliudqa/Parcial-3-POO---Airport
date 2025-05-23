@@ -12,6 +12,7 @@ import Models.Storage.FlightsStorage;
  * @author samit
  */
 public class SaverFlights implements ISaverFlights{
+    
     @Override
     public void addFlight(Flight flight){
         FlightsStorage.getInstance().addFlight(flight);

@@ -5,13 +5,15 @@
 package Controllers.Facades;
 
 import Controllers.Interfaces.IRefresher;
-import Controllers.Refreshers.IFlightsAvailableRefresher;
-import Controllers.Refreshers.IFlightsRefresher;
-import Controllers.Refreshers.ILocationsRefreshers;
-import Controllers.Refreshers.IPassengersRefreshers;
-import Controllers.Refreshers.IPlanesRefreshers;
-import Controllers.Refreshers.IRefreshMyFlights;
-import Controllers.Refreshers.IUserRefresher;
+import Controllers.Interfaces.Refreshers.IFlightsAvailableRefresher;
+import Controllers.Interfaces.Refreshers.IFlightsRefresher;
+import Controllers.Interfaces.Refreshers.ILocationAvailableRefresher;
+import Controllers.Interfaces.Refreshers.ILocationsRefreshers;
+import Controllers.Interfaces.Refreshers.IPassengersRefreshers;
+import Controllers.Interfaces.Refreshers.IPlanesAvailableRefreshers;
+import Controllers.Interfaces.Refreshers.IPlanesRefreshers;
+import Controllers.Interfaces.Refreshers.IRefreshMyFlights;
+import Controllers.Interfaces.Refreshers.IUserRefresher;
 import core.controllers.utils.Response;
 import java.util.ArrayList;
 
@@ -28,6 +30,8 @@ public class RefresherFacade implements IRefresher {
     private final IUserRefresher userRefresher;
     private final IFlightsAvailableRefresher availableFlightsRefresher;
     private final IRefreshMyFlights myFlightsRefresher;
+    private final IPlanesAvailableRefreshers availablePlanesRefresher;
+    private final ILocationAvailableRefresher availableLocationsRefresher;
     
 
     public RefresherFacade(
@@ -37,7 +41,9 @@ public class RefresherFacade implements IRefresher {
             ILocationsRefreshers locationRefresher,
             IUserRefresher userRefresher,
             IFlightsAvailableRefresher availableFlightsRefresher,
-            IRefreshMyFlights myFlightsRefresher
+            IRefreshMyFlights myFlightsRefresher,
+            IPlanesAvailableRefreshers availablePlanesRefresher,
+            ILocationAvailableRefresher availableLocationsRefresher
     ) {
         this.planeRefresher = planeRefresher;
         this.flightRefresher = flightRefresher;
@@ -46,6 +52,8 @@ public class RefresherFacade implements IRefresher {
         this.userRefresher = userRefresher;
         this.availableFlightsRefresher = availableFlightsRefresher;
         this.myFlightsRefresher = myFlightsRefresher;
+        this.availablePlanesRefresher = availablePlanesRefresher;
+        this.availableLocationsRefresher = availableLocationsRefresher;
     }
 
     @Override
@@ -82,5 +90,15 @@ public class RefresherFacade implements IRefresher {
     @Override
     public Response getMyFlightsRows(Long passengerId){
         return myFlightsRefresher.getMyFlightsRows(passengerId);
+    }
+    
+    @Override
+    public ArrayList<String> refreshAvailablePlanes(){
+        return availablePlanesRefresher.refreshAvailablePlanes();
+    }
+    
+    @Override
+    public ArrayList<String> refreshAvailableLocations(){
+        return availableLocationsRefresher.refreshAvailableLocations();
     }
 }

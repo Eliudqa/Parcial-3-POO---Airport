@@ -4,6 +4,8 @@
  */
 package Controllers.Refreshers;
 
+import Controllers.Interfaces.Refreshers.IFlightsRefresher;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Flight;
 import Models.Storage.FlightsStorage;
 import core.controllers.utils.Response;
@@ -15,9 +17,15 @@ import java.util.ArrayList;
  */
 public class FlightsRefreshers implements IFlightsRefresher {
 
+    private final IStorageGet ISG;
+
+    public FlightsRefreshers(IStorageGet ISG) {
+        this.ISG = ISG;
+    }
+
     @Override
     public Response refreshFlights() {
-        ArrayList<Flight> flights = FlightsStorage.getInstance().getFlights();
+        ArrayList<Flight> flights = ISG.getFlights();
 
         if (flights.isEmpty()) {
             return new Response("No flights registered", 404);

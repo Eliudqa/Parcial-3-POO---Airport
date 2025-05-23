@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Controllers.Refreshers;
+package Controllers.Interfaces.Refreshers;
 
 import core.controllers.utils.Response;
 
@@ -10,7 +10,6 @@ import core.controllers.utils.Response;
  *
  * @author HOLA
  */
-public interface IFlightsRefresher {
-   public Response refreshFlights();
-
+public interface ILocationsRefreshers {
+    public Response refreshLocations();
 }

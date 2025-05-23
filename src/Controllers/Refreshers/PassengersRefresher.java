@@ -4,6 +4,8 @@
  */
 package Controllers.Refreshers;
 
+import Controllers.Interfaces.Refreshers.IPassengersRefreshers;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Passenger;
 import Models.Storage.PassengersStorage;
 import core.controllers.utils.Response;
@@ -15,10 +17,15 @@ import java.util.ArrayList;
  */
 public class PassengersRefresher implements IPassengersRefreshers {
     
+    private final IStorageGet ISG;
+
+    public PassengersRefresher(IStorageGet ISG) {
+        this.ISG = ISG;
+    }
     
   @Override
   public Response refreshPassengers() {
-        ArrayList<Passenger> passengers = PassengersStorage.getInstance().getPassengers();
+        ArrayList<Passenger> passengers = ISG.getPassengers();
 
         if (passengers.isEmpty()) {
             return new Response("No passengers registered", 404);

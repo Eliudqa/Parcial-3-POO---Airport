@@ -5,8 +5,6 @@
 package Controllers.Validators;
 
 import Controllers.Interfaces.ISearchStorage;
-import Models.Passenger;
-import Models.Storage.PassengersStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 import java.time.DateTimeException;

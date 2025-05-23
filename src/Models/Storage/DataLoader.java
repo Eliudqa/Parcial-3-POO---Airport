@@ -5,7 +5,6 @@
 package Models.Storage;
 
 import Controllers.Interfaces.ISearchStorage;
-import Controllers.SearchStorage;
 import Models.Flight;
 import Models.Location;
 import Models.Passenger;
