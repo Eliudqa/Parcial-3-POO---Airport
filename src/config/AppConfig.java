@@ -43,10 +43,12 @@ import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IPassengersRefreshers;
 import Controllers.Refreshers.IPlanesRefreshers;
+import Controllers.Refreshers.IRefreshMyFlights;
 import Controllers.Refreshers.IUserRefresher;
 import Controllers.Refreshers.LocationsRefreshers;
 import Controllers.Refreshers.PassengersRefresher;
 import Controllers.Refreshers.PlanesRefreshers;
+import Controllers.Refreshers.RefreshMyFlights;
 import Controllers.Refreshers.UserRefresher;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
@@ -150,7 +152,27 @@ public class AppConfig {
         IStorageGet ISG = createStorageGet();
         return new SearchStorage(ISG);
     }
-    
+          
+     public IRefresher createRefresher() {
+    IPlanesRefreshers planeRefresher = new PlanesRefreshers();
+    IFlightsRefresher flightRefresher = new FlightsRefreshers();
+    IPassengersRefreshers passengerRefresher = new PassengersRefresher();
+    ILocationsRefreshers locationRefresher = new LocationsRefreshers();
+    IUserRefresher userRefresher = new UserRefresher();
+    IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher();
+    IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage);
+
+    return new RefresherFacade(
+        planeRefresher,
+        flightRefresher,
+        passengerRefresher,
+        locationRefresher,
+       userRefresher,
+       availableFlightsRefresher,
+       myFlightsRefresher     
+    );
+}
+
     public IStorageGet createStorageGet(){
         IStorageGetPlanes isgpl = PlanesStorage.getInstance();
         IStorageGetFlights isgf=  FlightsStorage.getInstance();
@@ -159,22 +181,5 @@ public class AppConfig {
         return new GetStorageFacade(isgpl, isgf, isgl, isgpa);
     }
 
-    public IRefresher createRefresher() {
-        IPlanesRefreshers planeRefresher = new PlanesRefreshers();
-        IFlightsRefresher flightRefresher = new FlightsRefreshers();
-        IPassengersRefreshers passengerRefresher = new PassengersRefresher();
-        ILocationsRefreshers locationRefresher = new LocationsRefreshers();
-        IUserRefresher userRefresher = new UserRefresher();
-        IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher();
-
-        return new RefresherFacade(
-                planeRefresher,
-                flightRefresher,
-                passengerRefresher,
-                locationRefresher,
-                userRefresher,
-                availableFlightsRefresher
-        );
-    }
 
 }

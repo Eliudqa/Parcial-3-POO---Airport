@@ -14,7 +14,6 @@ import Models.Location;
 import Models.Passenger;
 import Models.Plane;
 import core.controllers.utils.Response;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 /**
@@ -104,6 +103,10 @@ public class MainController {
       return refresher.refreshAvailableFlights();
     }
 
+    public Response getMyFlightsRows(Long passengerId){
+        return refresher.getMyFlightsRows(passengerId);
+    }
+    
     
     public ArrayList<Plane> getPlanes() {
         return ISG.getPlanes();

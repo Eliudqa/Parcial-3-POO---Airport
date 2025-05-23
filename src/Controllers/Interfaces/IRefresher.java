@@ -9,6 +9,7 @@ import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.IPlanesRefreshers;
 import Controllers.Refreshers.IPassengersRefreshers;
+import Controllers.Refreshers.IRefreshMyFlights;
 import Controllers.Refreshers.IUserRefresher;
 
 
@@ -17,6 +18,9 @@ import Controllers.Refreshers.IUserRefresher;
  *
  * @author HOLA
  */
-public interface IRefresher extends IFlightsRefresher, IPlanesRefreshers, ILocationsRefreshers, IPassengersRefreshers, IUserRefresher,IFlightsAvailableRefresher {
+public interface IRefresher extends IFlightsRefresher, IPlanesRefreshers, 
+        ILocationsRefreshers, IPassengersRefreshers, 
+        IUserRefresher,IFlightsAvailableRefresher,
+        IRefreshMyFlights {
     
 }

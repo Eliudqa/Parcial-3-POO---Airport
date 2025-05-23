@@ -26,7 +26,7 @@ public class RefreshMyFlights implements IRefreshMyFlights {
     
     
     @Override
-    public Response getMyFlightsRows(int passengerId) {
+    public Response getMyFlightsRows(Long passengerId) {
 
         Passenger passenger = searchStorage.getPassenger(passengerId);
 
