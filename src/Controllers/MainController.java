@@ -94,5 +94,9 @@ public class MainController {
       return refresher.refreshUser();
     }
 
+    public ArrayList<String> refreshAvailableFlights(){
+      return refresher.refreshAvailableFlights();
+    }
+
     
 }

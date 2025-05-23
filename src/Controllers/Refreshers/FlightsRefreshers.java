@@ -13,11 +13,10 @@ import java.util.ArrayList;
  *
  * @author HOLA
  */
-public class FlightsRefreshers implements IFlightsRefresher  {
-    
-    
-  @Override
-  public Response refreshFlights() {
+public class FlightsRefreshers implements IFlightsRefresher {
+
+    @Override
+    public Response refreshFlights() {
         ArrayList<Flight> flights = FlightsStorage.getInstance().getFlights();
 
         if (flights.isEmpty()) {
@@ -26,15 +25,18 @@ public class FlightsRefreshers implements IFlightsRefresher  {
 
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Flight f : flights) {
-            rows.add(new Object[]{f.getId(), 
-                f.getDepartureLocation().getAirportId(), 
-                f.getArrivalLocation().getAirportId(), 
-                (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), 
-                f.getDepartureDate(), 
-                f.calculateArrivalDate(), 
-                f.getPlane().getId(), f.getNumPassengers()});
+            Flight copy = f.copy(); // copia independiente
+
+            rows.add(new Object[]{f.getId(),
+                copy.getDepartureLocation().getAirportId(),
+                copy.getArrivalLocation().getAirportId(),
+                (copy.getScaleLocation() == null ? "-" : copy.getScaleLocation().getAirportId()),
+                copy.getDepartureDate(),
+                copy.calculateArrivalDate(),
+                copy.getPlane().getId(),
+                copy.getNumPassengers()});
         }
 
         return new Response("Planes loaded succesfully", 200, rows);
-    } 
+    }
 }

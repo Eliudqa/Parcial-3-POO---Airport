@@ -5,6 +5,7 @@
 package Controllers.Facades;
 
 import Controllers.Interfaces.IRefresher;
+import Controllers.Refreshers.IFlightsAvailableRefresher;
 import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IPassengersRefreshers;
@@ -24,26 +25,28 @@ public class RefresherFacade implements IRefresher {
     private final IFlightsRefresher flightRefresher;
     private final IPassengersRefreshers passengerRefresher;
     private final IUserRefresher userRefresher;
-
+    private final IFlightsAvailableRefresher availableFlightsRefresher;
 
     public RefresherFacade(
-        IPlanesRefreshers planeRefresher,
-        IFlightsRefresher flightRefresher,
-        IPassengersRefreshers passengerRefresher,
-        ILocationsRefreshers locationRefresher,
-        IUserRefresher userRefresher    
+            IPlanesRefreshers planeRefresher,
+            IFlightsRefresher flightRefresher,
+            IPassengersRefreshers passengerRefresher,
+            ILocationsRefreshers locationRefresher,
+            IUserRefresher userRefresher,
+            IFlightsAvailableRefresher availableFlightsRefresher
     ) {
         this.planeRefresher = planeRefresher;
         this.flightRefresher = flightRefresher;
         this.passengerRefresher = passengerRefresher;
         this.locationRefresher = locationRefresher;
-        this.userRefresher=userRefresher;
+        this.userRefresher = userRefresher;
+        this.availableFlightsRefresher = availableFlightsRefresher;
     }
-    
+
     @Override
     public Response refreshPlanes() {
         return planeRefresher.refreshPlanes();
-    }    
+    }
 
     @Override
     public Response refreshFlights() {
@@ -61,8 +64,14 @@ public class RefresherFacade implements IRefresher {
     }
 
     @Override
-    public ArrayList<String> refreshUser(){
+    public ArrayList<String> refreshUser() {
         return userRefresher.refreshUser();
- 
- }
+
+    }
+
+    @Override
+    public ArrayList<String> refreshAvailableFlights() {
+        return availableFlightsRefresher.refreshAvailableFlights();
+
+    }
 }

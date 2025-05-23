@@ -4,6 +4,7 @@
  */
 package Controllers.Interfaces;
 
+import Controllers.Refreshers.IFlightsAvailableRefresher;
 import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.IPlanesRefreshers;
@@ -16,6 +17,6 @@ import Controllers.Refreshers.IUserRefresher;
  *
  * @author HOLA
  */
-public interface IRefresher extends IFlightsRefresher, IPlanesRefreshers, ILocationsRefreshers, IPassengersRefreshers, IUserRefresher {
+public interface IRefresher extends IFlightsRefresher, IPlanesRefreshers, ILocationsRefreshers, IPassengersRefreshers, IUserRefresher,IFlightsAvailableRefresher {
     
 }

@@ -25,10 +25,12 @@ public class LocationsRefreshers implements ILocationsRefreshers {
 
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Location l : locations) {
+              Location copy = l.copy(); // copia independiente
+
             rows.add(new Object[]{l.getAirportId(), 
-                l.getAirportName(), 
-                l.getAirportCity(), 
-                l.getAirportCountry()
+                copy.getAirportName(), 
+                copy.getAirportCity(), 
+                copy.getAirportCountry()
             });
         }
 

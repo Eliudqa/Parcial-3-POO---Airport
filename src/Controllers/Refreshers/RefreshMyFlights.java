@@ -37,10 +37,12 @@ public class RefreshMyFlights implements IRefreshMyFlights {
         ArrayList<Object[]> rows = new ArrayList<>();
 
         for (Flight flight : passenger.getFlights()) {
+                Flight copy = flight.copy(); // copia independiente
+
             rows.add(new Object[]{
-                flight.getId(),
-                flight.getDepartureDate(),
-                flight.calculateArrivalDate()
+                copy.getId(),
+                copy.getDepartureDate(),
+                copy.calculateArrivalDate()
             });
         }
 

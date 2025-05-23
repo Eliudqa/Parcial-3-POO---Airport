@@ -4,24 +4,24 @@
  */
 package Controllers.Refreshers;
 
-import Models.Passenger;
-import Models.Storage.PassengersStorage;
+import Models.Flight;
+import Models.Storage.FlightsStorage;
 import java.util.ArrayList;
 
 /**
  *
  * @author HOLA
  */
-public class UserRefresher implements IUserRefresher {
+public class FlightsAvailableRefresher implements IFlightsAvailableRefresher  {
     
     @Override
-    public ArrayList<String> refreshUser(){
-        ArrayList<Passenger> passengers = PassengersStorage.getInstance().getPassengers();
+    public ArrayList<String> refreshAvailableFlights(){
+        ArrayList<Flight> flights = FlightsStorage.getInstance().getFlights();
         ArrayList<String> ids = new ArrayList<>();
 
         
-        for (Passenger p : passengers) {
-             Passenger copy = p.copy(); // copia independiente
+        for (Flight f : flights) {
+             Flight copy = f.copy(); // copia independiente
 
             ids.add(copy.getId()+"");
         }
