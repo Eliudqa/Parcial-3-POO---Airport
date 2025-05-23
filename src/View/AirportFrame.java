@@ -1597,31 +1597,26 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
-        long id = Long.parseLong(txtID.getText());
+        String id = txtID.getText();
         String firstname = txtFirstName.getText();
         String lastname = txtLastName.getText();
-        int year = Integer.parseInt(txtDayBD.getText());
-        int month = Integer.parseInt(cmbMONTH.getItemAt(cmbUpdateBDMonth.getSelectedIndex()));
-        int day = Integer.parseInt(cmbDAY.getItemAt(cmbUpdateBDDay.getSelectedIndex()));
-        int phoneCode = Integer.parseInt(txtCountryCode.getText());
-        long phone = Long.parseLong(txtPhone.getText());
+        String year = txtDayBD.getText();
+        String month = cmbMONTH.getItemAt(cmbUpdateBDMonth.getSelectedIndex());
+        String day = cmbDAY.getItemAt(cmbUpdateBDDay.getSelectedIndex());
+        String phoneCode = txtCountryCode.getText();
+        String phone = txtPhone.getText();
         String country = txtCountry.getText();
 
-        LocalDate birthDate = LocalDate.of(year, month, day);
-
-        Passenger passenger = null;
-        for (Passenger p : this.passengers) {
-            if (p.getId() == id) {
-                passenger = p;
-            }
+        Response response = mainController.updatePassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
+        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        passenger.setFirstname(firstname);
-        passenger.setLastname(lastname);
-        passenger.setBirthDate(birthDate);
-        passenger.setCountryPhoneCode(phoneCode);
-        passenger.setPhone(phone);
-        passenger.setCountry(country);
+        
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddToFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToFlightActionPerformed
@@ -1678,10 +1673,13 @@ public class AirportFrame extends javax.swing.JFrame {
         } else {
             JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
         }
-
-        for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+         
+       if (response.getObject()!=null){
+          for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
             model.addRow(row); // Añade directamente cada fila
-        }
+        } 
+       } 
+        
     }//GEN-LAST:event_btnRefreshMyFlightsActionPerformed
 
     private void btnRefreshPassengersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPassengersActionPerformed

@@ -31,6 +31,7 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.ISearchStorage;
 import Controllers.Facades.RegisterFacade;
 import Controllers.Interfaces.IRefresher;
+import Controllers.Interfaces.IUpdateInfo;
 import Controllers.Interfaces.Storage.IStorageGet;
 import Controllers.Interfaces.Storage.IStorageGetFlights;
 import Controllers.Interfaces.Storage.IStorageGetLocations;
@@ -59,13 +60,16 @@ import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
 import Controllers.Registers.RegisterPlane;
 import Controllers.SearchStorage;
+import Controllers.UpdateInfo;
 import Controllers.Validators.IValidatorFlight;
 import Controllers.Validators.IValidatorLocation;
 import Controllers.Validators.IValidatorPassenger;
+import Controllers.Validators.IValidatorPassengerUpdate;
 import Controllers.Validators.IValidatorPlane;
 import Controllers.Validators.ValidatorFlight;
 import Controllers.Validators.ValidatorLocation;
 import Controllers.Validators.ValidatorPassenger;
+import Controllers.Validators.ValidatorPassengerUpdate;
 import Controllers.Validators.ValidatorPlane;
 import Models.Storage.DataLoader;
 import Models.Storage.FlightsStorage;
@@ -84,7 +88,9 @@ public class AppConfig {
 
     public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();
-
+        IValidatorPassengerUpdate vf = new ValidatorPassengerUpdate();
+        IUpdateInfo IUF = new UpdateInfo(vf,searchStorage);
+        
         RegisterFlight registerFlight = createRegisterFlight();
         RegisterPassenger registerPassenger = createRegisterPassenger();
         RegisterPlane registerPlane = createRegisterPlane();
@@ -101,7 +107,7 @@ public class AppConfig {
         
         IControllerFlights ICFlights = new ControllerFlights();
 
-        return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG);
+        return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG, IUF);
     }
 
     public RegisterFlight createRegisterFlight() {

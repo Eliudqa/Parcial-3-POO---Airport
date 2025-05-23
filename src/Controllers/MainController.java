@@ -8,6 +8,7 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRefresher;
 import Controllers.Interfaces.IRegister;
+import Controllers.Interfaces.IUpdateInfo;
 import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Flight;
 import Models.Location;
@@ -27,14 +28,19 @@ public class MainController {
     private final IControllerFlights ICFlights;
     private final IRefresher refresher;
     private final IStorageGet ISG;
+    private final IUpdateInfo IUF;
+    
 
 
-    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights,IRefresher refresher, IStorageGet ISG) {
+    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights,IRefresher refresher, IStorageGet ISG,
+            IUpdateInfo IUF) {
         this.timeGenerator = timeGenerator;
         this.registerFacade = register;
         this.ICFlights = ICFlights;
         this.refresher = refresher;
         this.ISG=ISG;
+        this.IUF=IUF;
+        
 
     }
 
@@ -134,6 +140,13 @@ public class MainController {
     
     public ArrayList<String> refreshAvailableLocations(){
         return refresher.refreshAvailableLocations();
+    }
+    
+    public Response updatePassenger(String id, String firstName, String lastName,
+            String year, String month, String day,
+            String phoneCode, String phone, String country){
+        
+        return IUF.updatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
     }
     
 }
