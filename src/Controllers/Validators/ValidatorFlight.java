@@ -83,10 +83,9 @@ public class ValidatorFlight implements IValidatorFlight {
                 }
             }
 
-            for (Flight flight : FlightsStorage.getInstance().getFlights()) {
-                if (flight.getId().equals(id)) {
-                    return new Response("There is already a flight with that id", Status.CONFLICT);
-                }
+            //Se verifica que el id no exista
+            if (searchStorage.getFlight(id)!=null) {
+                return new Response("There is already a flight with that id", Status.CONFLICT);
             }
 
             //Se verifica que el id del avion este bien escrito
@@ -110,17 +109,8 @@ public class ValidatorFlight implements IValidatorFlight {
             int i = 0;
             //Se busca el avion
             boolean found = false;
-            Plane plane = null;
-            ArrayList<Plane> planes = PlanesStorage.getInstance().getPlanes();
-            while (i < planes.size() && !found) {
-                if (planes.get(i).equals(planeId)) {
-                    found = true;
-                    plane = planes.get(i);
-                } else {
-                    i++;
-                }
-            }
-            if (!found) {
+            Plane plane = searchStorage.getPlane(planeId);
+            if (plane == null) {
                 return new Response("There is no plane with that id", Status.NOT_FOUND);
             }
 
@@ -141,19 +131,9 @@ public class ValidatorFlight implements IValidatorFlight {
             }
 
             i = 0;
-            Location departureLocation = null;
-            found = false;
-            ArrayList<Location> locations = LocationsStorage.getInstance().getLocations();
-            while (i < locations.size() && !found) {
-                if (locations.get(i).equals(departureLocationId)) {
-                    found = true;
-                    departureLocation = locations.get(i);
-                } else {
-                    i++;
-                }
-            }
+            Location departureLocation = searchStorage.getLocation(departureLocationId);
 
-            if (!found) {
+            if (departureLocation == null) {
                 return new Response("In departure, there is no location with that id", Status.NOT_FOUND);
             }
 
@@ -176,17 +156,8 @@ public class ValidatorFlight implements IValidatorFlight {
             
             //BUSQUEDA AQUI TAMBIEN
             i = 0;
-            Location arrivalLocation = null;
-            found = false;
-            while (i < locations.size() && !found) {
-                if (locations.get(i).equals(arrivalLocationId)) {
-                    found = true;
-                    arrivalLocation = locations.get(i);
-                } else {
-                    i++;
-                }
-            }
-            if (!found) {
+            Location arrivalLocation = searchStorage.getLocation(arrivalLocationId);
+            if (arrivalLocation == null) {
                 return new Response("In arrival, there is no location with that id", Status.NOT_FOUND);
             }
 
@@ -205,23 +176,13 @@ public class ValidatorFlight implements IValidatorFlight {
                 return new Response("Enter a valid date and hour", Status.BAD_REQUEST);
             }
 
-            // BUSQUEDA AQUI TAMBIEN
             //En caso de escala
             Flight flight;
             if (!scaleId.equals("")) {
                 i = 0;
-                Location scaleLocation = null;
-                found = false;
-                while (i < locations.size() && !found) {
-                    if (locations.get(i).equals(arrivalLocationId)) {
-                        found = true;
-                        scaleLocation = locations.get(i);
-                    } else {
-                        i++;
-                    }
-                }
+                Location scaleLocation = searchStorage.getLocation(scaleId);
 
-                if (!found) {
+                if (scaleLocation == null) {
                     return new Response("In scale, there is no location with that id", Status.NOT_FOUND);
                 }
 

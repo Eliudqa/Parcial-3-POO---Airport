@@ -19,7 +19,7 @@ public interface ISearchStorage {
 
     public Location getLocation(String AirportId);
 
-    public Passenger getPassenger(int passengerId);
+    public Passenger getPassenger(Long passengerId);
 
     public Flight getFlight(String flightId);
 

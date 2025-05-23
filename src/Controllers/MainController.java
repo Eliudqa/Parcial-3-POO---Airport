@@ -51,7 +51,7 @@ public class MainController {
     }
 
 //Metodos de register
-    public Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country) {
+    public Response registerPassenger(String id, String firstName, String lastName, String year, String month, String day, String phoneCode, String phone, String country) {
         return registerFacade.registerPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
     }
     

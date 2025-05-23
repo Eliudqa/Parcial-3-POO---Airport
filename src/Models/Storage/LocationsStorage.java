@@ -4,6 +4,8 @@
  */
 package Models.Storage;
 
+import Controllers.Interfaces.Storage.IStorageAddLocation;
+import Controllers.Interfaces.Storage.IStorageGetLocations;
 import Models.Location;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author HOLA
  */
-public class LocationsStorage {
+public class LocationsStorage implements IStorageAddLocation, IStorageGetLocations{
 
     // Singleton
     private static LocationsStorage instance;
@@ -33,11 +35,12 @@ public class LocationsStorage {
         this.locations = locations;
     }
 
+    @Override
     public ArrayList<Location> getLocations() {
         return locations;
     }
 
-
+    @Override
     public void addLocation(Location location){
         this.locations.add(location);
     }

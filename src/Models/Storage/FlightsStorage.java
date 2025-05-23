@@ -4,6 +4,8 @@
  */
 package Models.Storage;
 
+import Controllers.Interfaces.Storage.IStorageAddFlight;
+import Controllers.Interfaces.Storage.IStorageGetFlights;
 import Models.Flight;
 import java.util.ArrayList;
 
@@ -11,7 +13,7 @@ import java.util.ArrayList;
  *
  * @author HOLA
  */
-public class FlightsStorage {
+public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights {
     
     // Singleton
     private static FlightsStorage instance;
@@ -35,10 +37,13 @@ public class FlightsStorage {
         this.flights = flights;
     }
 
+    @Override
     public ArrayList<Flight> getFlights() {
         return flights;
     }
     
+    
+    @Override
     public void addFlight(Flight flight){
         this.flights.add(flight);
     }

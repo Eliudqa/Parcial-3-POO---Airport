@@ -15,10 +15,11 @@ public class PassengerCreator implements IPassengerCreator {
     
     @Override
     public Passenger createPassenger(String id, String firstName, String lastName,
-            String year, int month, int day,
+            String year, String month, String day,
             String phoneCode, String phone, String country) { 
         
-            LocalDate BD = LocalDate.of(Integer.parseInt(year), month, day);
+            Long idInt = Long.parseLong(id);
+            LocalDate BD = LocalDate.of(Integer.parseInt(year), Integer.parseInt(month), Integer.parseInt(day));
             
         return new Passenger(Integer.parseInt(id), firstName, lastName, BD, Integer.parseInt(phoneCode), Integer.parseInt(phone), country);
 

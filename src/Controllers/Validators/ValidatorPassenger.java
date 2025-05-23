@@ -16,22 +16,21 @@ import java.time.LocalDate;
  *
  * @author samit
  */
-
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
-public class ValidatorPassenger implements IValidatorPassenger{
-    
-   private final ISearchStorage searchStorage;
-    
-    public ValidatorPassenger(ISearchStorage searchStorage){
+public class ValidatorPassenger implements IValidatorPassenger {
+
+    private final ISearchStorage searchStorage;
+
+    public ValidatorPassenger(ISearchStorage searchStorage) {
         this.searchStorage = searchStorage;
     }
-    
+
     @Override
-    public Response validatePassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country){
+    public Response validatePassenger(String id, String firstName, String lastName, String year, String month, String day, String phoneCode, String phone, String country) {
         try {
             long idInt, phoneInt;
             LocalDate BD;
-            int phoneCodeInt, yearInt;
+            int phoneCodeInt, yearInt, monthInt, dayInt;
 
             if (id.equals("")) {
                 return new Response("Id must be not empty", Status.BAD_REQUEST);
@@ -45,10 +44,9 @@ public class ValidatorPassenger implements IValidatorPassenger{
                     return new Response("Id must have at most 15 digits", Status.BAD_REQUEST);
                 }
 
-                for (Passenger passenger : PassengersStorage.getInstance().getPassengers()) {
-                    if (idInt == passenger.getId()) {
-                        return new Response("There is already a passenger with that id", Status.CONFLICT);
-                    }
+                //Se verifica que el id no exista
+                if (searchStorage.getPassenger(idInt) != null) {
+                    return new Response("There is already a passenger with that id", Status.CONFLICT);
                 }
 
             } catch (NumberFormatException ex) {
@@ -75,9 +73,23 @@ public class ValidatorPassenger implements IValidatorPassenger{
                 if (yearInt < 0) {
                     return new Response("Year must be positive", Status.BAD_REQUEST);
                 }
+
+                //Se verifica que se haya selecionado un mes
+                try {
+                    monthInt = Integer.parseInt(month);
+                } catch (NumberFormatException ex) {
+                    return new Response("No month has been selected", Status.BAD_REQUEST);
+                }
+                //Se verifica que se haya selecionado un día
+                try {
+                    dayInt = Integer.parseInt(day);
+                } catch (NumberFormatException ex) {
+                    return new Response("No day has been selected", Status.BAD_REQUEST);
+                }
+
                 //(No se especifica que error hay en la fecha, solo que es invalida)
                 try {
-                    BD = LocalDate.of(yearInt, month, day);
+                    BD = LocalDate.of(yearInt, monthInt, dayInt);
                 } catch (DateTimeException e) {
                     return new Response("Enter a valid date", Status.BAD_REQUEST);
                 }
@@ -105,11 +117,11 @@ public class ValidatorPassenger implements IValidatorPassenger{
                 return new Response("Phone must be not empty", Status.BAD_REQUEST);
             }
             try {
-                phoneInt = Integer.parseInt(phone);
+                phoneInt = Long.parseLong(phone);
                 if (phoneInt < 0) {
                     return new Response("Phone must be positive", Status.BAD_REQUEST);
                 } else if (phoneInt > Math.pow(10, 12) - 1) {
-                    return new Response("Phone must have at most 3 digits", Status.BAD_REQUEST);
+                    return new Response("Phone must have at most 11 digits", Status.BAD_REQUEST);
                 }
             } catch (NumberFormatException ex) {
                 return new Response("Phone must be numeric", Status.BAD_REQUEST);

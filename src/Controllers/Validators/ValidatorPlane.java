@@ -30,18 +30,17 @@ public class ValidatorPlane implements IValidatorPlane {
         try {
             int maxCapacityInt;
 
-            for (Plane plane : PlanesStorage.getInstance().getPlanes()) {
-                if (plane.getId().equals(id)) {
-                    return new Response("Id already exist", Status.CONFLICT);
-                }
-            }
-
             if (id.equals("")) {
                 return new Response("Id must not be empty", Status.BAD_REQUEST);
             }
 
             if (id.length() != 7) {
                 return new Response("Id must have 7 characters", Status.BAD_REQUEST);
+            }
+            
+            //Se verifica que el id no exista
+            if (searchStorage.getPlane(id)!=null) {
+                return new Response("There is already a plane with that id", Status.CONFLICT);
             }
 
             // Verificamos que los dos primeros caracteres sean mayúsculas

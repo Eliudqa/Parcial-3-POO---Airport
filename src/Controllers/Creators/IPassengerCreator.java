@@ -12,6 +12,6 @@ import Models.Passenger;
  */
 public interface IPassengerCreator {
     public Passenger createPassenger(String id, String firstName, String lastName,
-            String year, int month, int day,
+            String year, String  month, String day,
             String phoneCode, String phone, String country);
 }

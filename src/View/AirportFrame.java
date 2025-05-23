@@ -1460,8 +1460,8 @@ public class AirportFrame extends javax.swing.JFrame {
         String firstname = txtFirstNameRegister.getText();
         String lastname = txtLastNameRegister.getText();
         String year = txtDayBDRegister.getText();
-        int month = Integer.parseInt(cmbMONTH.getItemAt(cmbMONTH.getSelectedIndex()));
-        int day = Integer.parseInt(cmbDAY.getItemAt(cmbDAY.getSelectedIndex()));
+        String month = cmbMONTH.getItemAt(cmbMONTH.getSelectedIndex());
+        String day = cmbDAY.getItemAt(cmbDAY.getSelectedIndex());
         String phoneCode = txtCountryCodeRegister.getText();
         String phone = txtPhoneRegister.getText();
         String country = txtCountryRegister.getText();
@@ -1488,10 +1488,10 @@ public class AirportFrame extends javax.swing.JFrame {
         String name = txtAirportName.getText();
         String city = txtAirportCity.getText();
         String country = txtAirportCountry.getText();
-        double latitude = Double.parseDouble(txtAirportLatitude.getText());
-        double longitude = Double.parseDouble(txtAirportLongitude.getText());
+        String latitude = txtAirportLatitude.getText();
+        String longitude = txtAirportLongitude.getText();
 
-        //this.locations.add(new Location(id, name, city, country, latitude, longitude));
+        mainController.registerLocation(id, name, city, country, latitude, longitude);
         
         
         this.cmbDepartureLocationRegister.addItem(id);

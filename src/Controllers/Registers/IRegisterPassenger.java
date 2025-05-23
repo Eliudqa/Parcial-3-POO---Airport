@@ -11,6 +11,6 @@ import core.controllers.utils.Response;
  * @author HOLA
  */
 public interface IRegisterPassenger {
-        Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country);
+        Response registerPassenger(String id, String firstName, String lastName, String year, String month, String day, String phoneCode, String phone, String country);
 
 }

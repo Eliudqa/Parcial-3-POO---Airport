@@ -14,18 +14,17 @@ import core.controllers.utils.Status;
  *
  * @author samit
  */
-
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class ValidatorLocation implements IValidatorLocation {
+
     private final ISearchStorage searchStorage;
-    
-    public ValidatorLocation(ISearchStorage searchStorage){
+
+    public ValidatorLocation(ISearchStorage searchStorage) {
         this.searchStorage = searchStorage;
     }
-    
-    
+
     @Override
-    public Response validateLocation(String id, String name, String city, String country, String latitude, String longitude){
+    public Response validateLocation(String id, String name, String city, String country, String latitude, String longitude) {
         try {
 
             //Se verifica que no este vacio
@@ -48,10 +47,8 @@ public class ValidatorLocation implements IValidatorLocation {
             }
 
             //Se verifica que el id no exista
-            for (Location location : LocationsStorage.getInstance().getLocations()) {
-                if (location.getAirportId().equals(id)) {
-                    return new Response("There is already a location with that id", Status.CONFLICT);
-                }
+            if (searchStorage.getLocation(id)!=null) {
+                return new Response("There is already a location with that id", Status.CONFLICT);
             }
 
             //Se verifica que el nombre, pais y la ciudad no esten vacias

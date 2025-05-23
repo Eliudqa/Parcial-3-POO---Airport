@@ -32,7 +32,7 @@ public class RegisterPassenger implements IRegisterPassenger {
     
     @Override
     public Response registerPassenger(String id, String firstName, String lastName, 
-            String year, int month, int day, 
+            String year, String month, String day, 
             String phoneCode, String phone, String country) {
 
         Response response = vp.validatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);

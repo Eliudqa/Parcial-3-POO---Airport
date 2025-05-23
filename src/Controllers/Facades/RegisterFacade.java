@@ -20,12 +20,12 @@ import core.controllers.utils.Response;
 // Esta clase es la que se encarga de controlar las interfaces y que se llamen a los metodos correspondientes  
 // de Register
 // Se usa para no violar el principio OCP
-public class RegisterFacade implements IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight, IRegister{
+public class RegisterFacade implements IRegister{
 
-    private final RegisterPassenger registerPassenger;
-    private final RegisterPlane registerPlane;
-    private final RegisterLocation registerLocation;
-    private final RegisterFlight registerFlight;
+    private final IRegisterPassenger registerPassenger;
+    private final IRegisterPlane registerPlane;
+    private final IRegisterLocation registerLocation;
+    private final IRegisterFlight registerFlight;
 
     public RegisterFacade(
         RegisterPassenger registerPassenger,
@@ -40,7 +40,7 @@ public class RegisterFacade implements IRegisterPassenger, IRegisterPlane, IRegi
     }
 
     @Override
-    public Response registerPassenger(String id, String firstName, String lastName, String year, int month, int day, String phoneCode, String phone, String country) {
+    public Response registerPassenger(String id, String firstName, String lastName, String year, String month, String day, String phoneCode, String phone, String country) {
         return registerPassenger.registerPassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
     }
 

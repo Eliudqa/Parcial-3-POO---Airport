@@ -55,7 +55,7 @@ public class SearchStorage implements ISearchStorage {
     
     
      @Override
-    public Passenger getPassenger(int passengerId){
+    public Passenger getPassenger(Long passengerId){
         
         ArrayList<Passenger> passengers = PassengersStorage.getInstance().getPassengers();
         
