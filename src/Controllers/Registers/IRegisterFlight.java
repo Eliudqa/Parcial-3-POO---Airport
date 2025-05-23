@@ -12,6 +12,9 @@ import core.controllers.utils.Response;
  */
 public interface IRegisterFlight {
     
-        Response registerFlight(String id, String plane, String departureLocation, String arrivalLocation, String year, int month, int day, int hour,int minute, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale);
+        Response registerFlight(String id, String plane, String departureLocation, String arrivalLocation, 
+                String year, String month, String day, String hour,String minute, 
+                String hoursDurationArrival, String minutesDurationArrival,
+                String scaleId, String hoursDurationScale, String minutesDurationScale);
 
 }

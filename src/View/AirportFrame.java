@@ -1434,7 +1434,7 @@ public class AirportFrame extends javax.swing.JFrame {
         userSelect.removeAllItems();
         userSelect.addItem("Select User");
         userSelect.setSelectedIndex(0);
-        
+
         if (user.isSelected()) {
             user.setSelected(false);
             userSelect.removeAllItems(); // Limpia todo
@@ -1443,7 +1443,6 @@ public class AirportFrame extends javax.swing.JFrame {
 
         }
 
- 
         for (int i = 1; i < jTabbedPane1.getTabCount(); i++) {
             jTabbedPane1.setEnabledAt(i, true);
         }
@@ -1513,14 +1512,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         response = mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
         this.userSelect.addItem("" + id);
-
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        mainController.showMessage(response);
 
     }//GEN-LAST:event_btnRegisterPassengerActionPerformed
 
@@ -1532,14 +1524,8 @@ public class AirportFrame extends javax.swing.JFrame {
         String maxCapacity = txtMaxCapPlane.getText();
         String airline = txtAirlinePlane.getText();
 
-        mainController.registerPlane(id, brand, model, maxCapacity, airline);
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        Response response = mainController.registerPlane(id, brand, model, maxCapacity, airline);
+        mainController.showMessage(response);
         this.cmbPlaneRegister.addItem(id);
     }//GEN-LAST:event_btnCreateAirplaneActionPerformed
 
@@ -1552,15 +1538,9 @@ public class AirportFrame extends javax.swing.JFrame {
         String latitude = txtAirportLatitude.getText();
         String longitude = txtAirportLongitude.getText();
 
-        mainController.registerLocation(id, name, city, country, latitude, longitude);
+        Response response = mainController.registerLocation(id, name, city, country, latitude, longitude);
 
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        mainController.showMessage(response);
 
         this.cmbDepartureLocationRegister.addItem(id);
         this.cmbArrivalLocationRegister.addItem(id);
@@ -1575,23 +1555,17 @@ public class AirportFrame extends javax.swing.JFrame {
         String arrivalLocationId = cmbArrivalLocationRegister.getItemAt(cmbArrivalLocationRegister.getSelectedIndex());
         String scaleLocationId = cmbScaleLocationRegister.getItemAt(cmbScaleLocationRegister.getSelectedIndex());
         String year = txtDepartureDayRegister.getText();
-        int month = Integer.parseInt(cmbDepartureMonthRegister.getItemAt(cmbDepartureMonthRegister.getSelectedIndex()));
-        int day = Integer.parseInt(cmbDepartureDayRegister.getItemAt(cmbDepartureDayRegister.getSelectedIndex()));
-        int hour = Integer.parseInt(cmbDepartureHourRegister.getItemAt(cmbDepartureHourRegister.getSelectedIndex()));
-        int minutes = Integer.parseInt(DAY2.getItemAt(DAY2.getSelectedIndex()));
+        String month = cmbDepartureMonthRegister.getItemAt(cmbDepartureMonthRegister.getSelectedIndex());
+        String day = cmbDepartureDayRegister.getItemAt(cmbDepartureDayRegister.getSelectedIndex());
+        String hour = cmbDepartureHourRegister.getItemAt(cmbDepartureHourRegister.getSelectedIndex());
+        String minutes = DAY2.getItemAt(DAY2.getSelectedIndex());
         String hoursDurationsArrival = cmbDurationRegister.getItemAt(cmbDurationRegister.getSelectedIndex());
         String minutesDurationsArrival = cmbMinuteRegister.getItemAt(cmbMinuteRegister.getSelectedIndex());
-        int hoursDurationsScale = Integer.parseInt(cmbScaleHourRegister.getItemAt(cmbScaleHourRegister.getSelectedIndex()));
-        int minutesDurationsScale = Integer.parseInt(cmbScaleMinuteRegister.getItemAt(cmbScaleMinuteRegister.getSelectedIndex()));
+        String hoursDurationsScale = cmbScaleHourRegister.getItemAt(cmbScaleHourRegister.getSelectedIndex());
+        String minutesDurationsScale = cmbScaleMinuteRegister.getItemAt(cmbScaleMinuteRegister.getSelectedIndex());
 
-        mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        Response response = mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
+        mainController.showMessage(response);
         this.cmbFlights.addItem(id);
     }//GEN-LAST:event_btnCreateRegisterFlightActionPerformed
 
@@ -1608,15 +1582,9 @@ public class AirportFrame extends javax.swing.JFrame {
         String country = txtCountry.getText();
 
         Response response = mainController.updatePassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
-        
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
-        
+
+        mainController.showMessage(response);
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddToFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToFlightActionPerformed
@@ -1666,20 +1634,14 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         Response response = mainController.getMyFlightsRows(passengerId);
 
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        mainController.showMessage(response);
+
+        if (response.getObject() != null) {
+            for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+                model.addRow(row); // Añade directamente cada fila
+            }
         }
-         
-       if (response.getObject()!=null){
-          for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
-            model.addRow(row); // Añade directamente cada fila
-        } 
-       } 
-        
+
     }//GEN-LAST:event_btnRefreshMyFlightsActionPerformed
 
     private void btnRefreshPassengersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshPassengersActionPerformed
@@ -1691,13 +1653,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         mainController.refreshPassengers();
 
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
 
             model.addRow(row); // Añade directamente cada fila
@@ -1710,13 +1666,7 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         response = mainController.refreshFlights();
         mainController.refreshFlights();
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
             model.addRow(row); // Añade directamente cada fila
         }
@@ -1728,13 +1678,7 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
 
         response = mainController.refreshPlanes();
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
             model.addRow(row); // Añade directamente cada fila
         }
@@ -1747,13 +1691,7 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
 
         response = mainController.refreshLocations();
-        if (response.getStatus() >= 500) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
-        } else if (response.getStatus() >= 400) {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
-        }
+        mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
             model.addRow(row); // Añade directamente cada fila
         }
@@ -1770,12 +1708,11 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
 
         try {
-            String id = userSelect.getSelectedItem().toString();             
-                txtID.setText(id);
-                txtIdAddToFlight.setText(id);                   
+            String id = userSelect.getSelectedItem().toString();
+            txtID.setText(id);
+            txtIdAddToFlight.setText(id);
         } catch (Exception e) {
         }
-        
 
 
     }//GEN-LAST:event_userSelectActionPerformed

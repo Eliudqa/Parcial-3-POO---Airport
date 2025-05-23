@@ -13,8 +13,8 @@ import Models.Plane;
  * @author HOLA
  */
 public interface IFlightCreator {
-    public Flight CreateFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation, String year,
-            int month, int day, int hour, int minutes, String hoursDurationArrival,
-            String minutesDurationArrival, Location scaleLocation,
-            int hoursDurationScale, int minutesDurationScale);
+    public Flight CreateFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation,
+            String year,  String month, String day, String hour, String minutes,
+            String hoursDurationArrival, String minutesDurationArrival,
+            Location scaleLocation,  String hoursDurationScale, String minutesDurationScale);
 }

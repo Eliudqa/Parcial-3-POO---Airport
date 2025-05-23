@@ -56,7 +56,10 @@ public class RegisterFacade implements IRegister{
     }
 
     @Override
-    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year, int month, int day, int hour, int minutes, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale) {
+    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId,
+            String year, String month, String day, String hour, String minutes,
+            String hoursDurationArrival, String minutesDurationArrival, 
+            String scaleId, String hoursDurationScale, String minutesDurationScale) {
         return registerFlight.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
     }
     

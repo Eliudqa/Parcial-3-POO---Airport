@@ -16,17 +16,20 @@ import java.time.LocalDateTime;
 public class FlightCreator implements IFlightCreator {
     
     @Override
-    public Flight CreateFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation, String year,
-            int month, int day, int hour, int minutes, String hoursDurationArrival,
-            String minutesDurationArrival, Location scaleLocation,
-            int hoursDurationScale, int minutesDurationScale){
+    public Flight CreateFlight(String id, Plane plane, Location departureLocation, Location arrivalLocation, 
+            String year, String month, String day, String hour, String minutes, 
+            String hoursDurationArrival, String minutesDurationArrival, 
+            Location scaleLocation, String hoursDurationScale, String minutesDurationScale){
         
                 Flight flight;
-                LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), month, day, hour, minutes);
+                LocalDateTime departureDate = LocalDateTime.of(Integer.parseInt(year), Integer.parseInt(month), 
+                        Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minutes));
 
 
         if (scaleLocation==null) {
-             flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival), hoursDurationScale, minutesDurationScale);
+             flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, 
+                     departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival), 
+                     Integer.parseInt(hoursDurationScale), Integer.parseInt(minutesDurationScale));
         } else {
              flight = new Flight(id, plane, departureLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival));
         }

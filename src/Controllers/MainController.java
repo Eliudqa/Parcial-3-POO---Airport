@@ -8,6 +8,7 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRefresher;
 import Controllers.Interfaces.IRegister;
+import Controllers.Interfaces.IShowResponse;
 import Controllers.Interfaces.IUpdateInfo;
 import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Flight;
@@ -29,17 +30,20 @@ public class MainController {
     private final IRefresher refresher;
     private final IStorageGet ISG;
     private final IUpdateInfo IUF;
+    private final IShowResponse ISR;
     
 
 
-    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights,IRefresher refresher, IStorageGet ISG,
-            IUpdateInfo IUF) {
+    public MainController(IGeneratorTime timeGenerator, IRegister register, 
+            IControllerFlights ICFlights,IRefresher refresher, IStorageGet ISG,
+            IUpdateInfo IUF, IShowResponse ISR) {
         this.timeGenerator = timeGenerator;
         this.registerFacade = register;
         this.ICFlights = ICFlights;
         this.refresher = refresher;
         this.ISG=ISG;
         this.IUF=IUF;
+        this.ISR=ISR;
         
 
     }
@@ -74,7 +78,10 @@ public class MainController {
         return registerFacade.registerLocation(id, name, city, country, latitude, longitude);
     } 
     
-    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year, int month, int day, int hour, int minutes, String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale){
+    public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId,
+            String year, String month, String day, String hour, String minutes, 
+            String hoursDurationArrival, String minutesDurationArrival, 
+            String scaleId, String hoursDurationScale, String minutesDurationScale){
         return registerFacade.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
     }
 
@@ -109,6 +116,15 @@ public class MainController {
       return refresher.refreshAvailableFlights();
     }
 
+    public ArrayList<String> refreshAvailablePlanes(){
+        return refresher.refreshAvailablePlanes();
+    }
+    
+    public ArrayList<String> refreshAvailableLocations(){
+        return refresher.refreshAvailableLocations();
+    }
+    
+    //Metodos Getters
     public Response getMyFlightsRows(Long passengerId){
         return refresher.getMyFlightsRows(passengerId);
     }
@@ -134,19 +150,18 @@ public class MainController {
     }
     
     
-    public ArrayList<String> refreshAvailablePlanes(){
-        return refresher.refreshAvailablePlanes();
-    }
-    
-    public ArrayList<String> refreshAvailableLocations(){
-        return refresher.refreshAvailableLocations();
-    }
-    
+    //Metodo updater    
     public Response updatePassenger(String id, String firstName, String lastName,
             String year, String month, String day,
             String phoneCode, String phone, String country){
         
         return IUF.updatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
+    }
+    
+    
+    //Metodo show
+    public void showMessage(Response response){
+        ISR.showResponse(response);
     }
     
 }

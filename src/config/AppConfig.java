@@ -31,6 +31,7 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.ISearchStorage;
 import Controllers.Facades.RegisterFacade;
 import Controllers.Interfaces.IRefresher;
+import Controllers.Interfaces.IShowResponse;
 import Controllers.Interfaces.IUpdateInfo;
 import Controllers.Interfaces.Storage.IStorageGet;
 import Controllers.Interfaces.Storage.IStorageGetFlights;
@@ -60,6 +61,7 @@ import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
 import Controllers.Registers.RegisterPlane;
 import Controllers.SearchStorage;
+import Controllers.ShowResponse;
 import Controllers.UpdateInfo;
 import Controllers.Validators.IValidatorFlight;
 import Controllers.Validators.IValidatorLocation;
@@ -89,6 +91,7 @@ public class AppConfig {
     public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();
         IValidatorPassengerUpdate vf = new ValidatorPassengerUpdate();
+        IShowResponse ISR = new ShowResponse();
         IUpdateInfo IUF = new UpdateInfo(vf,searchStorage);
         
         RegisterFlight registerFlight = createRegisterFlight();
@@ -107,7 +110,7 @@ public class AppConfig {
         
         IControllerFlights ICFlights = new ControllerFlights();
 
-        return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG, IUF);
+        return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG, IUF, ISR);
     }
 
     public RegisterFlight createRegisterFlight() {

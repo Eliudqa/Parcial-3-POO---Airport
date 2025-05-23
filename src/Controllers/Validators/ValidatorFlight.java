@@ -28,9 +28,10 @@ public class ValidatorFlight implements IValidatorFlight {
     }
     
     @Override
-    public Response validateFlight(String id, String planeId, String departureLocationId
-            , String arrivalLocationId, String year, int month, int day, int hour, int minutes,
-            String hoursDurationArrival, String minutesDurationArrival, String scaleId, int hoursDurationScale, int minutesDurationScale) {
+    public Response validateFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, 
+            String year, String month, String day, String hour, String minutes,
+            String hoursDurationArrival, String minutesDurationArrival,
+            String scaleId, String hoursDurationScale, String minutesDurationScale) {
         try {
             //Se verifica que nada este vacio
             if (id.equals("")) {
@@ -158,16 +159,36 @@ public class ValidatorFlight implements IValidatorFlight {
             }
 
             //Se verifica que el año sea valido
-            int yearInt;
+            int yearInt, monthInt, dayInt, hourInt, minuteInt;
             try {
                 yearInt = Integer.parseInt(year);
             } catch (NumberFormatException e) {
                 return new Response("Year must be a number", Status.BAD_REQUEST);
             }
+            try {
+                monthInt = Integer.parseInt(month);
+            } catch (NumberFormatException e) {
+                return new Response("Please, select a month", Status.BAD_REQUEST);
+            }
+            try {
+                dayInt = Integer.parseInt(day);
+            } catch (NumberFormatException e) {
+                return new Response("Please, select a day", Status.BAD_REQUEST);
+            }
+            try {
+                hourInt = Integer.parseInt(hour);
+            } catch (NumberFormatException e) {
+                return new Response("Please, select an hour", Status.BAD_REQUEST);
+            }
+            try {
+                minuteInt = Integer.parseInt(minutes);
+            } catch (NumberFormatException e) {
+                return new Response("Please, select a minute", Status.BAD_REQUEST);
+            }
 
             LocalDateTime departureDate;
             try {
-                departureDate = LocalDateTime.of(yearInt, month, day, hour, minutes);
+                departureDate = LocalDateTime.of(yearInt, monthInt, dayInt, hourInt, minuteInt);
             } catch (DateTimeException e) {
                 return new Response("Enter a valid date and hour", Status.BAD_REQUEST);
             }

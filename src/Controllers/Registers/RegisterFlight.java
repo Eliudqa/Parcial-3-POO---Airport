@@ -40,9 +40,9 @@ public class RegisterFlight implements IRegisterFlight {
     
     @Override
     public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year,
-            int month, int day, int hour, int minutes, String hoursDurationArrival,
+            String month, String day, String hour, String minutes, String hoursDurationArrival,
             String minutesDurationArrival, String scaleId,
-            int hoursDurationScale, int minutesDurationScale) {
+            String hoursDurationScale, String minutesDurationScale) {
 
         // Se le manda al validador la informacion del avion
         Response response = vf.validateFlight(id, planeId, departureLocationId,
