@@ -47,7 +47,7 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights {
     public void addFlight(Flight flight){
         this.flights.add(flight);
     }
-    
+     
     
     
     

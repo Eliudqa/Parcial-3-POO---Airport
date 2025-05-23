@@ -67,7 +67,6 @@ public class ValidatorPassenger implements IValidatorPassenger {
                 return new Response("Year must be not empty", Status.BAD_REQUEST);
             }
             try {
-
                 //Primero se verifica que el año sea positivo, despues se verifica que se pueda comvertir la fecha
                 yearInt = Integer.parseInt(year);
                 if (yearInt < 0) {

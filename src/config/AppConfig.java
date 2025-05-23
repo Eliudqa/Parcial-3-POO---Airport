@@ -21,6 +21,7 @@ import Controllers.DataSavers.SaverFlights;
 import Controllers.DataSavers.SaverLocations;
 import Controllers.DataSavers.SaverPassengers;
 import Controllers.DataSavers.SaverPlanes;
+import Controllers.Facades.GetStorageFacade;
 import Controllers.Facades.RefresherFacade;
 import Controllers.GeneratorTime;
 import Controllers.Interfaces.IGeneratorTime;
@@ -30,14 +31,23 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.ISearchStorage;
 import Controllers.Facades.RegisterFacade;
 import Controllers.Interfaces.IRefresher;
+import Controllers.Interfaces.Storage.IStorageGet;
+import Controllers.Interfaces.Storage.IStorageGetFlights;
+import Controllers.Interfaces.Storage.IStorageGetLocations;
+import Controllers.Interfaces.Storage.IStorageGetPassengers;
+import Controllers.Interfaces.Storage.IStorageGetPlanes;
+import Controllers.Refreshers.FlightsAvailableRefresher;
 import Controllers.Refreshers.FlightsRefreshers;
+import Controllers.Refreshers.IFlightsAvailableRefresher;
 import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IPassengersRefreshers;
 import Controllers.Refreshers.IPlanesRefreshers;
+import Controllers.Refreshers.IUserRefresher;
 import Controllers.Refreshers.LocationsRefreshers;
 import Controllers.Refreshers.PassengersRefresher;
 import Controllers.Refreshers.PlanesRefreshers;
+import Controllers.Refreshers.UserRefresher;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
@@ -52,51 +62,53 @@ import Controllers.Validators.ValidatorLocation;
 import Controllers.Validators.ValidatorPassenger;
 import Controllers.Validators.ValidatorPlane;
 import Models.Storage.DataLoader;
+import Models.Storage.FlightsStorage;
+import Models.Storage.LocationsStorage;
+import Models.Storage.PassengersStorage;
+import Models.Storage.PlanesStorage;
 
 /**
  *
  * @author samit
  */
 public class AppConfig {
-     private final ISearchStorage searchStorage = createSearchStorage();
 
-     public MainController createMainController() {
+    private final ISearchStorage searchStorage = createSearchStorage();
+
+    public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();
-        
+
         RegisterFlight registerFlight = createRegisterFlight();
         RegisterPassenger registerPassenger = createRegisterPassenger();
         RegisterPlane registerPlane = createRegisterPlane();
         RegisterLocation registerLocation = createRegisterLocation();
-     
-        IRefresher refresher = createRefresher(); 
 
-     
+        IRefresher refresher = createRefresher();
+        IStorageGet ISG = createStorageGet();
 
-        
         IRegister registerFacade = new RegisterFacade(
-            registerPassenger,
-            registerPlane,
-            registerLocation,
-            registerFlight
-        );        
+                registerPassenger,
+                registerPlane,
+                registerLocation,
+                registerFlight
+        );
         IControllerFlights ICFlights = new ControllerFlights();
-        
-        return new MainController(generatorTime, registerFacade, ICFlights,refresher);
+
+        return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG);
     }
-     
+
     public RegisterFlight createRegisterFlight() {
         // Primero creas el FlightCreator
         IFlightCreator flightCreator = new FlightCreator();
-        
+
         IValidatorFlight vf = new ValidatorFlight(searchStorage);
         ISaverFlights sf = new SaverFlights();
 
         // Lo inyectas al RegisterFlight
-        return new RegisterFlight(flightCreator, vf, searchStorage,sf);
+        return new RegisterFlight(flightCreator, vf, searchStorage, sf);
 
     }
-    
-    
+
     public RegisterPassenger createRegisterPassenger() {
         // Primero creas el PassengerCreator
         IPassengerCreator passengerCreator = new PassengerCreator();
@@ -107,7 +119,7 @@ public class AppConfig {
         return new RegisterPassenger(passengerCreator, vp, sp);
 
     }
-    
+
     public RegisterLocation createRegisterLocation() {
         // Primero creas el LocationCreator
         ILocationCreator locationCreator = new LocationCreator();
@@ -118,8 +130,7 @@ public class AppConfig {
         return new RegisterLocation(locationCreator, vl, sl);
 
     }
-    
-    
+
     public RegisterPlane createRegisterPlane() {
         // Primero creas el PlaneCreator
         IPlaneCreator planeCreator = new PlaneCreator();
@@ -127,31 +138,43 @@ public class AppConfig {
         ISaverPlanes sp = new SaverPlanes();
 
         // Lo inyectas al RegisterPlane
-        return new RegisterPlane(planeCreator,vp, sp );
+        return new RegisterPlane(planeCreator, vp, sp);
 
     }
-    
+
     public DataLoader createDataLoader() {
         return new DataLoader(createSearchStorage());
     }
 
+    public ISearchStorage createSearchStorage() {
+        IStorageGet ISG = createStorageGet();
+        return new SearchStorage(ISG);
+    }
     
-      public ISearchStorage createSearchStorage() {
-        return new SearchStorage();
- }
-      
-     public IRefresher createRefresher() {
-    IPlanesRefreshers planeRefresher = new PlanesRefreshers();
-    IFlightsRefresher flightRefresher = new FlightsRefreshers();
-    IPassengersRefreshers passengerRefresher = new PassengersRefresher();
-    ILocationsRefreshers locationRefresher = new LocationsRefreshers();
+    public IStorageGet createStorageGet(){
+        IStorageGetPlanes isgpl = PlanesStorage.getInstance();
+        IStorageGetFlights isgf=  FlightsStorage.getInstance();
+        IStorageGetLocations isgl=  LocationsStorage.getInstance();
+        IStorageGetPassengers isgpa=  PassengersStorage.getInstance();
+        return new GetStorageFacade(isgpl, isgf, isgl, isgpa);
+    }
 
-    return new RefresherFacade(
-        planeRefresher,
-        flightRefresher,
-        passengerRefresher,
-        locationRefresher
-    );
-}
+    public IRefresher createRefresher() {
+        IPlanesRefreshers planeRefresher = new PlanesRefreshers();
+        IFlightsRefresher flightRefresher = new FlightsRefreshers();
+        IPassengersRefreshers passengerRefresher = new PassengersRefresher();
+        ILocationsRefreshers locationRefresher = new LocationsRefreshers();
+        IUserRefresher userRefresher = new UserRefresher();
+        IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher();
+
+        return new RefresherFacade(
+                planeRefresher,
+                flightRefresher,
+                passengerRefresher,
+                locationRefresher,
+                userRefresher,
+                availableFlightsRefresher
+        );
+    }
 
 }

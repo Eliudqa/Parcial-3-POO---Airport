@@ -2,16 +2,16 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Controllers.Interfaces;
+package Controllers.Refreshers;
 
-import Models.Flight;
-import java.time.LocalDateTime;
+import core.controllers.utils.Response;
+import java.util.ArrayList;
 
 /**
  *
- * @author samit
+ * @author HOLA
  */
-public interface IControllerFlights {
-    void delay(Flight flight, int hours, int minutes);
+public interface IUserRefresher {
+     public ArrayList<String> refreshUser();
 
 }

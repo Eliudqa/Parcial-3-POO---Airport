@@ -26,13 +26,15 @@ public class PlanesRefreshers implements IPlanesRefreshers {
 
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Plane p : planes) {
+           Plane copy = p.copy(); // copia independiente
+
             rows.add(new Object[]{
-                p.getId(),
-                p.getBrand(),
-                p.getModel(),
-                p.getMaxCapacity(),
-                p.getAirline(),
-                p.getNumFlights()
+                copy.getId(),
+                copy.getBrand(),
+                copy.getModel(),
+                copy.getMaxCapacity(),
+                copy.getAirline(),
+                copy.getNumFlights()
             });
         }
 

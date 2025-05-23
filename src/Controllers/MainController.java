@@ -8,7 +8,11 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.IGeneratorTime;
 import Controllers.Interfaces.IRefresher;
 import Controllers.Interfaces.IRegister;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Flight;
+import Models.Location;
+import Models.Passenger;
+import Models.Plane;
 import core.controllers.utils.Response;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -23,13 +27,15 @@ public class MainController {
     private final IRegister registerFacade;
     private final IControllerFlights ICFlights;
     private final IRefresher refresher;
+    private final IStorageGet ISG;
 
 
-    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights,IRefresher refresher) {
+    public MainController(IGeneratorTime timeGenerator, IRegister register, IControllerFlights ICFlights,IRefresher refresher, IStorageGet ISG) {
         this.timeGenerator = timeGenerator;
         this.registerFacade = register;
         this.ICFlights = ICFlights;
         this.refresher = refresher;
+        this.ISG=ISG;
 
     }
 
@@ -70,10 +76,8 @@ public class MainController {
     public void delayFlight(Flight flight, int hours, int minutes) {
         ICFlights.delay(flight, hours, minutes);
     }    
-    public LocalDateTime calculateArrivalDate(Flight flight) {
-        return ICFlights.calculateArrivalDate(flight);
-    }
     
+    // Metodos de refresh
     public Response refreshPlanes() {
         return refresher.refreshPlanes();
     }    
@@ -92,6 +96,32 @@ public class MainController {
         return refresher.refreshLocations();
     }
     
+    public ArrayList<String> refreshUser(){
+      return refresher.refreshUser();
+    }
+
+    public ArrayList<String> refreshAvailableFlights(){
+      return refresher.refreshAvailableFlights();
+    }
+
     
+    public ArrayList<Plane> getPlanes() {
+        return ISG.getPlanes();
+    }
+
+    
+    public ArrayList<Location> getLocations() {
+        return ISG.getLocations();
+    }
+
+    
+    public ArrayList<Passenger> getPassengers() {
+        return ISG.getPassengers();
+    }
+
+    
+    public ArrayList<Flight> getFlights() {
+        return ISG.getFlights();
+    }
     
 }

@@ -25,13 +25,16 @@ public class PassengersRefresher implements IPassengersRefreshers {
         }
 
         ArrayList<Object[]> rows = new ArrayList<>();
+        
         for (Passenger p : passengers) {
+            Passenger copy = p.copy(); // copia independiente (Patron prototype)
+
             rows.add(new Object[]{p.getId(), p.getFullname(), 
-                p.getBirthDate(), 
-                p.calculateAge(),
-                p.generateFullPhone(), 
-                p.getCountry(), 
-                p.getNumFlights()});
+                copy.getBirthDate(), 
+                copy.calculateAge(),
+                copy.generateFullPhone(), 
+                copy.getCountry(), 
+                copy.getNumFlights()});
         };
         
 

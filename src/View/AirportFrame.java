@@ -18,6 +18,7 @@ import core.controllers.utils.Response;
 import java.awt.Color;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -56,7 +57,7 @@ public class AirportFrame extends javax.swing.JFrame {
         this.blockPanels();
         
         AppConfig appConfig = new AppConfig();
-      
+              
     }
 
     private void blockPanels() {
@@ -216,11 +217,11 @@ public class AirportFrame extends javax.swing.JFrame {
         txtCountry = new javax.swing.JTextField();
         btnUpdate = new javax.swing.JButton();
         jPanel6 = new javax.swing.JPanel();
-        IDTextField = new javax.swing.JTextField();
+        txtIdAddToFlight = new javax.swing.JTextField();
         jLabel44 = new javax.swing.JLabel();
         jLabel45 = new javax.swing.JLabel();
         cmbFlights = new javax.swing.JComboBox<>();
-        jButton12 = new javax.swing.JButton();
+        btnAddToFlight = new javax.swing.JButton();
         jPanel7 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblMyFlights = new javax.swing.JTable();
@@ -426,38 +427,38 @@ public class AirportFrame extends javax.swing.JFrame {
 
         txtIDPlane.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(txtIDPlane);
-        txtIDPlane.setBounds(180, 93, 130, 35);
+        txtIDPlane.setBounds(180, 93, 130, 31);
 
         jLabel12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel12.setText("Brand:");
         jPanel3.add(jLabel12);
-        jLabel12.setBounds(53, 157, 52, 25);
+        jLabel12.setBounds(53, 157, 50, 25);
 
         txtBrandPlane.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(txtBrandPlane);
-        txtBrandPlane.setBounds(180, 154, 130, 35);
+        txtBrandPlane.setBounds(180, 154, 130, 31);
 
         txtModelPlane.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(txtModelPlane);
-        txtModelPlane.setBounds(180, 213, 130, 35);
+        txtModelPlane.setBounds(180, 213, 130, 31);
 
         jLabel13.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel13.setText("Model:");
         jPanel3.add(jLabel13);
-        jLabel13.setBounds(53, 216, 57, 25);
+        jLabel13.setBounds(53, 216, 55, 25);
 
         txtMaxCapPlane.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(txtMaxCapPlane);
-        txtMaxCapPlane.setBounds(180, 273, 130, 35);
+        txtMaxCapPlane.setBounds(180, 273, 130, 31);
 
         jLabel14.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel14.setText("Max Capacity:");
         jPanel3.add(jLabel14);
-        jLabel14.setBounds(53, 276, 114, 25);
+        jLabel14.setBounds(53, 276, 109, 25);
 
         txtAirlinePlane.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jPanel3.add(txtAirlinePlane);
-        txtAirlinePlane.setBounds(180, 333, 130, 35);
+        txtAirlinePlane.setBounds(180, 333, 130, 31);
 
         jLabel15.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel15.setText("Airline:");
@@ -949,8 +950,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
         jTabbedPane1.addTab("Update info", jPanel5);
 
-        IDTextField.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        IDTextField.setEnabled(false);
+        txtIdAddToFlight.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        txtIdAddToFlight.setEnabled(false);
 
         jLabel44.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel44.setText("ID:");
@@ -966,11 +967,11 @@ public class AirportFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton12.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        jButton12.setText("Add");
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
+        btnAddToFlight.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        btnAddToFlight.setText("Add");
+        btnAddToFlight.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                btnAddToFlightActionPerformed(evt);
             }
         });
 
@@ -986,11 +987,11 @@ public class AirportFrame extends javax.swing.JFrame {
                 .addGap(79, 79, 79)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(cmbFlights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdAddToFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(829, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel6Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddToFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(509, 509, 509))
         );
         jPanel6Layout.setVerticalGroup(
@@ -1001,13 +1002,13 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(3, 3, 3)
                         .addComponent(jLabel44))
-                    .addComponent(IDTextField, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtIdAddToFlight, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(35, 35, 35)
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel45)
                     .addComponent(cmbFlights, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 288, Short.MAX_VALUE)
-                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnAddToFlight, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(85, 85, 85))
         );
 
@@ -1429,16 +1430,24 @@ public class AirportFrame extends javax.swing.JFrame {
         if (user.isSelected()) {
             user.setSelected(false);
             userSelect.setSelectedIndex(0);
+            userSelect.removeAllItems();
+            userSelect.addItem("Select User");
 
         }
         for (int i = 1; i < jTabbedPane1.getTabCount(); i++) {
-            jTabbedPane1.setEnabledAt(i, true);
+                jTabbedPane1.setEnabledAt(i, true);
         }
         jTabbedPane1.setEnabledAt(5, false);
         jTabbedPane1.setEnabledAt(6, false);
+        jTabbedPane1.setEnabledAt(7, false);
+
     }//GEN-LAST:event_administratorActionPerformed
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
+        
+
+        
+        
         if (administrator.isSelected()) {
             administrator.setSelected(false);
         }
@@ -1452,6 +1461,19 @@ public class AirportFrame extends javax.swing.JFrame {
         jTabbedPane1.setEnabledAt(6, true);
         jTabbedPane1.setEnabledAt(7, true);
         jTabbedPane1.setEnabledAt(11, true);
+        
+        ArrayList<String> ids = mainController.refreshUser();
+        ArrayList<String> idsFlights = mainController.refreshAvailableFlights();
+
+        
+        for (String id : ids){
+            userSelect.addItem(id);
+        }
+        
+        for (String idf : idsFlights){
+            cmbFlights.addItem(idf);
+        }
+        
     }//GEN-LAST:event_userActionPerformed
 
     private void btnRegisterPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPassengerActionPerformed
@@ -1466,8 +1488,17 @@ public class AirportFrame extends javax.swing.JFrame {
         String phone = txtPhoneRegister.getText();
         String country = txtCountryRegister.getText();
 
-        mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
+        response = mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
         this.userSelect.addItem("" + id);
+        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
+        
     }//GEN-LAST:event_btnRegisterPassengerActionPerformed
 
     private void btnCreateAirplaneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateAirplaneActionPerformed
@@ -1479,6 +1510,13 @@ public class AirportFrame extends javax.swing.JFrame {
         String airline = txtAirlinePlane.getText();
 
         mainController.registerPlane( id,  brand,  model,  maxCapacity,  airline);
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
         this.cmbPlaneRegister.addItem(id);
     }//GEN-LAST:event_btnCreateAirplaneActionPerformed
 
@@ -1491,9 +1529,20 @@ public class AirportFrame extends javax.swing.JFrame {
         String latitude = txtAirportLatitude.getText();
         String longitude = txtAirportLongitude.getText();
 
+<<<<<<< HEAD
         mainController.registerLocation(id, name, city, country, latitude, longitude);
         
         
+=======
+        mainController.registerLocation(id, name, city, country, city, country);
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }        
+>>>>>>> e364c4caf7f8a908bfc944dae2d2c522b0dabab1
         this.cmbDepartureLocationRegister.addItem(id);
         this.cmbArrivalLocationRegister.addItem(id);
         this.cmbScaleLocationRegister.addItem(id);
@@ -1517,7 +1566,13 @@ public class AirportFrame extends javax.swing.JFrame {
         int minutesDurationsScale = Integer.parseInt(cmbScaleMinuteRegister.getItemAt(cmbScaleMinuteRegister.getSelectedIndex()));
 
         mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival,scaleLocationId, hoursDurationsScale, minutesDurationsScale );
-        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
         this.cmbFlights.addItem(id);
     }//GEN-LAST:event_btnCreateRegisterFlightActionPerformed
 
@@ -1550,9 +1605,9 @@ public class AirportFrame extends javax.swing.JFrame {
         passenger.setCountry(country);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void btnAddToFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToFlightActionPerformed
         // TODO add your handling code here:
-        long passengerId = Long.parseLong(IDTextField.getText());
+        long passengerId = Long.parseLong(txtIdAddToFlight.getText());
         String flightId = cmbFlights.getItemAt(cmbFlights.getSelectedIndex());
 
         Passenger passenger = null;
@@ -1572,7 +1627,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         passenger.addFlight(flight);
         flight.addPassenger(passenger);
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }//GEN-LAST:event_btnAddToFlightActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
@@ -1592,7 +1647,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void btnRefreshMyFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshMyFlightsActionPerformed
         // TODO add your handling code here:
-        long passengerId = Long.parseLong(userSelect.getItemAt(userSelect.getSelectedIndex()));
+        Long passengerId = Long.parseLong(userSelect.getItemAt(userSelect.getSelectedIndex()));
 
         Passenger passenger = null;
         for (Passenger p : this.passengers) {
@@ -1605,7 +1660,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblMyFlights.getModel();
         model.setRowCount(0);
         for (Flight flight : flights) {
-            model.addRow(new Object[]{flight.getId(), flight.getDepartureDate(), mainController.calculateArrivalDate(flight)});
+            model.addRow(new Object[]{flight.getId(), flight.getDepartureDate(), flight.calculateArrivalDate()});
         }
     }//GEN-LAST:event_btnRefreshMyFlightsActionPerformed
 
@@ -1613,9 +1668,20 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tblPassengers.getModel();
         model.setRowCount(0);
-        response = mainController.refreshPlanes();
+        
+        response = mainController.refreshPassengers();
+        
         mainController.refreshPassengers();
+        
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
+            
         model.addRow(row); // Añade directamente cada fila
         }
     }//GEN-LAST:event_btnRefreshPassengersActionPerformed
@@ -1624,8 +1690,15 @@ public class AirportFrame extends javax.swing.JFrame {
         // No hemos usado el controladorDeDelay:
         DefaultTableModel model = (DefaultTableModel) tblAllFlights.getModel();
         model.setRowCount(0);
-        response = mainController.refreshPlanes();
+        response = mainController.refreshFlights();
         mainController.refreshFlights();
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
         model.addRow(row); // Añade directamente cada fila
         }
@@ -1635,8 +1708,15 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tblAllPlanes.getModel();
         model.setRowCount(0);
-        
+       
         response = mainController.refreshPlanes();
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
         model.addRow(row); // Añade directamente cada fila
     }
@@ -1647,11 +1727,20 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) tblAllLocations.getModel();
         model.setRowCount(0);
-        // 
+       
         response = mainController.refreshLocations();
+        if (response.getStatus() >= 500) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.ERROR_MESSAGE);
+        } else if (response.getStatus() >= 400) {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Error " + response.getStatus(), JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, response.getMessage(), "Response Message", JOptionPane.INFORMATION_MESSAGE);
+        }
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
         model.addRow(row); // Añade directamente cada fila
     }
+        
+           
     }//GEN-LAST:event_btnRefreshLocationsActionPerformed
 
     private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
@@ -1663,17 +1752,19 @@ public class AirportFrame extends javax.swing.JFrame {
             String id = userSelect.getSelectedItem().toString();
             if (!id.equals(userSelect.getItemAt(0))) {
                 txtID.setText(id);
-                IDTextField.setText(id);
+                txtIdAddToFlight.setText(id);
             } else {
                 txtID.setText("");
-                IDTextField.setText("");
+                txtIdAddToFlight.setText("");
             }
         } catch (Exception e) {
         }
     }//GEN-LAST:event_userSelectActionPerformed
 
     private void cmbFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbFlightsActionPerformed
-        // TODO add your handling code here:
+
+    
+    
     }//GEN-LAST:event_cmbFlightsActionPerformed
 
     private void cmbDAYActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDAYActionPerformed
@@ -1684,8 +1775,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> DAY2;
-    private javax.swing.JTextField IDTextField;
     private javax.swing.JRadioButton administrator;
+    private javax.swing.JButton btnAddToFlight;
     private javax.swing.JButton btnCreateAirplane;
     private javax.swing.JButton btnCreateLocation;
     private javax.swing.JButton btnCreateRegisterFlight;
@@ -1715,7 +1806,6 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbScaleMinuteRegister;
     private javax.swing.JComboBox<String> cmbUpdateBDDay;
     private javax.swing.JComboBox<String> cmbUpdateBDMonth;
-    private javax.swing.JButton jButton12;
     private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
@@ -1814,6 +1904,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtIDFlightRegister;
     private javax.swing.JTextField txtIDPlane;
     private javax.swing.JTextField txtIDRegister;
+    private javax.swing.JTextField txtIdAddToFlight;
     private javax.swing.JTextField txtLastName;
     private javax.swing.JTextField txtLastNameRegister;
     private javax.swing.JTextField txtMaxCapPlane;

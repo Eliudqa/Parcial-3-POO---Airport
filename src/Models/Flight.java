@@ -105,15 +105,19 @@ public class Flight {
         return passengers.size();
     }
 
-   public Flight getCopyFlight(){
+   public Flight copy(){
        if(this.scaleLocation==null){
          return new Flight( id, plane,  departureLocation,  arrivalLocation,  departureDate,  hoursDurationArrival, minutesDurationArrival); 
        }
        else {
-           return new Flight( id,  plane,  departureLocation,  scaleLocation,  arrivalLocation, departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale); 
+           return new Flight( id, plane,  departureLocation,  scaleLocation,  arrivalLocation, departureDate, hoursDurationArrival, minutesDurationArrival, hoursDurationScale, minutesDurationScale); 
 
        }
    }
+   
+   public LocalDateTime calculateArrivalDate() {
+        return departureDate.plusHours(hoursDurationScale).plusHours(hoursDurationArrival).plusMinutes(minutesDurationScale).plusMinutes(minutesDurationArrival);
+    }
     
     
     

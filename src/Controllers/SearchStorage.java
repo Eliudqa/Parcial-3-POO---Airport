@@ -5,6 +5,7 @@
 package Controllers;
 
 import Controllers.Interfaces.ISearchStorage;
+import Controllers.Interfaces.Storage.IStorageGet;
 import Models.Flight;
 import Models.Location;
 import Models.Passenger;
@@ -22,6 +23,13 @@ import java.util.ArrayList;
 
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class SearchStorage implements ISearchStorage {
+    
+    private final IStorageGet ISG;
+
+    public SearchStorage(IStorageGet ISG) {
+        this.ISG = ISG;
+    }
+    
     
     
      @Override
