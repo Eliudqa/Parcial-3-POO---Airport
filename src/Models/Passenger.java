@@ -110,7 +110,7 @@ public class Passenger {
         return flights.size();
     }
     
-    public Passenger getCopyPassenger(){
+    public Passenger copy(){
         return new Passenger(id,firstname,  lastname,  birthDate,  countryPhoneCode, phone,country);
     }
     

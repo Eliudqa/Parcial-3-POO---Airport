@@ -60,7 +60,7 @@ public class Plane {
         return flights.size();
     }
 
-    public Plane getCopyPlane(){
+    public Plane copy(){
         return new Plane(id,brand,model,maxCapacity,airline);
     }
     

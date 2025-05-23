@@ -35,9 +35,11 @@ import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IPassengersRefreshers;
 import Controllers.Refreshers.IPlanesRefreshers;
+import Controllers.Refreshers.IUserRefresher;
 import Controllers.Refreshers.LocationsRefreshers;
 import Controllers.Refreshers.PassengersRefresher;
 import Controllers.Refreshers.PlanesRefreshers;
+import Controllers.Refreshers.UserRefresher;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
@@ -145,12 +147,14 @@ public class AppConfig {
     IFlightsRefresher flightRefresher = new FlightsRefreshers();
     IPassengersRefreshers passengerRefresher = new PassengersRefresher();
     ILocationsRefreshers locationRefresher = new LocationsRefreshers();
+    IUserRefresher userRefresher = new UserRefresher();
 
     return new RefresherFacade(
         planeRefresher,
         flightRefresher,
         passengerRefresher,
-        locationRefresher
+        locationRefresher,
+       userRefresher
     );
 }
 

@@ -9,7 +9,9 @@ import Controllers.Refreshers.IFlightsRefresher;
 import Controllers.Refreshers.ILocationsRefreshers;
 import Controllers.Refreshers.IPassengersRefreshers;
 import Controllers.Refreshers.IPlanesRefreshers;
+import Controllers.Refreshers.IUserRefresher;
 import core.controllers.utils.Response;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,17 +23,21 @@ public class RefresherFacade implements IRefresher {
     private final ILocationsRefreshers locationRefresher;
     private final IFlightsRefresher flightRefresher;
     private final IPassengersRefreshers passengerRefresher;
+    private final IUserRefresher userRefresher;
+
 
     public RefresherFacade(
         IPlanesRefreshers planeRefresher,
         IFlightsRefresher flightRefresher,
         IPassengersRefreshers passengerRefresher,
-        ILocationsRefreshers locationRefresher
+        ILocationsRefreshers locationRefresher,
+        IUserRefresher userRefresher    
     ) {
         this.planeRefresher = planeRefresher;
         this.flightRefresher = flightRefresher;
         this.passengerRefresher = passengerRefresher;
         this.locationRefresher = locationRefresher;
+        this.userRefresher=userRefresher;
     }
     
     @Override
@@ -54,5 +60,9 @@ public class RefresherFacade implements IRefresher {
         return locationRefresher.refreshLocations();
     }
 
-
+    @Override
+    public ArrayList<String> refreshUser(){
+        return userRefresher.refreshUser();
+ 
+ }
 }

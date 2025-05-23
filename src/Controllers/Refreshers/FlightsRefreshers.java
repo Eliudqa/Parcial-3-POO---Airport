@@ -31,7 +31,7 @@ public class FlightsRefreshers implements IFlightsRefresher  {
                 f.getArrivalLocation().getAirportId(), 
                 (f.getScaleLocation() == null ? "-" : f.getScaleLocation().getAirportId()), 
                 f.getDepartureDate(), 
-                mainController.calculateArrivalDate(f), 
+                f.calculateArrivalDate(), 
                 f.getPlane().getId(), f.getNumPassengers()});
         }
 

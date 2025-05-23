@@ -70,10 +70,8 @@ public class MainController {
     public void delayFlight(Flight flight, int hours, int minutes) {
         ICFlights.delay(flight, hours, minutes);
     }    
-    public LocalDateTime calculateArrivalDate(Flight flight) {
-        return ICFlights.calculateArrivalDate(flight);
-    }
     
+    // Metodos de refresh
     public Response refreshPlanes() {
         return refresher.refreshPlanes();
     }    
@@ -92,6 +90,9 @@ public class MainController {
         return refresher.refreshLocations();
     }
     
-    
+    public ArrayList<String> refreshUser(){
+      return refresher.refreshUser();
+    }
+
     
 }
