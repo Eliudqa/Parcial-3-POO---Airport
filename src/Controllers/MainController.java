@@ -125,7 +125,7 @@ public class MainController {
     }
     
     //Metodos Getters
-    public Response getMyFlightsRows(Long passengerId){
+    public Response getMyFlightsRows(String passengerId){
         return refresher.getMyFlightsRows(passengerId);
     }
     

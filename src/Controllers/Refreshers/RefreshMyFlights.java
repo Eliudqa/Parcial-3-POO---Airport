@@ -10,6 +10,7 @@ import Models.Flight;
 import Models.Passenger;
 import Models.Storage.PassengersStorage;
 import core.controllers.utils.Response;
+import core.controllers.utils.Status;
 import java.awt.List;
 import java.util.ArrayList;
 
@@ -26,16 +27,22 @@ public class RefreshMyFlights implements IRefreshMyFlights {
     }
 
     @Override
-    public Response getMyFlightsRows(Long passengerId) {
-
+    public Response getMyFlightsRows(String passengerIdStr) {
+        Long passengerId;
+        try{
+             passengerId = Long.parseLong(passengerIdStr);
+        }catch(NumberFormatException e){
+            return new Response("Please, select an user first", Status.BAD_REQUEST);
+        }
+        
         Passenger passenger = searchStorage.getPassenger(passengerId);
 
         if (passenger == null) {
-            return new Response("Passenger not found", 404);
+            return new Response("Passenger not found", Status.NOT_FOUND);
         }
 
         if (passenger.getNumFlights() == 0) {
-            return new Response("Lista Vacia", 204);
+            return new Response("Lista Vacia", Status.NO_CONTENT);
 
         }
 

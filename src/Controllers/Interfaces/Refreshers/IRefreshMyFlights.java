@@ -11,5 +11,5 @@ import core.controllers.utils.Response;
  * @author HOLA
  */
 public interface IRefreshMyFlights {
-      public Response getMyFlightsRows(Long passengerId);
+      public Response getMyFlightsRows(String passengerId);
 }
