@@ -1700,8 +1700,8 @@ public class AirportFrame extends javax.swing.JFrame {
     private void btnDelayApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelayApplyActionPerformed
         // TODO add your handling code here:
         String flightId = cmbDFlightID.getItemAt(cmbDFlightID.getSelectedIndex());
-        int hours = Integer.parseInt(cmbDFlightHour.getItemAt(cmbDFlightHour.getSelectedIndex()));
-        int minutes = Integer.parseInt(cmbDFlightMinute.getItemAt(cmbDFlightMinute.getSelectedIndex()));
+        String hours = cmbDFlightHour.getItemAt(cmbDFlightHour.getSelectedIndex());
+        String minutes = cmbDFlightMinute.getItemAt(cmbDFlightMinute.getSelectedIndex());
 
         Flight flight = null;
         for (Flight f : this.flights) {
@@ -1710,7 +1710,13 @@ public class AirportFrame extends javax.swing.JFrame {
             }
         }
 
-        mainController.delayFlight(flight, hours, minutes);
+        Response response = mainController.delayFlight(flight, hours, minutes);
+        mainController.showMessage(response);
+        if(response.getStatus()==Status.OK){
+           cmbDFlightID.setSelectedIndex(0);
+       cmbDFlightHour.setSelectedIndex(0);
+        cmbDFlightMinute.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnDelayApplyActionPerformed
 
     private void btnRefreshMyFlightsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRefreshMyFlightsActionPerformed

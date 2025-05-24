@@ -2,16 +2,14 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
-package Controllers.Interfaces;
+package Controllers.Validators;
 
-import Models.Flight;
 import core.controllers.utils.Response;
 
 /**
  *
  * @author samit
  */
-public interface IControllerFlights {
-    Response delay(Flight flight, String hours, String minutes);
-
+public interface IValidatorDelayFlight {
+    public Response validateDelayedTime(String hour, String minute);
 }

@@ -88,8 +88,8 @@ public class MainController {
         return registerFacade.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
     }
 
-    public void delayFlight(Flight flight, int hours, int minutes) {
-        ICFlights.delay(flight, hours, minutes);
+    public Response delayFlight(Flight flight, String hours, String minutes) {
+        return ICFlights.delay(flight, hours, minutes);
     }    
     
     // Metodos de refresh

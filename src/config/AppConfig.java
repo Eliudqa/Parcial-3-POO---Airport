@@ -56,7 +56,6 @@ import Controllers.Refreshers.PlanesAvailableRefreshers;
 import Controllers.Refreshers.PlanesRefreshers;
 import Controllers.Refreshers.RefreshMyFlights;
 import Controllers.Refreshers.UserRefresher;
-import Controllers.Registers.IRegisterPassengerInFlight;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
@@ -65,12 +64,14 @@ import Controllers.Registers.RegisterPlane;
 import Controllers.SearchStorage;
 import Controllers.ShowResponse;
 import Controllers.UpdateInfo;
+import Controllers.Validators.IValidatorDelayFlight;
 import Controllers.Validators.IValidatorFlight;
 import Controllers.Validators.IValidatorLocation;
 import Controllers.Validators.IValidatorPassenger;
 import Controllers.Validators.IValidatorPassengerToFlight;
 import Controllers.Validators.IValidatorPassengerUpdate;
 import Controllers.Validators.IValidatorPlane;
+import Controllers.Validators.ValidatorDelayFlight;
 import Controllers.Validators.ValidatorFlight;
 import Controllers.Validators.ValidatorLocation;
 import Controllers.Validators.ValidatorPassenger;
@@ -116,9 +117,15 @@ public class AppConfig {
                 
         );
         
-        IControllerFlights ICFlights = new ControllerFlights();
+        IControllerFlights ICFlights = createControllerFlights();
 
         return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG, IUF, ISR);
+    }
+    
+    public ControllerFlights createControllerFlights(){
+        IValidatorDelayFlight IVDF = new ValidatorDelayFlight();
+        
+        return new ControllerFlights(IVDF);
     }
 
     public RegisterFlight createRegisterFlight() {

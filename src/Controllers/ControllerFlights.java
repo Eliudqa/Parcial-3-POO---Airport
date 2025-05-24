@@ -5,23 +5,33 @@
 package Controllers;
 
 import Controllers.Interfaces.IControllerFlights;
+import Controllers.Validators.IValidatorDelayFlight;
 import Models.Flight;
-import java.time.LocalDateTime;
+import core.controllers.utils.Response;
+import core.controllers.utils.Status;
 
 /**
  *
  * @author Admin
  */
-public class ControllerFlights implements IControllerFlights{
+public class ControllerFlights implements IControllerFlights {
+
+    private final IValidatorDelayFlight IVDF;
+
+    public ControllerFlights(IValidatorDelayFlight IVDF) {
+        this.IVDF = IVDF;
+    }
 
     @Override
-    public void delay(Flight flight, int hours, int minutes) {
-        flight.setDepartureDate(flight.getDepartureDate().plusHours(hours).plusMinutes(minutes));
-    }
-    
+    public Response delay(Flight flight, String hours, String minutes) {
+        Response response = IVDF.validateDelayedTime(hours, minutes);
 
-    
-    
-    
-    
+        if (response.getStatus()==Status.OK) {
+            flight.setDepartureDate(flight.getDepartureDate().
+                    plusHours(Integer.parseInt(hours)).
+                    plusMinutes(Integer.parseInt(minutes)));
+        }
+        return response;
+    }
+
 }
