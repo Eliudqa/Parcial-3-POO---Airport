@@ -46,6 +46,11 @@ public class PassengersStorage implements IStorageAddPassenger, IStorageGetPasse
     public void addPassenger(Passenger passenger){
         this.passengers.add(passenger);
     }
+
+    @Override
+    public ArrayList<Passenger> getCopyPassengers() {
+        return new ArrayList<>(this.passengers);
+    }
     
     
     

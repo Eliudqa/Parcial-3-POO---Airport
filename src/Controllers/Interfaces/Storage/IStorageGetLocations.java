@@ -13,4 +13,6 @@ import java.util.ArrayList;
  */
 public interface IStorageGetLocations {
     ArrayList<Location> getLocations();
+    ArrayList<Location> getCopyLocations();
+
 }

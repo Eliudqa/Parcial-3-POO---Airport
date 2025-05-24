@@ -6,6 +6,7 @@ package Controllers.Refreshers;
 
 import Controllers.Interfaces.Refreshers.IPlanesRefreshers;
 import Controllers.Interfaces.Storage.IStorageGet;
+import Controllers.Sorts.ISortPlanes;
 import Models.Plane;
 import core.controllers.utils.Response;
 import java.util.ArrayList;
@@ -17,19 +18,22 @@ import java.util.ArrayList;
 public class PlanesRefreshers implements IPlanesRefreshers {
 
     private final IStorageGet ISG;
+    private final ISortPlanes ISP;
 
-    public PlanesRefreshers(IStorageGet ISG) {
+    public PlanesRefreshers(IStorageGet ISG,ISortPlanes ISP) {
         this.ISG = ISG;
+        this.ISP = ISP;
     }
 
     @Override
     public Response refreshPlanes() {
-        ArrayList<Plane> planes = ISG.getPlanes();
+        ArrayList<Plane> planes = ISG.getCopyPlanes();
 
         if (planes.isEmpty()) {
             return new Response("No airplanes registered", 404);
         }
-
+        
+        ISP.sortPlanes(planes);
         ArrayList<Object[]> rows = new ArrayList<>();
         for (Plane p : planes) {
             Plane copy = p.copy(); // copia independiente

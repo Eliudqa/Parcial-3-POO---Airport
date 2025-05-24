@@ -6,8 +6,8 @@ package Controllers.Refreshers;
 
 import Controllers.Interfaces.Refreshers.ILocationsRefreshers;
 import Controllers.Interfaces.Storage.IStorageGet;
+import Controllers.Sorts.ISortLocations;
 import Models.Location;
-import Models.Storage.LocationsStorage;
 import core.controllers.utils.Response;
 import java.util.ArrayList;
 
@@ -18,20 +18,24 @@ import java.util.ArrayList;
 public class LocationsRefreshers implements ILocationsRefreshers {
     
     private final IStorageGet ISG;
+    private final ISortLocations ISL;
 
-    public LocationsRefreshers(IStorageGet ISG) {
+    public LocationsRefreshers(IStorageGet ISG,ISortLocations ISL) {
         this.ISG = ISG;
+        this.ISL = ISL;
     }
     
   @Override
   public Response refreshLocations() {
-        ArrayList<Location> locations = ISG.getLocations();
+        // Obtenemos una copia del arrayList de storage original
+        ArrayList<Location> locations = ISG.getCopyLocations();
 
         if (locations.isEmpty()) {
             return new Response("No locations registered", 404);
         }
-
+        ISL.sortLocations(locations);
         ArrayList<Object[]> rows = new ArrayList<>();
+        
         for (Location l : locations) {
               Location copy = l.copy(); // copia independiente
 

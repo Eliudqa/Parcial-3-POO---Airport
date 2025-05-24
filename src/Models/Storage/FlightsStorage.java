@@ -47,6 +47,11 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights {
     public void addFlight(Flight flight){
         this.flights.add(flight);
     }
+
+    @Override
+    public ArrayList<Flight> getCopyFlights() {
+        return new ArrayList<>(this.flights);
+    }
      
     
     

@@ -44,4 +44,9 @@ public class LocationsStorage implements IStorageAddLocation, IStorageGetLocatio
     public void addLocation(Location location){
         this.locations.add(location);
     }
+
+    @Override
+    public ArrayList<Location> getCopyLocations() {
+        return new ArrayList<>(this.locations);
+    }
 }

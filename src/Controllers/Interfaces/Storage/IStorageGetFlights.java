@@ -13,4 +13,6 @@ import java.util.ArrayList;
  */
 public interface IStorageGetFlights {
     ArrayList<Flight> getFlights();
+    ArrayList<Flight> getCopyFlights();
+    
 }

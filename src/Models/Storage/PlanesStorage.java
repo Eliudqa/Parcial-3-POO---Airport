@@ -48,6 +48,12 @@ public class PlanesStorage implements IStorageAddPlane, IStorageGetPlanes {
     public void addPlane(Plane plane){
         this.planes.add(plane);
     }
+
+    @Override
+    public ArrayList<Plane> getCopyPlanes() {
+      return new ArrayList<>(this.planes);   
+    }
+    
     
     
     

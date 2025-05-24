@@ -52,4 +52,27 @@ public class GetStorageFacade implements IStorageGet {
     public ArrayList<Flight> getFlights() {
         return isgf.getFlights();
     }
+
+    @Override
+    public ArrayList<Plane> getCopyPlanes() {
+        return isgpl.getCopyPlanes();
+    }
+
+    @Override
+    public ArrayList<Location> getCopyLocations() {
+        return isgl.getCopyLocations();
+
+    }
+
+    @Override
+    public ArrayList<Passenger> getCopyPassengers() {
+        return isgpa.getCopyPassengers();
+
+    }
+
+    @Override
+    public ArrayList<Flight> getCopyFlights() {
+        return isgf.getCopyFlights();
+
+    }
 }

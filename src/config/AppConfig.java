@@ -63,6 +63,14 @@ import Controllers.Registers.RegisterPassengerInFlight;
 import Controllers.Registers.RegisterPlane;
 import Controllers.SearchStorage;
 import Controllers.ShowResponse;
+import Controllers.Sorts.ISortFlights;
+import Controllers.Sorts.ISortLocations;
+import Controllers.Sorts.ISortPassengers;
+import Controllers.Sorts.ISortPlanes;
+import Controllers.Sorts.SortFlights;
+import Controllers.Sorts.SortLocations;
+import Controllers.Sorts.SortPassengers;
+import Controllers.Sorts.SortPlanes;
 import Controllers.UpdateInfo;
 import Controllers.Validators.IValidatorDelayFlight;
 import Controllers.Validators.IValidatorFlight;
@@ -189,10 +197,15 @@ public class AppConfig {
           
      public IRefresher createRefresher() {
          
-    IPlanesRefreshers planeRefresher = new PlanesRefreshers(ISG);
-    IFlightsRefresher flightRefresher = new FlightsRefreshers(ISG);
-    IPassengersRefreshers passengerRefresher = new PassengersRefresher(ISG);
-    ILocationsRefreshers locationRefresher = new LocationsRefreshers(ISG);
+    ISortFlights ISF = new SortFlights();     
+    ISortPlanes ISP = new SortPlanes();     
+    ISortPassengers ISPA = new SortPassengers();     
+    ISortLocations ISL = new SortLocations();     
+         
+    IPlanesRefreshers planeRefresher = new PlanesRefreshers(ISG,ISP);
+    IFlightsRefresher flightRefresher = new FlightsRefreshers(ISG,ISF);
+    IPassengersRefreshers passengerRefresher = new PassengersRefresher(ISG,ISPA);
+    ILocationsRefreshers locationRefresher = new LocationsRefreshers(ISG,ISL);
     IUserRefresher userRefresher = new UserRefresher(ISG);
     IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher(ISG);
     IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage);
