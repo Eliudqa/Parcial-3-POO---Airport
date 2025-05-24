@@ -6,12 +6,11 @@ package Controllers.Refreshers;
 
 import Controllers.Interfaces.Refreshers.IRefreshMyFlights;
 import Controllers.Interfaces.ISearchStorage;
+import Controllers.Sorts.ISortMyFlights;
 import Models.Flight;
 import Models.Passenger;
-import Models.Storage.PassengersStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
-import java.awt.List;
 import java.util.ArrayList;
 
 /**
@@ -21,9 +20,11 @@ import java.util.ArrayList;
 public class RefreshMyFlights implements IRefreshMyFlights {
 
     private final ISearchStorage searchStorage;
+    private final ISortMyFlights ISMF;
 
-    public RefreshMyFlights(ISearchStorage searchStorage) {
+    public RefreshMyFlights(ISearchStorage searchStorage, ISortMyFlights ISMF) {
         this.searchStorage = searchStorage;
+        this.ISMF = ISMF;
     }
 
     @Override
@@ -47,8 +48,11 @@ public class RefreshMyFlights implements IRefreshMyFlights {
         }
 
         ArrayList<Object[]> rows = new ArrayList<>();
-
-        for (Flight flight : passenger.getFlights()) {
+        
+        // Obtengo una copia de la lista de los vuelos en pasajeros
+        ArrayList<Flight> flights = passenger.getCopyFlights();
+        ISMF.sortMyFlights(flights);
+        for (Flight flight : flights) {
 
             Flight copy = flight.copy(); // copia independiente
 
