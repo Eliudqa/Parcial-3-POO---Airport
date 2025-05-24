@@ -888,7 +888,7 @@
                                       <Component id="jLabel33" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                                       <Group type="102" alignment="0" attributes="0">
                                           <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
-                                          <Component id="DAY2" min="-2" max="-2" attributes="0"/>
+                                          <Component id="cmbDepartureMinute" min="-2" max="-2" attributes="0"/>
                                       </Group>
                                   </Group>
                                   <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
@@ -950,7 +950,7 @@
                               <Component id="cmbDepartureHourRegister" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel32" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Component id="jLabel33" alignment="0" min="-2" max="-2" attributes="0"/>
-                              <Component id="DAY2" alignment="0" min="-2" max="-2" attributes="0"/>
+                              <Component id="cmbDepartureMinute" alignment="0" min="-2" max="-2" attributes="0"/>
                               <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
                                       <Group type="103" groupAlignment="3" attributes="0">
@@ -988,7 +988,7 @@
                                   </Group>
                               </Group>
                           </Group>
-                          <EmptySpace pref="132" max="32767" attributes="0"/>
+                          <EmptySpace pref="134" max="32767" attributes="0"/>
                           <Component id="btnCreateRegisterFlight" min="-2" pref="40" max="-2" attributes="0"/>
                           <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
                       </Group>
@@ -1217,7 +1217,7 @@
                     <Property name="text" type="java.lang.String" value="-"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="DAY2">
+                <Component class="javax.swing.JComboBox" name="cmbDepartureMinute">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Yu Gothic UI" size="18" style="0"/>
@@ -1385,7 +1385,7 @@
                                   <Component id="btnUpdate" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="555" max="32767" attributes="0"/>
+                          <EmptySpace pref="586" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1616,7 +1616,7 @@
                               <Component id="cmbFlights" min="-2" max="-2" attributes="0"/>
                               <Component id="txtIdAddToFlight" min="-2" pref="130" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace pref="829" max="32767" attributes="0"/>
+                          <EmptySpace pref="860" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -1719,7 +1719,7 @@
                       <Group type="102" attributes="0">
                           <EmptySpace min="-2" pref="269" max="-2" attributes="0"/>
                           <Component id="jScrollPane1" min="-2" pref="590" max="-2" attributes="0"/>
-                          <EmptySpace pref="291" max="32767" attributes="0"/>
+                          <EmptySpace pref="322" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace max="32767" attributes="0"/>
@@ -1800,7 +1800,7 @@
                                   <Component id="jScrollPane2" min="-2" pref="1078" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="25" max="32767" attributes="0"/>
+                          <EmptySpace pref="56" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1880,7 +1880,7 @@
                                   <Component id="btnRefreshFlights" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="21" max="32767" attributes="0"/>
+                          <EmptySpace pref="52" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -1961,7 +1961,7 @@
                                   <Component id="jScrollPane4" min="-2" pref="816" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="189" max="32767" attributes="0"/>
+                          <EmptySpace pref="220" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2037,7 +2037,7 @@
                                   <Component id="jScrollPane5" min="-2" pref="652" max="-2" attributes="0"/>
                               </Group>
                           </Group>
-                          <EmptySpace pref="272" max="32767" attributes="0"/>
+                          <EmptySpace pref="303" max="32767" attributes="0"/>
                       </Group>
                   </Group>
                 </DimensionLayout>
@@ -2115,7 +2115,7 @@
                                   </Group>
                                   <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="cmbDFlightHour" pref="105" max="32767" attributes="0"/>
+                                      <Component id="cmbDFlightHour" pref="136" max="32767" attributes="0"/>
                                       <Component id="cmbDFlightID" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
@@ -2197,6 +2197,9 @@
                       </StringArray>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmbDFlightIDActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>

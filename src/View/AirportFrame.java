@@ -11,6 +11,7 @@ import Models.Plane;
 import Models.Flight;
 import config.AppConfig;
 import core.controllers.utils.Response;
+import core.controllers.utils.Status;
 import java.awt.Color;
 import java.util.ArrayList;
 import javax.swing.table.DefaultTableModel;
@@ -87,7 +88,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void generateMinutes() {
         for (String minute : mainController.generateMinutes()) {
-            DAY2.addItem(minute);
+            cmbDepartureMinute.addItem(minute);
             cmbMinuteRegister.addItem(minute);
             cmbScaleMinuteRegister.addItem(minute);
             cmbDFlightMinute.addItem(minute);
@@ -180,7 +181,7 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel32 = new javax.swing.JLabel();
         cmbDepartureHourRegister = new javax.swing.JComboBox<>();
         jLabel33 = new javax.swing.JLabel();
-        DAY2 = new javax.swing.JComboBox<>();
+        cmbDepartureMinute = new javax.swing.JComboBox<>();
         cmbDurationRegister = new javax.swing.JComboBox<>();
         jLabel34 = new javax.swing.JLabel();
         cmbMinuteRegister = new javax.swing.JComboBox<>();
@@ -641,8 +642,8 @@ public class AirportFrame extends javax.swing.JFrame {
         jLabel33.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel33.setText("-");
 
-        DAY2.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
-        DAY2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
+        cmbDepartureMinute.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
+        cmbDepartureMinute.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Minute" }));
 
         cmbDurationRegister.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         cmbDurationRegister.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Hour" }));
@@ -729,7 +730,7 @@ public class AirportFrame extends javax.swing.JFrame {
                             .addComponent(jLabel33, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel4Layout.createSequentialGroup()
                                 .addGap(20, 20, 20)
-                                .addComponent(DAY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(cmbDepartureMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(30, 30, 30))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -773,7 +774,7 @@ public class AirportFrame extends javax.swing.JFrame {
                     .addComponent(cmbDepartureHourRegister, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel32)
                     .addComponent(jLabel33)
-                    .addComponent(DAY2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmbDepartureMinute, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -1326,6 +1327,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
         cmbDFlightID.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         cmbDFlightID.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "ID" }));
+        cmbDFlightID.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbDFlightIDActionPerformed(evt);
+            }
+        });
 
         jLabel48.setFont(new java.awt.Font("Yu Gothic UI", 0, 18)); // NOI18N
         jLabel48.setText("Minutes:");
@@ -1430,6 +1436,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private void administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorActionPerformed
  
             cmbPlaneRegister.removeAllItems();
+            cmbDFlightID.removeAllItems();
             cmbDepartureLocationRegister.removeAllItems();
             cmbScaleLocationRegister.removeAllItems();
             cmbArrivalLocationRegister.removeAllItems();
@@ -1437,6 +1444,19 @@ public class AirportFrame extends javax.swing.JFrame {
             cmbDepartureLocationRegister.addItem("Location");
             cmbScaleLocationRegister.addItem("Location");
             cmbArrivalLocationRegister.addItem("Location");
+            cmbDFlightID.addItem("ID");
+            cmbDFlightHour.setSelectedIndex(0);
+            cmbDFlightMinute.setSelectedIndex(0);
+            cmbDepartureMonthRegister.setSelectedIndex(0);
+            cmbDepartureDayRegister.setSelectedIndex(0);
+            cmbDepartureHourRegister.setSelectedIndex(0);
+            cmbMinuteRegister.setSelectedIndex(0);
+            cmbDepartureMinute.setSelectedIndex(0);
+            cmbDurationRegister.setSelectedIndex(0);
+            cmbScaleHourRegister.setSelectedIndex(0);
+            cmbScaleMinuteRegister.setSelectedIndex(0);
+            txtIDFlightRegister.setText("");
+            
             
             
         if (user.isSelected()) {
@@ -1459,13 +1479,13 @@ public class AirportFrame extends javax.swing.JFrame {
 
         for (String idp : idsPlanes) {
             cmbPlaneRegister.addItem(idp);
+            cmbDFlightID.addItem(idp);
         }
 
         for (String id : ids) {
             cmbDepartureLocationRegister.addItem(id);
             cmbScaleLocationRegister.addItem(id);
             cmbArrivalLocationRegister.addItem(id);
-
         }
 
 
@@ -1534,6 +1554,19 @@ public class AirportFrame extends javax.swing.JFrame {
         response = mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
         this.userSelect.addItem("" + id);
         mainController.showMessage(response);
+        
+        if(response.getStatus()==Status.OK){
+        txtIDRegister.setText("");
+        txtFirstNameRegister.setText("");
+        txtLastNameRegister.setText("");
+        txtDayBDRegister.setText("");
+        cmbMONTH.setSelectedIndex(0);
+        cmbDAY.setSelectedIndex(0);
+        txtCountryCodeRegister.setText("");
+        txtPhoneRegister.setText("");
+        txtCountryRegister.setText("");
+
+        }
 
     }//GEN-LAST:event_btnRegisterPassengerActionPerformed
 
@@ -1548,6 +1581,14 @@ public class AirportFrame extends javax.swing.JFrame {
         response = mainController.registerPlane(id, brand, model, maxCapacity, airline);
         mainController.showMessage(response);
         this.cmbPlaneRegister.addItem(id);
+        
+        if(response.getStatus()==Status.OK){
+        txtIDPlane.setText("");
+        txtBrandPlane.setText("");
+        txtModelPlane.setText("");
+        txtMaxCapPlane.setText("");
+        txtAirlinePlane.setText("");
+        }
     }//GEN-LAST:event_btnCreateAirplaneActionPerformed
 
     private void btnCreateLocationActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateLocationActionPerformed
@@ -1566,6 +1607,17 @@ public class AirportFrame extends javax.swing.JFrame {
         this.cmbDepartureLocationRegister.addItem(id);
         this.cmbArrivalLocationRegister.addItem(id);
         this.cmbScaleLocationRegister.addItem(id);
+        
+        if(response.getStatus()==Status.OK){
+            
+        
+        txtIDAirport.setText("");
+        txtAirportName.setText("");
+        txtAirportCity.setText("");
+        txtAirportCountry.setText("");
+        txtAirportLatitude.setText("");
+       txtAirportLongitude.setText("");
+        }
     }//GEN-LAST:event_btnCreateLocationActionPerformed
 
     private void btnCreateRegisterFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCreateRegisterFlightActionPerformed
@@ -1579,7 +1631,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String month = cmbDepartureMonthRegister.getItemAt(cmbDepartureMonthRegister.getSelectedIndex());
         String day = cmbDepartureDayRegister.getItemAt(cmbDepartureDayRegister.getSelectedIndex());
         String hour = cmbDepartureHourRegister.getItemAt(cmbDepartureHourRegister.getSelectedIndex());
-        String minutes = DAY2.getItemAt(DAY2.getSelectedIndex());
+        String minutes = cmbDepartureMinute.getItemAt(cmbDepartureMinute.getSelectedIndex());
         String hoursDurationsArrival = cmbDurationRegister.getItemAt(cmbDurationRegister.getSelectedIndex());
         String minutesDurationsArrival = cmbMinuteRegister.getItemAt(cmbMinuteRegister.getSelectedIndex());
         String hoursDurationsScale = cmbScaleHourRegister.getItemAt(cmbScaleHourRegister.getSelectedIndex());
@@ -1588,6 +1640,23 @@ public class AirportFrame extends javax.swing.JFrame {
         response = mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
         mainController.showMessage(response);
         this.cmbFlights.addItem(id);
+        
+        if(response.getStatus()==Status.OK){
+         txtIDFlightRegister.setText("");
+         cmbPlaneRegister.setSelectedIndex(0);
+         cmbDepartureLocationRegister.setSelectedIndex(0);
+         cmbArrivalLocationRegister.setSelectedIndex(0);
+         cmbScaleLocationRegister.setSelectedIndex(0);
+         txtDepartureDayRegister.setText("");
+         cmbDepartureMonthRegister.setSelectedIndex(0);
+         cmbDepartureDayRegister.setSelectedIndex(0);
+         cmbDepartureHourRegister.setSelectedIndex(0);
+         cmbDepartureMinute.setSelectedIndex(0);
+         cmbDurationRegister.setSelectedIndex(0);
+         cmbMinuteRegister.setSelectedIndex(0);
+         cmbScaleHourRegister.setSelectedIndex(0);
+         cmbScaleMinuteRegister.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnCreateRegisterFlightActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
@@ -1747,9 +1816,12 @@ public class AirportFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbScaleLocationRegisterActionPerformed
 
+    private void cmbDFlightIDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbDFlightIDActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbDFlightIDActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JComboBox<String> DAY2;
     private javax.swing.JRadioButton administrator;
     private javax.swing.JButton btnAddToFlight;
     private javax.swing.JButton btnCreateAirplane;
@@ -1771,6 +1843,7 @@ public class AirportFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> cmbDepartureDayRegister;
     private javax.swing.JComboBox<String> cmbDepartureHourRegister;
     private javax.swing.JComboBox<String> cmbDepartureLocationRegister;
+    private javax.swing.JComboBox<String> cmbDepartureMinute;
     private javax.swing.JComboBox<String> cmbDepartureMonthRegister;
     private javax.swing.JComboBox<String> cmbDurationRegister;
     private javax.swing.JComboBox<String> cmbFlights;
