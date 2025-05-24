@@ -31,7 +31,7 @@ public class ValidatorLocation implements IValidatorLocation {
             }
             //Se verifica que el id sí este hecho por 3 caracteres
             if (id.length() != 3) {
-                return new Response("Id must be 3 digits long", Status.BAD_REQUEST);
+                return new Response("Id must have 3", Status.BAD_REQUEST);
             } else {
 
                 //Se revisa que el id sí sea valido

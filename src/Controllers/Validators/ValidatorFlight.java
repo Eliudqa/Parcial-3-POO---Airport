@@ -37,22 +37,19 @@ public class ValidatorFlight implements IValidatorFlight {
             if (id.equals("")) {
                 return new Response("Id must be not empty", Status.BAD_REQUEST);
             }
-            if (planeId.equals("")) {
+            if (planeId.equals("Plane")) {
                 return new Response("Plane must be not empty", Status.BAD_REQUEST);
             }
-            if (departureLocationId.equals("")) {
+            if (departureLocationId.equals("Location")) {
                 return new Response("Departure location must be not empty", Status.BAD_REQUEST);
             }
-            if (arrivalLocationId.equals("")) {
+            if (arrivalLocationId.equals("Location")) {
                 return new Response("Arrival location must be not empty", Status.BAD_REQUEST);
             }
-            if (year.equals("")) {
-                return new Response("Departure date must be not empty", Status.BAD_REQUEST);
-            }
-            if (hoursDurationArrival.equals("")) {
+            if (hoursDurationArrival.equals("Hour")) {
                 return new Response("Hours duration arrival must be not empty", Status.BAD_REQUEST);
             }
-            if (minutesDurationArrival.equals("")) {
+            if (minutesDurationArrival.equals("Minute")) {
                 return new Response("Minutes duration arrival must be not empty", Status.BAD_REQUEST);
             }
 
@@ -69,13 +66,13 @@ public class ValidatorFlight implements IValidatorFlight {
                 char c = id.charAt(i);
                 if (i < 3) {
                     if (!Character.isLetter(c)) {
-                        return new Response("The character " + i + " must be a letter", Status.BAD_REQUEST);
+                        return new Response("The character " + (i+1) + " must be a letter", Status.BAD_REQUEST);
                     } else if (!Character.isUpperCase(c)) {
-                        return new Response("The character " + i + " must be capitalized", Status.BAD_REQUEST);
+                        return new Response("The character " + (i+1)+ " must be capitalized", Status.BAD_REQUEST);
                     }
                 } else {
                     if (!Character.isDigit(c)) {
-                        return new Response("The character " + i + " must be a number", Status.BAD_REQUEST);
+                        return new Response("The character " + (i+1) + " must be a number", Status.BAD_REQUEST);
                     }
                 }
             }
@@ -160,6 +157,15 @@ public class ValidatorFlight implements IValidatorFlight {
 
             //Se verifica que el año sea valido
             int yearInt, monthInt, dayInt, hourInt, minuteInt;
+            if (year.equals("")) {
+                return new Response("Year must be not empty", Status.BAD_REQUEST);
+            }
+            if (month.equals("Month")) {
+                return new Response("Month must be not empty", Status.BAD_REQUEST);
+            }
+            if (day.equals("Day")) {
+                return new Response("Day must be not empty", Status.BAD_REQUEST);
+            }
             try {
                 yearInt = Integer.parseInt(year);
             } catch (NumberFormatException e) {
@@ -195,7 +201,7 @@ public class ValidatorFlight implements IValidatorFlight {
 
             //En caso de escala
             Flight flight;
-            if (!scaleId.equals("")) {
+            if (!scaleId.equals("Location")) {
       
                 Location scaleLocation = searchStorage.getLocation(scaleId);
 
