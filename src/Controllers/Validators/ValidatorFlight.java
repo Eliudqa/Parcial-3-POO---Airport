@@ -35,7 +35,7 @@ public class ValidatorFlight implements IValidatorFlight {
         try {
             //Se verifica que nada este vacio
             if (id.equals("")) {
-                return new Response("Plane must be not empty", Status.BAD_REQUEST);
+                return new Response("Id must be not empty", Status.BAD_REQUEST);
             }
             if (planeId.equals("")) {
                 return new Response("Plane must be not empty", Status.BAD_REQUEST);

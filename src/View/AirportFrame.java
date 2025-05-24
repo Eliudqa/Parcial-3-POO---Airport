@@ -12,9 +12,7 @@ import Models.Flight;
 import config.AppConfig;
 import core.controllers.utils.Response;
 import java.awt.Color;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -1430,11 +1428,17 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_panelRound2MouseDragged
 
     private void administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorActionPerformed
-
-        userSelect.removeAllItems();
-        userSelect.addItem("Select User");
-        userSelect.setSelectedIndex(0);
-
+ 
+            cmbPlaneRegister.removeAllItems();
+            cmbDepartureLocationRegister.removeAllItems();
+            cmbScaleLocationRegister.removeAllItems();
+            cmbArrivalLocationRegister.removeAllItems();
+            cmbPlaneRegister.addItem("Plane");
+            cmbDepartureLocationRegister.addItem("Location");
+            cmbScaleLocationRegister.addItem("Location");
+            cmbArrivalLocationRegister.addItem("Location");
+            
+            
         if (user.isSelected()) {
             user.setSelected(false);
             userSelect.removeAllItems(); // Limpia todo
@@ -1469,9 +1473,24 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
 
-        userSelect.removeItemAt(0);
+            userSelect.removeAllItems(); // Limpia todo
+            userSelect.addItem("Select User"); // Vuelve a poner el ítem principal
+            userSelect.setSelectedIndex(0);
+            cmbFlights.removeAllItems();
+            cmbFlights.addItem("Flight");
         if (administrator.isSelected()) {
             administrator.setSelected(false);
+
+            cmbPlaneRegister.removeAllItems();
+            cmbDepartureLocationRegister.removeAllItems();
+            cmbScaleLocationRegister.removeAllItems();
+            cmbArrivalLocationRegister.removeAllItems();
+            cmbPlaneRegister.addItem("Plane");
+            cmbDepartureLocationRegister.addItem("Location");
+            cmbScaleLocationRegister.addItem("Location");
+            cmbArrivalLocationRegister.addItem("Location");
+            
+            
         }
         for (int i = 1; i < jTabbedPane1.getTabCount(); i++) {
 
@@ -1494,6 +1513,8 @@ public class AirportFrame extends javax.swing.JFrame {
         for (String idf : idsFlights) {
             cmbFlights.addItem(idf);
         }
+
+
 
 
     }//GEN-LAST:event_userActionPerformed
@@ -1524,7 +1545,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String maxCapacity = txtMaxCapPlane.getText();
         String airline = txtAirlinePlane.getText();
 
-        Response response = mainController.registerPlane(id, brand, model, maxCapacity, airline);
+        response = mainController.registerPlane(id, brand, model, maxCapacity, airline);
         mainController.showMessage(response);
         this.cmbPlaneRegister.addItem(id);
     }//GEN-LAST:event_btnCreateAirplaneActionPerformed
@@ -1538,7 +1559,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String latitude = txtAirportLatitude.getText();
         String longitude = txtAirportLongitude.getText();
 
-        Response response = mainController.registerLocation(id, name, city, country, latitude, longitude);
+        response = mainController.registerLocation(id, name, city, country, latitude, longitude);
 
         mainController.showMessage(response);
 
@@ -1564,7 +1585,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String hoursDurationsScale = cmbScaleHourRegister.getItemAt(cmbScaleHourRegister.getSelectedIndex());
         String minutesDurationsScale = cmbScaleMinuteRegister.getItemAt(cmbScaleMinuteRegister.getSelectedIndex());
 
-        Response response = mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
+        response = mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
         mainController.showMessage(response);
         this.cmbFlights.addItem(id);
     }//GEN-LAST:event_btnCreateRegisterFlightActionPerformed
@@ -1581,7 +1602,7 @@ public class AirportFrame extends javax.swing.JFrame {
         String phone = txtPhone.getText();
         String country = txtCountry.getText();
 
-        Response response = mainController.updatePassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
+        response = mainController.updatePassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
 
         mainController.showMessage(response);
 
@@ -1589,26 +1610,12 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void btnAddToFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToFlightActionPerformed
         // TODO add your handling code here:
-        long passengerId = Long.parseLong(txtIdAddToFlight.getText());
+        String passengerId = txtIdAddToFlight.getText();
         String flightId = cmbFlights.getItemAt(cmbFlights.getSelectedIndex());
 
-        Passenger passenger = null;
-        Flight flight = null;
+        Response response = mainController.RegisterPassengerInFlight(passengerId, flightId);
+        mainController.showMessage(response);
 
-        for (Passenger p : this.passengers) {
-            if (p.getId() == passengerId) {
-                passenger = p;
-            }
-        }
-
-        for (Flight f : this.flights) {
-            if (flightId.equals(f.getId())) {
-                flight = f;
-            }
-        }
-
-        passenger.addFlight(flight);
-        flight.addPassenger(passenger);
     }//GEN-LAST:event_btnAddToFlightActionPerformed
 
     private void btnDelayApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelayApplyActionPerformed
@@ -1632,9 +1639,9 @@ public class AirportFrame extends javax.swing.JFrame {
         String passengerId = userSelect.getItemAt(userSelect.getSelectedIndex());
         DefaultTableModel model = (DefaultTableModel) tblMyFlights.getModel();
         model.setRowCount(0);
-        Response response = mainController.getMyFlightsRows(passengerId);
+        response = mainController.getMyFlightsRows(passengerId);
 
-        mainController.showMessage(response);
+
 
         if (response.getObject() != null) {
             for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
@@ -1651,7 +1658,6 @@ public class AirportFrame extends javax.swing.JFrame {
 
         response = mainController.refreshPassengers();
 
-        mainController.refreshPassengers();
 
         mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
@@ -1665,7 +1671,6 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblAllFlights.getModel();
         model.setRowCount(0);
         response = mainController.refreshFlights();
-        mainController.refreshFlights();
         mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
             model.addRow(row); // Añade directamente cada fila
@@ -1706,12 +1711,20 @@ public class AirportFrame extends javax.swing.JFrame {
     private void userSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userSelectActionPerformed
         DefaultTableModel model = (DefaultTableModel) tblMyFlights.getModel();
         model.setRowCount(0);
+        cmbFlights.setSelectedIndex(0);
 
         try {
             String id = userSelect.getSelectedItem().toString();
-            txtID.setText(id);
-            txtIdAddToFlight.setText(id);
+
+            if (!id.equals(userSelect.getItemAt(0))) {
+                txtID.setText(id);
+                txtIdAddToFlight.setText(id);
+            } else {
+                txtID.setText("");
+                txtIdAddToFlight.setText("");
+            }
         } catch (Exception e) {
+            
         }
 
 

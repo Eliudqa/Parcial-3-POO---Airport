@@ -28,6 +28,7 @@ public interface IRefresher extends IFlightsRefresher,
         IFlightsAvailableRefresher,
         IRefreshMyFlights,
         IPlanesAvailableRefreshers,
-        ILocationAvailableRefresher {
+        ILocationAvailableRefresher
+         {
     
 }

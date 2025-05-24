@@ -8,6 +8,7 @@ import Controllers.Registers.IRegisterFlight;
 import Controllers.Registers.IRegisterLocation;
 import Controllers.Registers.IRegisterPlane;
 import Controllers.Registers.IRegisterPassenger;
+import Controllers.Registers.IRegisterPassengerInFlight;
 
 /**
  *
@@ -15,6 +16,10 @@ import Controllers.Registers.IRegisterPassenger;
  */
 
 // Interfaz compuesta que contiene las interfaces independientes
-public interface IRegister extends IRegisterPassenger, IRegisterPlane, IRegisterLocation, IRegisterFlight  { 
+public interface IRegister extends IRegisterPassenger, 
+        IRegisterPlane, 
+        IRegisterLocation, 
+        IRegisterFlight,
+        IRegisterPassengerInFlight { 
     
 }

@@ -88,7 +88,7 @@ public class RefresherFacade implements IRefresher {
     }
     
     @Override
-    public Response getMyFlightsRows(Long passengerId){
+    public Response getMyFlightsRows(String passengerId){
         return myFlightsRefresher.getMyFlightsRows(passengerId);
     }
     
@@ -101,4 +101,6 @@ public class RefresherFacade implements IRefresher {
     public ArrayList<String> refreshAvailableLocations(){
         return availableLocationsRefresher.refreshAvailableLocations();
     }
+    
+    
 }

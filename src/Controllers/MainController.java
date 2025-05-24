@@ -34,9 +34,12 @@ public class MainController {
     
 
 
+   // Esto se hace asi para cumplir con OCP y no modificar los atributos ya existentes, sino que añadir metodos para cumplir con el principio
+   
     public MainController(IGeneratorTime timeGenerator, IRegister register, 
             IControllerFlights ICFlights,IRefresher refresher, IStorageGet ISG,
             IUpdateInfo IUF, IShowResponse ISR) {
+        
         this.timeGenerator = timeGenerator;
         this.registerFacade = register;
         this.ICFlights = ICFlights;
@@ -158,7 +161,11 @@ public class MainController {
         return IUF.updatePassenger(id, firstName, lastName, year, month, day, phoneCode, phone, country);
     }
     
-    
+
+    public Response RegisterPassengerInFlight(String passengerId, String flightId){
+        return registerFacade.RegisterPassengerInFlight(passengerId, flightId);
+    }
+
     //Metodo show
     public void showMessage(Response response){
         ISR.showResponse(response);

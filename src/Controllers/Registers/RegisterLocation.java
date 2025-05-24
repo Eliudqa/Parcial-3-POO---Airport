@@ -27,10 +27,6 @@ public class RegisterLocation implements IRegisterLocation {
         this.vl=vl;
         this.sl=sl;
     }  
-
-
-
-    
     
     @Override
     public Response registerLocation(String id, String name, String city, String country, String latitude, String longitude) {

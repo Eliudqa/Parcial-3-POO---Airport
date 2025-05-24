@@ -10,9 +10,11 @@ import Controllers.Registers.IRegisterLocation;
 import Controllers.Registers.IRegisterPlane;
 import Controllers.Registers.IRegisterPassenger;
 import Controllers.Interfaces.*;
+import Controllers.Registers.IRegisterPassengerInFlight;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
+import Controllers.Registers.RegisterPassengerInFlight;
 import Controllers.Registers.RegisterPlane;
 import core.controllers.utils.Response;
 
@@ -26,18 +28,24 @@ public class RegisterFacade implements IRegister{
     private final IRegisterPlane registerPlane;
     private final IRegisterLocation registerLocation;
     private final IRegisterFlight registerFlight;
+    private final IRegisterPassengerInFlight lar;
+
     
 
     public RegisterFacade(
         RegisterPassenger registerPassenger,
         RegisterPlane registerPlane,
         RegisterLocation registerLocation,
-        RegisterFlight registerFlight
+        RegisterFlight registerFlight,
+        RegisterPassengerInFlight lar
+
     ) {
         this.registerPassenger = registerPassenger;
         this.registerPlane = registerPlane;
         this.registerLocation = registerLocation;
         this.registerFlight = registerFlight;
+        this.lar = lar;
+
     }
 
     @Override
@@ -63,5 +71,9 @@ public class RegisterFacade implements IRegister{
         return registerFlight.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
     }
     
+    @Override
+    public Response RegisterPassengerInFlight(String passengerId, String flightId){
+        return lar.RegisterPassengerInFlight(passengerId, flightId);
+    }
     
 }

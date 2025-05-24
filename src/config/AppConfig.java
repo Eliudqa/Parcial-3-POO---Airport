@@ -56,9 +56,11 @@ import Controllers.Refreshers.PlanesAvailableRefreshers;
 import Controllers.Refreshers.PlanesRefreshers;
 import Controllers.Refreshers.RefreshMyFlights;
 import Controllers.Refreshers.UserRefresher;
+import Controllers.Registers.IRegisterPassengerInFlight;
 import Controllers.Registers.RegisterFlight;
 import Controllers.Registers.RegisterLocation;
 import Controllers.Registers.RegisterPassenger;
+import Controllers.Registers.RegisterPassengerInFlight;
 import Controllers.Registers.RegisterPlane;
 import Controllers.SearchStorage;
 import Controllers.ShowResponse;
@@ -66,11 +68,13 @@ import Controllers.UpdateInfo;
 import Controllers.Validators.IValidatorFlight;
 import Controllers.Validators.IValidatorLocation;
 import Controllers.Validators.IValidatorPassenger;
+import Controllers.Validators.IValidatorPassengerToFlight;
 import Controllers.Validators.IValidatorPassengerUpdate;
 import Controllers.Validators.IValidatorPlane;
 import Controllers.Validators.ValidatorFlight;
 import Controllers.Validators.ValidatorLocation;
 import Controllers.Validators.ValidatorPassenger;
+import Controllers.Validators.ValidatorPassengerToFlight;
 import Controllers.Validators.ValidatorPassengerUpdate;
 import Controllers.Validators.ValidatorPlane;
 import Models.Storage.DataLoader;
@@ -98,6 +102,8 @@ public class AppConfig {
         RegisterPassenger registerPassenger = createRegisterPassenger();
         RegisterPlane registerPlane = createRegisterPlane();
         RegisterLocation registerLocation = createRegisterLocation();
+        IValidatorPassengerToFlight ivptf = new ValidatorPassengerToFlight(searchStorage);
+        RegisterPassengerInFlight lar = new RegisterPassengerInFlight(searchStorage,ivptf);
 
         IRefresher refresher = createRefresher();
 
@@ -105,7 +111,9 @@ public class AppConfig {
                 registerPassenger,
                 registerPlane,
                 registerLocation,
-                registerFlight
+                registerFlight,
+                lar
+                
         );
         
         IControllerFlights ICFlights = new ControllerFlights();
@@ -178,8 +186,7 @@ public class AppConfig {
     IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage);
     IPlanesAvailableRefreshers availablePlanesRefresher = new PlanesAvailableRefreshers(ISG);
     ILocationAvailableRefresher availableLocationsRefresher = new LocationAvailableRefresher(ISG);
-
-   
+  
 
     return new RefresherFacade(
         planeRefresher,
@@ -191,6 +198,7 @@ public class AppConfig {
        myFlightsRefresher,
        availablePlanesRefresher,
        availableLocationsRefresher
+       
     );
 }
 
