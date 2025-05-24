@@ -53,4 +53,6 @@ public class Location {
     public Location copy(){
         return new Location( airportId,  airportName,  airportCity,  airportCountry,  airportLatitude, airportLongitude);
     }
+
+  
 }

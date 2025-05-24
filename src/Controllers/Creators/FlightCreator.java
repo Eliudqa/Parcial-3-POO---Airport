@@ -26,12 +26,13 @@ public class FlightCreator implements IFlightCreator {
                         Integer.parseInt(day), Integer.parseInt(hour), Integer.parseInt(minutes));
 
 
-        if (scaleLocation==null) {
+        if (scaleLocation!=null) {
              flight = new Flight(id, plane, departureLocation, scaleLocation, arrivalLocation, 
                      departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival), 
                      Integer.parseInt(hoursDurationScale), Integer.parseInt(minutesDurationScale));
         } else {
-             flight = new Flight(id, plane, departureLocation, arrivalLocation, departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival));
+             flight = new Flight(id, plane, departureLocation, arrivalLocation, 
+                     departureDate, Integer.parseInt(hoursDurationArrival), Integer.parseInt(minutesDurationArrival));
         }
         plane.addFlight(flight); 
         return flight;

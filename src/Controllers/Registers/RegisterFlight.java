@@ -20,24 +20,20 @@ import core.controllers.utils.Status;
  * @author HOLA
  */
 public class RegisterFlight implements IRegisterFlight {
-    
+
     private final IFlightCreator flightCreator;
     private final IValidatorFlight vf;
     private final ISearchStorage searchStorage;
     private final ISaverFlights sf;
 
-
-    
     // Inyección por constructor
-    public RegisterFlight(IFlightCreator flightCreator, IValidatorFlight validatorFlight,ISearchStorage searchStorage,ISaverFlights sf) {
+    public RegisterFlight(IFlightCreator flightCreator, IValidatorFlight validatorFlight, ISearchStorage searchStorage, ISaverFlights sf) {
         this.flightCreator = flightCreator;
-        this.vf=validatorFlight;
-        this.searchStorage=searchStorage;
-        this.sf =sf;
-    }  
+        this.vf = validatorFlight;
+        this.searchStorage = searchStorage;
+        this.sf = sf;
+    }
 
-  
-    
     @Override
     public Response registerFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, String year,
             String month, String day, String hour, String minutes, String hoursDurationArrival,
@@ -49,7 +45,7 @@ public class RegisterFlight implements IRegisterFlight {
                 arrivalLocationId, year, month, day, hour, minutes,
                 hoursDurationArrival, minutesDurationArrival,
                 scaleId, hoursDurationScale, minutesDurationScale);
-        
+
         // No se sigue con el proceso de registro si alguna validacion falló
         if (response.getStatus() != Status.OK) {
             return response;
@@ -60,17 +56,15 @@ public class RegisterFlight implements IRegisterFlight {
                 scaleLocation = searchStorage.getLocation(scaleId),
                 arrivalLocation = searchStorage.getLocation(arrivalLocationId);
         Plane plane = searchStorage.getPlane(planeId);
-        
+
         // Se llama la clase creadora de objetos de tipo Flight
-        Flight flight = flightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour, 
-                minutes, hoursDurationArrival, minutesDurationArrival, 
+        Flight flight = flightCreator.CreateFlight(id, plane, departureLocation, arrivalLocation, year, month, day, hour,
+                minutes, hoursDurationArrival, minutesDurationArrival,
                 scaleLocation, hoursDurationScale, minutesDurationScale);
-        
-        
+
         sf.addFlight(flight);
         return response;
 
     }
 
-   
 }

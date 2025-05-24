@@ -59,7 +59,7 @@ public class ValidatorFlight implements IValidatorFlight {
             }
             //Se verifica que el id sea valido
             if (id.length() != 6) {
-                return new Response("Flight id date must have 6 characters", Status.BAD_REQUEST);
+                return new Response("Flight id must have 6 characters", Status.BAD_REQUEST);
             }
 
             for (int i = 0; i < 6; i++) {
@@ -202,7 +202,7 @@ public class ValidatorFlight implements IValidatorFlight {
             //En caso de escala
             Flight flight;
             if (!scaleId.equals("Location")) {
-      
+                System.out.println("Se quiere hacer escala");
                 Location scaleLocation = searchStorage.getLocation(scaleId);
 
                 if (scaleLocation == null) {

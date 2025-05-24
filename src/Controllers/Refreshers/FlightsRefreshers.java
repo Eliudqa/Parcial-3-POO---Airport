@@ -50,6 +50,6 @@ public class FlightsRefreshers implements IFlightsRefresher {
                 copy.getNumPassengers()});
         }
 
-        return new Response("Planes loaded succesfully", 200, rows);
+        return new Response("Flights loaded succesfully", 200, rows);
     }
 }

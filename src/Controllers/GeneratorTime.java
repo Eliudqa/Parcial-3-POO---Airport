@@ -35,6 +35,7 @@ public class GeneratorTime implements IGeneratorTime{
     @Override
     public ArrayList<String> generateHours() {
         ArrayList<String> hours = new ArrayList<>();
+        hours.add("0");
         for (int i = 1; i < 24; i++) {
             hours.add(""+i);
         }
@@ -44,6 +45,7 @@ public class GeneratorTime implements IGeneratorTime{
     @Override
     public ArrayList<String> generateMinutes() {
         ArrayList<String> minutes = new ArrayList<>();
+        minutes.add("0");
         for (int i = 1; i < 60; i++) {
             minutes.add(""+i);
         }

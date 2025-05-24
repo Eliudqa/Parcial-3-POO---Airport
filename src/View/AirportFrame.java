@@ -1474,16 +1474,20 @@ public class AirportFrame extends javax.swing.JFrame {
 
         ArrayList<String> ids = mainController.refreshAvailableLocations();
         ArrayList<String> idsPlanes = mainController.refreshAvailablePlanes();
+        ArrayList<String> idF = mainController.refreshAvailableFlights();
 
         for (String idp : idsPlanes) {
             cmbPlaneRegister.addItem(idp);
-            cmbDFlightID.addItem(idp);
         }
 
         for (String id : ids) {
             cmbDepartureLocationRegister.addItem(id);
             cmbScaleLocationRegister.addItem(id);
             cmbArrivalLocationRegister.addItem(id);
+        }
+        
+        for(String id : idF){
+            cmbDFlightID.addItem(id);
         }
 
 

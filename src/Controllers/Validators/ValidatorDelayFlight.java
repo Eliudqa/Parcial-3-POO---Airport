@@ -28,7 +28,7 @@ public class ValidatorDelayFlight implements IValidatorDelayFlight {
         int hourInt, minuteInt;
         
         
-        if(ISS.getFlight(minute) == null){
+        if(ISS.getFlight(id) == null){
             return new Response("Please, select a flight", Status.BAD_REQUEST);
         }
         
@@ -41,10 +41,10 @@ public class ValidatorDelayFlight implements IValidatorDelayFlight {
         try {
             minuteInt = Integer.parseInt(minute);
         } catch (NumberFormatException e) {
-            return new Response("Please, select an minute", Status.BAD_REQUEST);
+            return new Response("Please, select a minute", Status.BAD_REQUEST);
         }
         
-        if(hourInt == 0||minuteInt ==0){
+        if(hourInt == 0&&minuteInt ==0){
             return new Response("Time delayed cannot be 00:00", Status.BAD_REQUEST);
         }
         return new Response("Flight succesfully delayed", Status.OK);

@@ -85,7 +85,10 @@ public class MainController {
             String year, String month, String day, String hour, String minutes, 
             String hoursDurationArrival, String minutesDurationArrival, 
             String scaleId, String hoursDurationScale, String minutesDurationScale){
-        return registerFacade.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
+        return registerFacade.registerFlight(id, planeId, departureLocationId, arrivalLocationId, 
+                year, month, day, hour, minutes, 
+                hoursDurationArrival, minutesDurationArrival, 
+                scaleId, hoursDurationScale, minutesDurationScale);
     }
 
     public Response delayFlight(String flight, String hours, String minutes) {
