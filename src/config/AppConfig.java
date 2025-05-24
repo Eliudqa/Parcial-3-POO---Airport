@@ -65,10 +65,12 @@ import Controllers.SearchStorage;
 import Controllers.ShowResponse;
 import Controllers.Sorts.ISortFlights;
 import Controllers.Sorts.ISortLocations;
+import Controllers.Sorts.ISortMyFlights;
 import Controllers.Sorts.ISortPassengers;
 import Controllers.Sorts.ISortPlanes;
 import Controllers.Sorts.SortFlights;
 import Controllers.Sorts.SortLocations;
+import Controllers.Sorts.SortMyFlights;
 import Controllers.Sorts.SortPassengers;
 import Controllers.Sorts.SortPlanes;
 import Controllers.UpdateInfo;
@@ -201,6 +203,7 @@ public class AppConfig {
     ISortPlanes ISP = new SortPlanes();     
     ISortPassengers ISPA = new SortPassengers();     
     ISortLocations ISL = new SortLocations();     
+    ISortMyFlights ISMF = new SortMyFlights();     
          
     IPlanesRefreshers planeRefresher = new PlanesRefreshers(ISG,ISP);
     IFlightsRefresher flightRefresher = new FlightsRefreshers(ISG,ISF);
@@ -208,7 +211,7 @@ public class AppConfig {
     ILocationsRefreshers locationRefresher = new LocationsRefreshers(ISG,ISL);
     IUserRefresher userRefresher = new UserRefresher(ISG);
     IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher(ISG);
-    IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage);
+    IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage,ISMF);
     IPlanesAvailableRefreshers availablePlanesRefresher = new PlanesAvailableRefreshers(ISG);
     ILocationAvailableRefresher availableLocationsRefresher = new LocationAvailableRefresher(ISG);
   

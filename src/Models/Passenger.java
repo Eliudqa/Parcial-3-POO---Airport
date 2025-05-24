@@ -118,5 +118,9 @@ public class Passenger {
         return copy;
     }
     
+    public ArrayList<Flight> getCopyFlights(){
+       return new ArrayList<>(this.flights);
+      }
+    
     
 }

@@ -1674,7 +1674,6 @@ public class AirportFrame extends javax.swing.JFrame {
         mainController.showMessage(response);
 
         if (response.getStatus() == Status.OK) {
-            txtID.setText("");
             txtFirstName.setText("");
             txtLastName.setText("");
             txtDayBD.setText("");
@@ -1696,7 +1695,6 @@ public class AirportFrame extends javax.swing.JFrame {
         Response response = mainController.RegisterPassengerInFlight(passengerId, flightId);
         mainController.showMessage(response);
         if (response.getStatus() == Status.OK) {
-            txtIdAddToFlight.setText("");
             cmbFlights.setSelectedIndex(0);
         }
     }//GEN-LAST:event_btnAddToFlightActionPerformed
