@@ -4,6 +4,8 @@
  */
 package Controllers.Validators;
 
+import Controllers.Interfaces.ISearchStorage;
+import Models.Flight;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -13,9 +15,23 @@ import core.controllers.utils.Status;
  */
 public class ValidatorDelayFlight implements IValidatorDelayFlight {
 
+    private final ISearchStorage ISS;
+
+    public ValidatorDelayFlight(ISearchStorage ISS) {
+        this.ISS = ISS;
+    }
+    
+    
+    
     @Override
-    public Response validateDelayedTime(String hour, String minute) {
+    public Response validateDelayedTime(String id,String hour, String minute) {
         int hourInt, minuteInt;
+        
+        
+        if(ISS.getFlight(minute) == null){
+            return new Response("Please, select a flight", Status.BAD_REQUEST);
+        }
+        
         try {
             hourInt = Integer.parseInt(hour);
         } catch (NumberFormatException e) {

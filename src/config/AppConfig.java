@@ -123,11 +123,16 @@ public class AppConfig {
     }
     
     public ControllerFlights createControllerFlights(){
-        IValidatorDelayFlight IVDF = new ValidatorDelayFlight();
+        IValidatorDelayFlight IVDF = createValidatorDelayFlight();
+        ISearchStorage ISS = createSearchStorage();
         
-        return new ControllerFlights(IVDF);
+        return new ControllerFlights(IVDF, ISS);
     }
 
+    public ValidatorDelayFlight createValidatorDelayFlight(){
+        return new ValidatorDelayFlight(createSearchStorage());
+    }
+    
     public RegisterFlight createRegisterFlight() {
         // Primero creas el FlightCreator
         IFlightCreator flightCreator = new FlightCreator();

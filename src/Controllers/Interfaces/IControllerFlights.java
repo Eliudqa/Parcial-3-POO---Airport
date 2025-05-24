@@ -12,6 +12,6 @@ import core.controllers.utils.Response;
  * @author samit
  */
 public interface IControllerFlights {
-    Response delay(Flight flight, String hours, String minutes);
+    Response delay(String flight, String hours, String minutes);
 
 }

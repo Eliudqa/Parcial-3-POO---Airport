@@ -11,5 +11,5 @@ import core.controllers.utils.Response;
  * @author samit
  */
 public interface IValidatorDelayFlight {
-    public Response validateDelayedTime(String hour, String minute);
+    public Response validateDelayedTime(String id,String hour, String minute);
 }

@@ -1703,19 +1703,14 @@ public class AirportFrame extends javax.swing.JFrame {
         String hours = cmbDFlightHour.getItemAt(cmbDFlightHour.getSelectedIndex());
         String minutes = cmbDFlightMinute.getItemAt(cmbDFlightMinute.getSelectedIndex());
 
-        Flight flight = null;
-        for (Flight f : this.flights) {
-            if (flightId.equals(f.getId())) {
-                flight = f;
-            }
-        }
+        
 
-        Response response = mainController.delayFlight(flight, hours, minutes);
+        Response response = mainController.delayFlight(flightId, hours, minutes);
         mainController.showMessage(response);
-        if(response.getStatus()==Status.OK){
-           cmbDFlightID.setSelectedIndex(0);
-       cmbDFlightHour.setSelectedIndex(0);
-        cmbDFlightMinute.setSelectedIndex(0);
+        if (response.getStatus() == Status.OK) {
+            cmbDFlightID.setSelectedIndex(0);
+            cmbDFlightHour.setSelectedIndex(0);
+            cmbDFlightMinute.setSelectedIndex(0);
         }
     }//GEN-LAST:event_btnDelayApplyActionPerformed
 

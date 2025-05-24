@@ -88,7 +88,7 @@ public class MainController {
         return registerFacade.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationArrival, minutesDurationArrival, scaleId, hoursDurationScale, minutesDurationScale);
     }
 
-    public Response delayFlight(Flight flight, String hours, String minutes) {
+    public Response delayFlight(String flight, String hours, String minutes) {
         return ICFlights.delay(flight, hours, minutes);
     }    
     
