@@ -1434,31 +1434,29 @@ public class AirportFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_panelRound2MouseDragged
 
     private void administratorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_administratorActionPerformed
- 
-            cmbPlaneRegister.removeAllItems();
-            cmbDFlightID.removeAllItems();
-            cmbDepartureLocationRegister.removeAllItems();
-            cmbScaleLocationRegister.removeAllItems();
-            cmbArrivalLocationRegister.removeAllItems();
-            cmbPlaneRegister.addItem("Plane");
-            cmbDepartureLocationRegister.addItem("Location");
-            cmbScaleLocationRegister.addItem("Location");
-            cmbArrivalLocationRegister.addItem("Location");
-            cmbDFlightID.addItem("ID");
-            cmbDFlightHour.setSelectedIndex(0);
-            cmbDFlightMinute.setSelectedIndex(0);
-            cmbDepartureMonthRegister.setSelectedIndex(0);
-            cmbDepartureDayRegister.setSelectedIndex(0);
-            cmbDepartureHourRegister.setSelectedIndex(0);
-            cmbMinuteRegister.setSelectedIndex(0);
-            cmbDepartureMinute.setSelectedIndex(0);
-            cmbDurationRegister.setSelectedIndex(0);
-            cmbScaleHourRegister.setSelectedIndex(0);
-            cmbScaleMinuteRegister.setSelectedIndex(0);
-            txtIDFlightRegister.setText("");
-            
-            
-            
+
+        cmbPlaneRegister.removeAllItems();
+        cmbDFlightID.removeAllItems();
+        cmbDepartureLocationRegister.removeAllItems();
+        cmbScaleLocationRegister.removeAllItems();
+        cmbArrivalLocationRegister.removeAllItems();
+        cmbPlaneRegister.addItem("Plane");
+        cmbDepartureLocationRegister.addItem("Location");
+        cmbScaleLocationRegister.addItem("Location");
+        cmbArrivalLocationRegister.addItem("Location");
+        cmbDFlightID.addItem("ID");
+        cmbDFlightHour.setSelectedIndex(0);
+        cmbDFlightMinute.setSelectedIndex(0);
+        cmbDepartureMonthRegister.setSelectedIndex(0);
+        cmbDepartureDayRegister.setSelectedIndex(0);
+        cmbDepartureHourRegister.setSelectedIndex(0);
+        cmbMinuteRegister.setSelectedIndex(0);
+        cmbDepartureMinute.setSelectedIndex(0);
+        cmbDurationRegister.setSelectedIndex(0);
+        cmbScaleHourRegister.setSelectedIndex(0);
+        cmbScaleMinuteRegister.setSelectedIndex(0);
+        txtIDFlightRegister.setText("");
+
         if (user.isSelected()) {
             user.setSelected(false);
             userSelect.removeAllItems(); // Limpia todo
@@ -1493,11 +1491,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
     private void userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userActionPerformed
 
-            userSelect.removeAllItems(); // Limpia todo
-            userSelect.addItem("Select User"); // Vuelve a poner el ítem principal
-            userSelect.setSelectedIndex(0);
-            cmbFlights.removeAllItems();
-            cmbFlights.addItem("Flight");
+        userSelect.removeAllItems(); // Limpia todo
+        userSelect.addItem("Select User"); // Vuelve a poner el ítem principal
+        userSelect.setSelectedIndex(0);
+        cmbFlights.removeAllItems();
+        cmbFlights.addItem("Flight");
         if (administrator.isSelected()) {
             administrator.setSelected(false);
 
@@ -1509,8 +1507,7 @@ public class AirportFrame extends javax.swing.JFrame {
             cmbDepartureLocationRegister.addItem("Location");
             cmbScaleLocationRegister.addItem("Location");
             cmbArrivalLocationRegister.addItem("Location");
-            
-            
+
         }
         for (int i = 1; i < jTabbedPane1.getTabCount(); i++) {
 
@@ -1535,8 +1532,6 @@ public class AirportFrame extends javax.swing.JFrame {
         }
 
 
-
-
     }//GEN-LAST:event_userActionPerformed
 
     private void btnRegisterPassengerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegisterPassengerActionPerformed
@@ -1554,17 +1549,17 @@ public class AirportFrame extends javax.swing.JFrame {
         response = mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
         this.userSelect.addItem("" + id);
         mainController.showMessage(response);
-        
-        if(response.getStatus()==Status.OK){
-        txtIDRegister.setText("");
-        txtFirstNameRegister.setText("");
-        txtLastNameRegister.setText("");
-        txtDayBDRegister.setText("");
-        cmbMONTH.setSelectedIndex(0);
-        cmbDAY.setSelectedIndex(0);
-        txtCountryCodeRegister.setText("");
-        txtPhoneRegister.setText("");
-        txtCountryRegister.setText("");
+
+        if (response.getStatus() == Status.OK) {
+            txtIDRegister.setText("");
+            txtFirstNameRegister.setText("");
+            txtLastNameRegister.setText("");
+            txtDayBDRegister.setText("");
+            cmbMONTH.setSelectedIndex(0);
+            cmbDAY.setSelectedIndex(0);
+            txtCountryCodeRegister.setText("");
+            txtPhoneRegister.setText("");
+            txtCountryRegister.setText("");
 
         }
 
@@ -1581,13 +1576,13 @@ public class AirportFrame extends javax.swing.JFrame {
         response = mainController.registerPlane(id, brand, model, maxCapacity, airline);
         mainController.showMessage(response);
         this.cmbPlaneRegister.addItem(id);
-        
-        if(response.getStatus()==Status.OK){
-        txtIDPlane.setText("");
-        txtBrandPlane.setText("");
-        txtModelPlane.setText("");
-        txtMaxCapPlane.setText("");
-        txtAirlinePlane.setText("");
+
+        if (response.getStatus() == Status.OK) {
+            txtIDPlane.setText("");
+            txtBrandPlane.setText("");
+            txtModelPlane.setText("");
+            txtMaxCapPlane.setText("");
+            txtAirlinePlane.setText("");
         }
     }//GEN-LAST:event_btnCreateAirplaneActionPerformed
 
@@ -1607,16 +1602,15 @@ public class AirportFrame extends javax.swing.JFrame {
         this.cmbDepartureLocationRegister.addItem(id);
         this.cmbArrivalLocationRegister.addItem(id);
         this.cmbScaleLocationRegister.addItem(id);
-        
-        if(response.getStatus()==Status.OK){
-            
-        
-        txtIDAirport.setText("");
-        txtAirportName.setText("");
-        txtAirportCity.setText("");
-        txtAirportCountry.setText("");
-        txtAirportLatitude.setText("");
-       txtAirportLongitude.setText("");
+
+        if (response.getStatus() == Status.OK) {
+
+            txtIDAirport.setText("");
+            txtAirportName.setText("");
+            txtAirportCity.setText("");
+            txtAirportCountry.setText("");
+            txtAirportLatitude.setText("");
+            txtAirportLongitude.setText("");
         }
     }//GEN-LAST:event_btnCreateLocationActionPerformed
 
@@ -1640,22 +1634,22 @@ public class AirportFrame extends javax.swing.JFrame {
         response = mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
         mainController.showMessage(response);
         this.cmbFlights.addItem(id);
-        
-        if(response.getStatus()==Status.OK){
-         txtIDFlightRegister.setText("");
-         cmbPlaneRegister.setSelectedIndex(0);
-         cmbDepartureLocationRegister.setSelectedIndex(0);
-         cmbArrivalLocationRegister.setSelectedIndex(0);
-         cmbScaleLocationRegister.setSelectedIndex(0);
-         txtDepartureDayRegister.setText("");
-         cmbDepartureMonthRegister.setSelectedIndex(0);
-         cmbDepartureDayRegister.setSelectedIndex(0);
-         cmbDepartureHourRegister.setSelectedIndex(0);
-         cmbDepartureMinute.setSelectedIndex(0);
-         cmbDurationRegister.setSelectedIndex(0);
-         cmbMinuteRegister.setSelectedIndex(0);
-         cmbScaleHourRegister.setSelectedIndex(0);
-         cmbScaleMinuteRegister.setSelectedIndex(0);
+
+        if (response.getStatus() == Status.OK) {
+            txtIDFlightRegister.setText("");
+            cmbPlaneRegister.setSelectedIndex(0);
+            cmbDepartureLocationRegister.setSelectedIndex(0);
+            cmbArrivalLocationRegister.setSelectedIndex(0);
+            cmbScaleLocationRegister.setSelectedIndex(0);
+            txtDepartureDayRegister.setText("");
+            cmbDepartureMonthRegister.setSelectedIndex(0);
+            cmbDepartureDayRegister.setSelectedIndex(0);
+            cmbDepartureHourRegister.setSelectedIndex(0);
+            cmbDepartureMinute.setSelectedIndex(0);
+            cmbDurationRegister.setSelectedIndex(0);
+            cmbMinuteRegister.setSelectedIndex(0);
+            cmbScaleHourRegister.setSelectedIndex(0);
+            cmbScaleMinuteRegister.setSelectedIndex(0);
         }
     }//GEN-LAST:event_btnCreateRegisterFlightActionPerformed
 
@@ -1675,6 +1669,19 @@ public class AirportFrame extends javax.swing.JFrame {
 
         mainController.showMessage(response);
 
+        if (response.getStatus() == Status.OK) {
+            txtID.setText("");
+            txtFirstName.setText("");
+            txtLastName.setText("");
+            txtDayBD.setText("");
+            cmbMONTH.setSelectedIndex(0);
+            cmbDAY.setSelectedIndex(0);
+            txtCountryCode.setText("");
+            txtPhone.setText("");
+            txtCountry.setText("");
+
+        }
+
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnAddToFlightActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddToFlightActionPerformed
@@ -1684,7 +1691,10 @@ public class AirportFrame extends javax.swing.JFrame {
 
         Response response = mainController.RegisterPassengerInFlight(passengerId, flightId);
         mainController.showMessage(response);
-
+        if (response.getStatus() == Status.OK) {
+            txtIdAddToFlight.setText("");
+            cmbFlights.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnAddToFlightActionPerformed
 
     private void btnDelayApplyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelayApplyActionPerformed
@@ -1710,8 +1720,6 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         response = mainController.getMyFlightsRows(passengerId);
 
-
-
         if (response.getObject() != null) {
             for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
                 model.addRow(row); // Añade directamente cada fila
@@ -1726,7 +1734,6 @@ public class AirportFrame extends javax.swing.JFrame {
         model.setRowCount(0);
 
         response = mainController.refreshPassengers();
-
 
         mainController.showMessage(response);
         for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
@@ -1793,7 +1800,7 @@ public class AirportFrame extends javax.swing.JFrame {
                 txtIdAddToFlight.setText("");
             }
         } catch (Exception e) {
-            
+
         }
 
 
