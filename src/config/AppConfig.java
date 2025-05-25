@@ -95,6 +95,7 @@ import Models.Storage.PassengersStorage;
 import Models.Storage.PlanesStorage;
 import ObserverPattern.IObservableNotifyStorage;
 import ObserverPattern.ObserverFlight;
+import ObserverPattern.ObserverLocation;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -107,14 +108,23 @@ public class AppConfig {
     private final IStorageGet ISG = createStorageGet();
     private final ISearchStorage searchStorage = createSearchStorage();
 
-    public void createObservers(JTable flightTable) {
-        FlightsStorage storage = FlightsStorage.getInstance();
+    public void createObservers(JTable flightTable, JTable locationsTable) {
+        FlightsStorage flightStorage = FlightsStorage.getInstance();
+        LocationsStorage locationsStorage = LocationsStorage.getInstance();
         IRefresher refresher = createRefresher();
 
-        storage.addObserver(new ObserverFlight(
+        flightStorage.addObserver(new ObserverFlight(
                 refresher,
                 (DefaultTableModel) flightTable.getModel()
         ));
+        
+        locationsStorage.addObserver(new ObserverLocation(
+                refresher,
+                (DefaultTableModel) locationsTable.getModel()
+        ));
+        
+        
+        
 
     }
 

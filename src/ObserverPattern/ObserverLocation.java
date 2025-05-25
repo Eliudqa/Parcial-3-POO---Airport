@@ -4,21 +4,22 @@
  */
 package ObserverPattern;
 
-import Controllers.Interfaces.Refreshers.IFlightsRefresher;
-import core.controllers.utils.Response;
-import java.util.ArrayList;
-import javax.swing.table.DefaultTableModel;
-
 /**
  *
  * @author HOLA
  */
-public class ObserverFlight implements IObserver {
+
+import Controllers.Interfaces.Refreshers.ILocationsRefreshers;
+import core.controllers.utils.Response;
+import java.util.ArrayList;
+import javax.swing.table.DefaultTableModel;
+
+ public class ObserverLocation implements IObserver {
     
-    private final IFlightsRefresher refresher;
+    private final ILocationsRefreshers refresher;
     private final DefaultTableModel table;
 
-    public ObserverFlight(IFlightsRefresher refresher, DefaultTableModel table) {
+    public ObserverLocation(ILocationsRefreshers refresher, DefaultTableModel table) {
         this.refresher = refresher;
         this.table = table;
     }
@@ -27,7 +28,7 @@ public class ObserverFlight implements IObserver {
     public void update() {
         
        
-        Response response = refresher.refreshFlights();
+        Response response = refresher.refreshLocations();
         table.setRowCount(0);
         if (response.getObject() != null) {
             for (Object[] row : (ArrayList<Object[]>) response.getObject()) {
@@ -36,4 +37,3 @@ public class ObserverFlight implements IObserver {
         }
     }
 }
-

@@ -42,7 +42,7 @@ public class ControllerFlights implements IControllerFlights {
             flight.setDepartureDate(flight.getDepartureDate().
                     plusHours(Integer.parseInt(hours)).
                     plusMinutes(Integer.parseInt(minutes)));
-                    notifier.notifyObservers(new Response("Flight delayed", 200, flight));
+                    notifier.notifyObservers();
 
         }
         return response;
