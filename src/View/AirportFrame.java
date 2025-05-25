@@ -27,7 +27,7 @@ public class AirportFrame extends javax.swing.JFrame {
      */
     private int x, y;
     private Response response;
-    private AppConfig appConfig = new AppConfig();
+    private final AppConfig appConfig = new AppConfig();
     private ArrayList<Passenger> passengers;
     private ArrayList<Plane> planes;
     private ArrayList<Location> locations;
@@ -1472,21 +1472,17 @@ public class AirportFrame extends javax.swing.JFrame {
         jTabbedPane1.setEnabledAt(6, false);
         jTabbedPane1.setEnabledAt(7, false);
 
-        ArrayList<String> ids = mainController.refreshAvailableLocations();
-        ArrayList<String> idsPlanes = mainController.refreshAvailablePlanes();
-        ArrayList<String> idF = mainController.refreshAvailableFlights();
-
-        for (String idp : idsPlanes) {
+        for (String idp : mainController.refreshAvailablePlanes()) {
             cmbPlaneRegister.addItem(idp);
         }
 
-        for (String id : ids) {
+        for (String id : mainController.refreshAvailableLocations()) {
             cmbDepartureLocationRegister.addItem(id);
             cmbScaleLocationRegister.addItem(id);
             cmbArrivalLocationRegister.addItem(id);
         }
-        
-        for(String id : idF){
+
+        for (String id : mainController.refreshAvailableFlights()) {
             cmbDFlightID.addItem(id);
         }
 
@@ -1524,14 +1520,11 @@ public class AirportFrame extends javax.swing.JFrame {
         jTabbedPane1.setEnabledAt(7, true);
         jTabbedPane1.setEnabledAt(11, true);
 
-        ArrayList<String> ids = mainController.refreshUser();
-        ArrayList<String> idsFlights = mainController.refreshAvailableFlights();
-
-        for (String id : ids) {
+        for (String id : mainController.refreshUser()) {
             userSelect.addItem(id);
         }
 
-        for (String idf : idsFlights) {
+        for (String idf : mainController.refreshAvailableFlights()) {
             cmbFlights.addItem(idf);
         }
 
@@ -1551,10 +1544,10 @@ public class AirportFrame extends javax.swing.JFrame {
         String country = txtCountryRegister.getText();
 
         response = mainController.registerPassenger(id, firstname, lastname, year, month, day, phoneCode, phone, country);
-        this.userSelect.addItem("" + id);
         mainController.showMessage(response);
 
         if (response.getStatus() == Status.OK) {
+            this.userSelect.addItem("" + id);
             txtIDRegister.setText("");
             txtFirstNameRegister.setText("");
             txtLastNameRegister.setText("");
@@ -1579,9 +1572,9 @@ public class AirportFrame extends javax.swing.JFrame {
 
         response = mainController.registerPlane(id, brand, model, maxCapacity, airline);
         mainController.showMessage(response);
-        this.cmbPlaneRegister.addItem(id);
 
         if (response.getStatus() == Status.OK) {
+            this.cmbPlaneRegister.addItem(id);
             txtIDPlane.setText("");
             txtBrandPlane.setText("");
             txtModelPlane.setText("");
@@ -1603,12 +1596,11 @@ public class AirportFrame extends javax.swing.JFrame {
 
         mainController.showMessage(response);
 
-        this.cmbDepartureLocationRegister.addItem(id);
-        this.cmbArrivalLocationRegister.addItem(id);
-        this.cmbScaleLocationRegister.addItem(id);
-
         if (response.getStatus() == Status.OK) {
 
+            this.cmbDepartureLocationRegister.addItem(id);
+            this.cmbArrivalLocationRegister.addItem(id);
+            this.cmbScaleLocationRegister.addItem(id);
             txtIDAirport.setText("");
             txtAirportName.setText("");
             txtAirportCity.setText("");
@@ -1637,9 +1629,9 @@ public class AirportFrame extends javax.swing.JFrame {
 
         response = mainController.registerFlight(id, planeId, departureLocationId, arrivalLocationId, year, month, day, hour, minutes, hoursDurationsArrival, minutesDurationsArrival, scaleLocationId, hoursDurationsScale, minutesDurationsScale);
         mainController.showMessage(response);
-        this.cmbFlights.addItem(id);
 
         if (response.getStatus() == Status.OK) {
+            this.cmbFlights.addItem(id);
             txtIDFlightRegister.setText("");
             cmbPlaneRegister.setSelectedIndex(0);
             cmbDepartureLocationRegister.setSelectedIndex(0);
@@ -1705,8 +1697,6 @@ public class AirportFrame extends javax.swing.JFrame {
         String hours = cmbDFlightHour.getItemAt(cmbDFlightHour.getSelectedIndex());
         String minutes = cmbDFlightMinute.getItemAt(cmbDFlightMinute.getSelectedIndex());
 
-        
-
         Response response = mainController.delayFlight(flightId, hours, minutes);
         mainController.showMessage(response);
         if (response.getStatus() == Status.OK) {
@@ -1722,6 +1712,7 @@ public class AirportFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) tblMyFlights.getModel();
         model.setRowCount(0);
         response = mainController.getMyFlightsRows(passengerId);
+        mainController.showMessage(response);
 
         if (response.getObject() != null) {
             for (Object[] row : (ArrayList<Object[]>) response.getObject()) {

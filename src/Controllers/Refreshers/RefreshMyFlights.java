@@ -43,7 +43,7 @@ public class RefreshMyFlights implements IRefreshMyFlights {
         }
 
         if (passenger.getNumFlights() == 0) {
-            return new Response("Lista Vacia", Status.NO_CONTENT);
+            return new Response("Empty list", Status.NO_CONTENT);
 
         }
 
