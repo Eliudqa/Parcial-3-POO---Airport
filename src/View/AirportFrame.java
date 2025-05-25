@@ -36,7 +36,8 @@ public class AirportFrame extends javax.swing.JFrame {
 
     public AirportFrame() {
         initComponents();
-
+        System.out.println("b");
+        appConfig.createObservers(tblAllFlights);
         this.passengers = mainController.getPassengers();
         this.planes = mainController.getPlanes();
         this.locations = mainController.getLocations();

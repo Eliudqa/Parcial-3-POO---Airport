@@ -4,8 +4,10 @@
  */
 package Models;
 
+import ObserverPattern.IObserver;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import ObserverPattern.IObservableAddStorage;
 
 /**
  *
@@ -127,5 +129,6 @@ public class Flight {
     public LocalDateTime calculateArrivalDate() {
         return departureDate.plusHours(hoursDurationScale).plusHours(hoursDurationArrival).plusMinutes(minutesDurationScale).plusMinutes(minutesDurationArrival);
     }
-
+    
+   
 }
