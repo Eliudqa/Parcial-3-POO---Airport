@@ -5,6 +5,7 @@
 package Controllers.Validators;
 
 import Controllers.Interfaces.ISearchStorage;
+import Models.Flight;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -33,9 +34,13 @@ private final ISearchStorage searchStorage;
                 return new Response("The flight id must not be empty, please select a flight", Status.BAD_REQUEST);
             }           
             
-
-            if (searchStorage.getFlight(flightId)== null){
+            Flight flight = searchStorage.getFlight(flightId);
+            if (flight == null){
                 return new Response("The flight does not exist", Status.BAD_REQUEST);
+            }
+            
+            if(flight.getNumPassengers()>=flight.getPlane().getMaxCapacity()){
+                return new Response("The plane is at its max capacity", Status.CONFLICT);
             }
             
             return new Response("Passenger succesfully added to flight ", Status.OK); 
