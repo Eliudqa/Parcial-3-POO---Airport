@@ -1632,6 +1632,7 @@ public class AirportFrame extends javax.swing.JFrame {
 
         if (response.getStatus() == Status.OK) {
             this.cmbFlights.addItem(id);
+            this.cmbDFlightID.addItem(id);
             txtIDFlightRegister.setText("");
             cmbPlaneRegister.setSelectedIndex(0);
             cmbDepartureLocationRegister.setSelectedIndex(0);

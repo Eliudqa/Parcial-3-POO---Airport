@@ -17,18 +17,17 @@ import java.time.LocalDateTime;
  *
  * @author samit
  */
-
 //Es abstracta para no violar DIP y que las clases que utilicen sus metodos no dependan de una clase concreta
 public class ValidatorFlight implements IValidatorFlight {
 
     private final ISearchStorage searchStorage;
-    
-    public ValidatorFlight(ISearchStorage searchStorage){
+
+    public ValidatorFlight(ISearchStorage searchStorage) {
         this.searchStorage = searchStorage;
     }
-    
+
     @Override
-    public Response validateFlight(String id, String planeId, String departureLocationId, String arrivalLocationId, 
+    public Response validateFlight(String id, String planeId, String departureLocationId, String arrivalLocationId,
             String year, String month, String day, String hour, String minutes,
             String hoursDurationArrival, String minutesDurationArrival,
             String scaleId, String hoursDurationScale, String minutesDurationScale) {
@@ -54,7 +53,7 @@ public class ValidatorFlight implements IValidatorFlight {
             }
 
             //Se verifica que el tiempo de vuelo sea mayor a 00:00
-            if(Integer.parseInt(hoursDurationArrival)==0&&Integer.parseInt(minutesDurationArrival)==0){
+            if (Integer.parseInt(hoursDurationArrival) == 0 && Integer.parseInt(minutesDurationArrival) == 0) {
                 return new Response("Flight time must be more than 00:00", Status.BAD_REQUEST);
             }
             //Se verifica que el id sea valido
@@ -66,19 +65,19 @@ public class ValidatorFlight implements IValidatorFlight {
                 char c = id.charAt(i);
                 if (i < 3) {
                     if (!Character.isLetter(c)) {
-                        return new Response("The character " + (i+1) + " must be a letter", Status.BAD_REQUEST);
+                        return new Response("The character " + (i + 1) + " of id must be a letter", Status.BAD_REQUEST);
                     } else if (!Character.isUpperCase(c)) {
-                        return new Response("The character " + (i+1)+ " must be capitalized", Status.BAD_REQUEST);
+                        return new Response("The character " + (i + 1) + " of id must be capitalized", Status.BAD_REQUEST);
                     }
                 } else {
                     if (!Character.isDigit(c)) {
-                        return new Response("The character " + (i+1) + " must be a number", Status.BAD_REQUEST);
+                        return new Response("The character " + (i + 1) + " of id must be a number", Status.BAD_REQUEST);
                     }
                 }
             }
 
             //Se verifica que el id no exista
-            if (searchStorage.getFlight(id)!=null) {
+            if (searchStorage.getFlight(id) != null) {
                 return new Response("There is already a flight with that id", Status.CONFLICT);
             }
 
@@ -98,7 +97,6 @@ public class ValidatorFlight implements IValidatorFlight {
                 }
             }
 
-            
             // CAMBIAR USANDO EL SEARCHSTORAGE
             int i = 0;
             //Se busca el avion
@@ -109,7 +107,6 @@ public class ValidatorFlight implements IValidatorFlight {
             }
 
             //Se busca el lugar de salida
-            
             //Se verifica que el id sí este hecho por 3 caracteres
             if (departureLocationId.length() != 3) {
                 return new Response("Id must be 3 digits long", Status.BAD_REQUEST);
@@ -124,7 +121,6 @@ public class ValidatorFlight implements IValidatorFlight {
                 }
             }
 
-        
             Location departureLocation = searchStorage.getLocation(departureLocationId);
 
             if (departureLocation == null) {
@@ -145,11 +141,8 @@ public class ValidatorFlight implements IValidatorFlight {
                     }
                 }
             }
- 
-            
-            
+
             //BUSQUEDA AQUI TAMBIEN
-    
             Location arrivalLocation = searchStorage.getLocation(arrivalLocationId);
             if (arrivalLocation == null) {
                 return new Response("In arrival, there is no location with that id", Status.NOT_FOUND);
@@ -208,8 +201,17 @@ public class ValidatorFlight implements IValidatorFlight {
                 if (scaleLocation == null) {
                     return new Response("In scale, there is no location with that id", Status.NOT_FOUND);
                 }
+                
+                 if (hoursDurationScale.equals("Hour")) {
+                    return new Response("If the flight has a scale, please select an hour, otherwise, deselect location", Status.BAD_REQUEST);
+                }
+                
+                 if (minutesDurationScale.equals("Minute")) {
+                    return new Response("If the flight has a scale, please select a minute, otherwise, deselect location", Status.BAD_REQUEST);
+                }
 
-            } 
+                
+            }
             // Se envia la respuesta
             return new Response("Flight registered succesfully", Status.OK);
         } catch (Exception e) {
