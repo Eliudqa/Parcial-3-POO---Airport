@@ -4,12 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/ValidatorFlight.java</file>
-            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Models/Flight.java</file>
-            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/ValidatorLocation.java</file>
-            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/ValidatorPassenger.java</file>
-            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/ValidatorPassengerToFlight.java</file>
-            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/ValidatorPlane.java</file>
             <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/View/AirportFrame.java</file>
+            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Registers/RegisterFlight.java</file>
+            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Creators/FlightCreator.java</file>
+            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/IValidatorPassengerToFlight.java</file>
+            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Validators/ValidatorPassengerToFlight.java</file>
+            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/Utils/Status.java</file>
+            <file>file:/C:/Users/samit/Documents/tareas%20adunno%20man/poo/parcial%203/Parcial-3-POO---Airport/src/Controllers/GeneratorTime.java</file>
         </group>
     </open-files>
 </project-private>

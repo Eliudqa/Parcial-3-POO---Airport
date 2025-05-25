@@ -148,6 +148,10 @@ public class ValidatorFlight implements IValidatorFlight {
                 return new Response("In arrival, there is no location with that id", Status.NOT_FOUND);
             }
 
+            if (arrivalLocation.equals(departureLocation)) {
+                return new Response("Arrival location and departure location cannot be the same", Status.BAD_REQUEST);
+            }
+
             //Se verifica que el año sea valido
             int yearInt, monthInt, dayInt, hourInt, minuteInt;
             if (year.equals("")) {
@@ -195,22 +199,28 @@ public class ValidatorFlight implements IValidatorFlight {
             //En caso de escala
             Flight flight;
             if (!scaleId.equals("Location")) {
-                System.out.println("Se quiere hacer escala");
                 Location scaleLocation = searchStorage.getLocation(scaleId);
 
                 if (scaleLocation == null) {
                     return new Response("In scale, there is no location with that id", Status.NOT_FOUND);
                 }
-                
-                 if (hoursDurationScale.equals("Hour")) {
+
+                if (arrivalLocation.equals(scaleLocation)) {
+                    return new Response("Arrival location and scale location cannot be the same", Status.BAD_REQUEST);
+                }
+
+                if (scaleLocation.equals(departureLocation)) {
+                    return new Response("Scale location and departure location cannot be the same", Status.BAD_REQUEST);
+                }
+
+                if (hoursDurationScale.equals("Hour")) {
                     return new Response("If the flight has a scale, please select an hour, otherwise, deselect location", Status.BAD_REQUEST);
                 }
-                
-                 if (minutesDurationScale.equals("Minute")) {
+
+                if (minutesDurationScale.equals("Minute")) {
                     return new Response("If the flight has a scale, please select a minute, otherwise, deselect location", Status.BAD_REQUEST);
                 }
 
-                
             }
             // Se envia la respuesta
             return new Response("Flight registered succesfully", Status.OK);
