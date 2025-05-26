@@ -1670,11 +1670,12 @@ public class AirportFrame extends javax.swing.JFrame {
             txtFirstName.setText("");
             txtLastName.setText("");
             txtDayBD.setText("");
-            cmbMONTH.setSelectedIndex(0);
-            cmbDAY.setSelectedIndex(0);
+            cmbUpdateBDDay.setSelectedIndex(0);
+            cmbUpdateBDMonth.setSelectedIndex(0);
             txtCountryCode.setText("");
             txtPhone.setText("");
             txtCountry.setText("");
+            
 
         }
 
