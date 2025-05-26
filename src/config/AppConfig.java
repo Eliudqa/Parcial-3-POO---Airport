@@ -88,6 +88,7 @@ import Controllers.Validators.ValidatorPassenger;
 import Controllers.Validators.ValidatorPassengerToFlight;
 import Controllers.Validators.ValidatorPassengerUpdate;
 import Controllers.Validators.ValidatorPlane;
+import Models.Plane;
 import Models.Storage.DataLoader;
 import Models.Storage.FlightsStorage;
 import Models.Storage.LocationsStorage;
@@ -96,6 +97,8 @@ import Models.Storage.PlanesStorage;
 import ObserverPattern.IObservableNotifyStorage;
 import ObserverPattern.ObserverFlight;
 import ObserverPattern.ObserverLocation;
+import ObserverPattern.ObserverPassenger;
+import ObserverPattern.ObserverPlane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
@@ -108,9 +111,11 @@ public class AppConfig {
     private final IStorageGet ISG = createStorageGet();
     private final ISearchStorage searchStorage = createSearchStorage();
 
-    public void createObservers(JTable flightTable, JTable locationsTable) {
+    public void createObservers(JTable flightTable, JTable locationsTable, JTable passengersTable, JTable planeTable) {
         FlightsStorage flightStorage = FlightsStorage.getInstance();
         LocationsStorage locationsStorage = LocationsStorage.getInstance();
+        PassengersStorage passengersStorage = PassengersStorage.getInstance();
+        PlanesStorage planesStorage = PlanesStorage.getInstance();
         IRefresher refresher = createRefresher();
 
         flightStorage.addObserver(new ObserverFlight(
@@ -123,8 +128,22 @@ public class AppConfig {
                 (DefaultTableModel) locationsTable.getModel()
         ));
         
+        passengersStorage.addObserver(new ObserverPassenger(
+                refresher,
+                (DefaultTableModel) passengersTable.getModel()
+        ));
         
+        planesStorage.addObserver(new ObserverPlane(
+                refresher,
+                (DefaultTableModel) planeTable.getModel()
+        ));
         
+        for(Plane plane : planesStorage.getPlanes()){
+            plane.addObserver(new ObserverPlane(
+                    refresher,  
+                    (DefaultTableModel) planeTable.getModel()
+            ));
+        }
 
     }
 
