@@ -24,9 +24,8 @@ public class ObserverFlight implements IObserver {
     }
 
     @Override
-    public void update() {
+    public void update(Response trigger) {
         
-       
         Response response = refresher.refreshFlights();
         table.setRowCount(0);
         if (response.getObject() != null) {

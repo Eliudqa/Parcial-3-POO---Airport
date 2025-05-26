@@ -11,6 +11,6 @@ import core.controllers.utils.Response;
  * @author HOLA
  */
 public interface IObservableNotifyStorage {
-        void notifyObservers();       
+        void notifyObservers(Response response);       
 
 }

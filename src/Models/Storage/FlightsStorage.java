@@ -41,7 +41,7 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IO
 
     public void setFlights(ArrayList<Flight> flights) {
         this.flights = flights;
-        notifyObservers();
+        notifyObservers(new Response("Flights loaded succesfully", 200, flights));
 
     }
 
@@ -54,7 +54,7 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IO
     @Override
     public void addFlight(Flight flight){
         this.flights.add(flight);
-        notifyObservers();
+        notifyObservers(new Response("Flights loaded succesfully", 200, flights));
 
     }
 
@@ -70,9 +70,9 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IO
 
     
     @Override
-    public void notifyObservers() {
+    public void notifyObservers(Response response) {
         for (IObserver observer : observers) {
-            observer.update();
+            observer.update(response);
         }
     }
 

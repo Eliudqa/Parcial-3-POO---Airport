@@ -7,22 +7,18 @@ package Models.Storage;
 import Controllers.Interfaces.Storage.IStorageAddLocation;
 import Controllers.Interfaces.Storage.IStorageGetLocations;
 import Models.Location;
-import ObserverPattern.IObservableAddStorage;
-import ObserverPattern.IObservableNotifyStorage;
-import ObserverPattern.IObserver;
 import java.util.ArrayList;
 
 /**
  *
  * @author HOLA
  */
-public class LocationsStorage implements IStorageAddLocation, IStorageGetLocations, IObservableAddStorage, IObservableNotifyStorage {
+public class LocationsStorage implements IStorageAddLocation, IStorageGetLocations{
 
     // Singleton
     private static LocationsStorage instance;
 
     private ArrayList<Location> locations;
-    private final ArrayList<IObserver> observers = new ArrayList<>();
 
     private LocationsStorage() {
         locations = new ArrayList<>();
@@ -37,8 +33,6 @@ public class LocationsStorage implements IStorageAddLocation, IStorageGetLocatio
 
     public void setLocations(ArrayList<Location> locations) {
         this.locations = locations;
-        notifyObservers();
-
     }
 
     @Override
@@ -47,27 +41,12 @@ public class LocationsStorage implements IStorageAddLocation, IStorageGetLocatio
     }
 
     @Override
-    public void addLocation(Location location) {
+    public void addLocation(Location location){
         this.locations.add(location);
-        notifyObservers();
-
     }
 
     @Override
     public ArrayList<Location> getCopyLocations() {
         return new ArrayList<>(this.locations);
     }
-
-    @Override
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
-    @Override
-    public void notifyObservers() {
-        for (IObserver observer : observers) {
-            observer.update();
-        }
-    }
-
 }

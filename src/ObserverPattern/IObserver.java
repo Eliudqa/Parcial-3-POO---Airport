@@ -11,5 +11,5 @@ import core.controllers.utils.Response;
  * @author HOLA
  */
 public interface IObserver {
-    void update();
+    void update(Response response);
 }

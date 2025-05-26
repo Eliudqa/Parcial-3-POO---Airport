@@ -35,7 +35,6 @@ public class PassengersStorage implements IStorageAddPassenger, IStorageGetPasse
 
     public void setPassengers(ArrayList<Passenger> passengers) {
         this.passengers = passengers;
-        
     }
 
     @Override
