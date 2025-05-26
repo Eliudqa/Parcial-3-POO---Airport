@@ -93,43 +93,28 @@ import Models.Storage.FlightsStorage;
 import Models.Storage.LocationsStorage;
 import Models.Storage.PassengersStorage;
 import Models.Storage.PlanesStorage;
-import ObserverPattern.IObservableNotifyStorage;
-import ObserverPattern.ObserverFlight;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author samit
  */
 public class AppConfig {
-
     private final IStorageGet ISG = createStorageGet();
     private final ISearchStorage searchStorage = createSearchStorage();
 
-    public void createObservers(JTable flightTable) {
-        FlightsStorage storage = FlightsStorage.getInstance();
-        IRefresher refresher = createRefresher();
-
-        storage.addObserver(new ObserverFlight(
-                refresher,
-                (DefaultTableModel) flightTable.getModel()
-        ));
-
-    }
 
     public MainController createMainController() {
         IGeneratorTime generatorTime = new GeneratorTime();
         IValidatorPassengerUpdate vf = new ValidatorPassengerUpdate();
         IShowResponse ISR = new ShowResponse();
-        IUpdateInfo IUF = new UpdateInfo(vf, searchStorage);
-
+        IUpdateInfo IUF = new UpdateInfo(vf,searchStorage);
+        
         RegisterFlight registerFlight = createRegisterFlight();
         RegisterPassenger registerPassenger = createRegisterPassenger();
         RegisterPlane registerPlane = createRegisterPlane();
         RegisterLocation registerLocation = createRegisterLocation();
         IValidatorPassengerToFlight ivptf = new ValidatorPassengerToFlight(searchStorage);
-        RegisterPassengerInFlight lar = new RegisterPassengerInFlight(searchStorage, ivptf);
+        RegisterPassengerInFlight lar = new RegisterPassengerInFlight(searchStorage,ivptf);
 
         IRefresher refresher = createRefresher();
 
@@ -139,26 +124,25 @@ public class AppConfig {
                 registerLocation,
                 registerFlight,
                 lar
+                
         );
-
+        
         IControllerFlights ICFlights = createControllerFlights();
 
         return new MainController(generatorTime, registerFacade, ICFlights, refresher, ISG, IUF, ISR);
     }
-
-    public ControllerFlights createControllerFlights() {
+    
+    public ControllerFlights createControllerFlights(){
         IValidatorDelayFlight IVDF = createValidatorDelayFlight();
         ISearchStorage ISS = createSearchStorage();
-        IObservableNotifyStorage notifier =  FlightsStorage.getInstance(); 
-
-
-        return new ControllerFlights(IVDF, ISS,notifier);
+        
+        return new ControllerFlights(IVDF, ISS);
     }
 
-    public ValidatorDelayFlight createValidatorDelayFlight() {
+    public ValidatorDelayFlight createValidatorDelayFlight(){
         return new ValidatorDelayFlight(createSearchStorage());
     }
-
+    
     public RegisterFlight createRegisterFlight() {
         // Primero creas el FlightCreator
         IFlightCreator flightCreator = new FlightCreator();
@@ -212,44 +196,47 @@ public class AppConfig {
         IStorageGet ISG = createStorageGet();
         return new SearchStorage(ISG);
     }
+          
+     public IRefresher createRefresher() {
+         
+    ISortFlights ISF = new SortFlights();     
+    ISortPlanes ISP = new SortPlanes();     
+    ISortPassengers ISPA = new SortPassengers();     
+    ISortLocations ISL = new SortLocations();     
+    ISortMyFlights ISMF = new SortMyFlights();     
+         
+    IPlanesRefreshers planeRefresher = new PlanesRefreshers(ISG,ISP);
+    IFlightsRefresher flightRefresher = new FlightsRefreshers(ISG,ISF);
+    IPassengersRefreshers passengerRefresher = new PassengersRefresher(ISG,ISPA);
+    ILocationsRefreshers locationRefresher = new LocationsRefreshers(ISG,ISL);
+    IUserRefresher userRefresher = new UserRefresher(ISG);
+    IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher(ISG);
+    IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage,ISMF);
+    IPlanesAvailableRefreshers availablePlanesRefresher = new PlanesAvailableRefreshers(ISG);
+    ILocationAvailableRefresher availableLocationsRefresher = new LocationAvailableRefresher(ISG);
+  
 
-    public IRefresher createRefresher() {
+    return new RefresherFacade(
+        planeRefresher,
+        flightRefresher,
+        passengerRefresher,
+        locationRefresher,
+       userRefresher,
+       availableFlightsRefresher,
+       myFlightsRefresher,
+       availablePlanesRefresher,
+       availableLocationsRefresher
+       
+    );
+}
 
-        ISortFlights ISF = new SortFlights();
-        ISortPlanes ISP = new SortPlanes();
-        ISortPassengers ISPA = new SortPassengers();
-        ISortLocations ISL = new SortLocations();
-        ISortMyFlights ISMF = new SortMyFlights();
-
-        IPlanesRefreshers planeRefresher = new PlanesRefreshers(ISG, ISP);
-        IFlightsRefresher flightRefresher = new FlightsRefreshers(ISG, ISF);
-        IPassengersRefreshers passengerRefresher = new PassengersRefresher(ISG, ISPA);
-        ILocationsRefreshers locationRefresher = new LocationsRefreshers(ISG, ISL);
-        IUserRefresher userRefresher = new UserRefresher(ISG);
-        IFlightsAvailableRefresher availableFlightsRefresher = new FlightsAvailableRefresher(ISG);
-        IRefreshMyFlights myFlightsRefresher = new RefreshMyFlights(searchStorage, ISMF);
-        IPlanesAvailableRefreshers availablePlanesRefresher = new PlanesAvailableRefreshers(ISG);
-        ILocationAvailableRefresher availableLocationsRefresher = new LocationAvailableRefresher(ISG);
-
-        return new RefresherFacade(
-                planeRefresher,
-                flightRefresher,
-                passengerRefresher,
-                locationRefresher,
-                userRefresher,
-                availableFlightsRefresher,
-                myFlightsRefresher,
-                availablePlanesRefresher,
-                availableLocationsRefresher
-        );
-    }
-
-    public IStorageGet createStorageGet() {
+    public IStorageGet createStorageGet(){
         IStorageGetPlanes isgpl = PlanesStorage.getInstance();
-        IStorageGetFlights isgf = FlightsStorage.getInstance();
-        IStorageGetLocations isgl = LocationsStorage.getInstance();
-        IStorageGetPassengers isgpa = PassengersStorage.getInstance();
+        IStorageGetFlights isgf=  FlightsStorage.getInstance();
+        IStorageGetLocations isgl=  LocationsStorage.getInstance();
+        IStorageGetPassengers isgpa=  PassengersStorage.getInstance();
         return new GetStorageFacade(isgpl, isgf, isgl, isgpa);
     }
+
 
 }

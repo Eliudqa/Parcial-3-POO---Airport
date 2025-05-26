@@ -8,7 +8,6 @@ import Controllers.Interfaces.IControllerFlights;
 import Controllers.Interfaces.ISearchStorage;
 import Controllers.Validators.IValidatorDelayFlight;
 import Models.Flight;
-import ObserverPattern.IObservableNotifyStorage;
 import core.controllers.utils.Response;
 import core.controllers.utils.Status;
 
@@ -20,13 +19,10 @@ public class ControllerFlights implements IControllerFlights {
 
     private final IValidatorDelayFlight IVDF;
     private final ISearchStorage ISS;
-    private final IObservableNotifyStorage notifier;
 
-
-    public ControllerFlights(IValidatorDelayFlight IVDF, ISearchStorage ISS,IObservableNotifyStorage notifier) {
+    public ControllerFlights(IValidatorDelayFlight IVDF, ISearchStorage ISS) {
         this.IVDF = IVDF;
         this.ISS = ISS;
-        this.notifier = notifier;
     }
 
 
@@ -37,13 +33,10 @@ public class ControllerFlights implements IControllerFlights {
 
         Flight flight = ISS.getFlight(flightId);
         
-        
         if (response.getStatus()==Status.OK) {
             flight.setDepartureDate(flight.getDepartureDate().
                     plusHours(Integer.parseInt(hours)).
                     plusMinutes(Integer.parseInt(minutes)));
-                    notifier.notifyObservers(new Response("Flight delayed", 200, flight));
-
         }
         return response;
     }

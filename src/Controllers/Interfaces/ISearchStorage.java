@@ -8,7 +8,6 @@ import Models.Flight;
 import Models.Location;
 import Models.Passenger;
 import Models.Plane;
-import core.controllers.utils.Response;
 
 /**
  *
@@ -23,6 +22,5 @@ public interface ISearchStorage {
     public Passenger getPassenger(Long passengerId);
 
     public Flight getFlight(String flightId);
-
 
 }

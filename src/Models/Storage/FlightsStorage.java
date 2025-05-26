@@ -7,25 +7,19 @@ package Models.Storage;
 import Controllers.Interfaces.Storage.IStorageAddFlight;
 import Controllers.Interfaces.Storage.IStorageGetFlights;
 import Models.Flight;
-import ObserverPattern.IObserver;
-import core.controllers.utils.Response;
 import java.util.ArrayList;
-import ObserverPattern.IObservableAddStorage;
-import ObserverPattern.IObservableNotifyStorage;
 
 /**
  *
  * @author HOLA
  */
-public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IObservableAddStorage, IObservableNotifyStorage {
+public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights {
     
     // Singleton
     private static FlightsStorage instance;
     
     //ArrayList
     private ArrayList<Flight> flights;
-    private final ArrayList<IObserver> observers = new ArrayList<>();
-
     
     
     private FlightsStorage() {
@@ -41,8 +35,6 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IO
 
     public void setFlights(ArrayList<Flight> flights) {
         this.flights = flights;
-        notifyObservers(new Response("Flights loaded succesfully", 200, flights));
-
     }
 
     @Override
@@ -54,8 +46,6 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IO
     @Override
     public void addFlight(Flight flight){
         this.flights.add(flight);
-        notifyObservers(new Response("Flights loaded succesfully", 200, flights));
-
     }
 
     @Override
@@ -63,20 +53,7 @@ public class FlightsStorage implements IStorageAddFlight, IStorageGetFlights, IO
         return new ArrayList<>(this.flights);
     }
      
-    @Override
-    public void addObserver(IObserver observer) {
-        observers.add(observer);
-    }
-
     
-    @Override
-    public void notifyObservers(Response response) {
-        for (IObserver observer : observers) {
-            observer.update(response);
-        }
-    }
-
-  
     
     
 }
